@@ -3,4 +3,4 @@
 	url = https://github.com/bitcoin-core/secp256k1.git
 [submodule "app/src/main/jni/loafwallet-core"]
 	path = app/src/main/jni/loafwallet-core
-	url = https://github.com/losh11/loafwallet-core.git
+	url = https://github.com/litecoin-foundation/loafwallet-core.git
