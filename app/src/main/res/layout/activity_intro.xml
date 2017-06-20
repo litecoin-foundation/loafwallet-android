@@ -75,7 +75,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="@dimen/bread_margin"
-        android:text="The most secure and safe way to use bitcoin."
+        android:text="The most secure and safe way to use litecoin."
         android:textAlignment="center"
         android:textColor="@color/almost_black"
         android:textSize="18sp"

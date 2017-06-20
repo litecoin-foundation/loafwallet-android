@@ -44,7 +44,7 @@ import java.util.Arrays;
  */
 public class BRBitId {
     public static final String TAG = BRBitId.class.getName();
-    public static final String BITCOIN_SIGNED_MESSAGE_HEADER = "Bitcoin Signed Message:\n";
+    public static final String BITCOIN_SIGNED_MESSAGE_HEADER = "Litecoin Signed Message:\n";
 
     public static String signMessage(String message, BRKey key) {
         byte[] signingData = formatMessageForBitcoinSigning(message);
