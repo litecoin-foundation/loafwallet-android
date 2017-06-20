@@ -352,7 +352,7 @@ public class FragmentSend extends Fragment {
         });
 
         final List<String> curList = new ArrayList<>();
-        curList.add("BTC");
+        curList.add("LTC");
         if (getActivity() == null) return;
         curList.addAll(CurrencyDataSource.getInstance(getActivity()).getAllISOs());
         curAdapter = new CurAdapter(getContext(), curList);

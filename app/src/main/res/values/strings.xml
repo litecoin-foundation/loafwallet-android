@@ -243,7 +243,7 @@
     <!-- Camera not allowed alert title -->
     <string name="Send.cameraUnavailableTitle">Bread is not allowed to access the camera</string>
     <!-- Currency Button label -->
-    <string name="Send.defaultCurrencyLabel">BTC (\(S.Symbols.bits))</string>
+    <string name="Send.defaultCurrencyLabel">LTC (\(S.Symbols.bits))</string>
     <!-- Description for sending money label -->
     <string name="Send.descriptionLabel">What\'s this for?</string>
     <!-- Invalid address alert message -->
