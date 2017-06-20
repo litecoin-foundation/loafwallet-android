@@ -152,7 +152,7 @@ public class FragmentRequestAmount extends Fragment {
         showCurrencyList(false);
 
         final List<String> curList = new ArrayList<>();
-        curList.add("BTC");
+        curList.add("LTC");
         curList.addAll(CurrencyDataSource.getInstance(getActivity()).getAllISOs());
         curAdapter = new CurAdapter(getContext(), curList);
         currencyRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -363,7 +363,7 @@ public class FragmentRequestAmount extends Fragment {
                     @Override
                     public void run() {
                         mAddress.setText(receiveAddress);
-                        boolean generated = generateQrImage(receiveAddress, "0", "BTC");
+                        boolean generated = generateQrImage(receiveAddress, "0", "LTC");
                         if (!generated)
                             throw new RuntimeException("failed to generate qr image for address");
                     }

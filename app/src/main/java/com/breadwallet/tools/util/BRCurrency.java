@@ -93,7 +93,7 @@ public class BRCurrency {
         String symbol = null;
         decimalFormatSymbols = currencyFormat.getDecimalFormatSymbols();
 //        int decimalPoints = 0;
-        if (Objects.equals(isoCurrencyCode, "BTC")) {
+        if (Objects.equals(isoCurrencyCode, "LTC")) {
             symbol = BRExchange.getBitcoinSymbol(app);
         } else {
             try {
@@ -121,7 +121,7 @@ public class BRCurrency {
 
     public static String getSymbolByIso(Context app, String iso) {
         String symbol;
-        if (Objects.equals(iso, "BTC")) {
+        if (Objects.equals(iso, "LTC")) {
             String currencySymbolString = BRConstants.bitcoinLowercase;
             if (app != null) {
                 int unit = SharedPreferencesManager.getCurrencyUnit(app);
@@ -153,7 +153,7 @@ public class BRCurrency {
     public static int getMaxDecimalPlaces(String iso) {
         if (Utils.isNullOrEmpty(iso)) return 8;
 
-        if (iso.equalsIgnoreCase("BTC")) {
+        if (iso.equalsIgnoreCase("LTC")) {
             return 8;
         } else {
             Currency currency = Currency.getInstance(iso);
