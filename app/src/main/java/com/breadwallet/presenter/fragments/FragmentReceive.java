@@ -280,7 +280,7 @@ public class FragmentReceive extends Fragment {
             public void run() {
                 receiveAddress = SharedPreferencesManager.getReceiveAddress(getActivity());
                 mAddress.setText(receiveAddress);
-                boolean generated = BRWalletManager.getInstance().generateQR(getActivity(), "bitcoin:" + receiveAddress, mQrImage);
+                boolean generated = BRWalletManager.getInstance().generateQR(getActivity(), "litecoin:" + receiveAddress, mQrImage);
                 if (!generated)
                     throw new RuntimeException("failed to generate qr image for address");
             }

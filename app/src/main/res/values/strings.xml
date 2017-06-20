@@ -101,9 +101,11 @@
     <!-- Ignore jailbreak warning button -->
     <string name="JailbreakWarnings.ignore">Ignore</string>
     <!-- Jailbreak warning message -->
-    <string name="JailbreakWarnings.messageWithBalance">DEVICE SECURITY COMPROMISED\n Any \'jailbreak\' app can access any other app\'s keychain data (and steal your bitcoins). Wipe this wallet immediately and restore on a secure device.</string>
+    <string name="JailbreakWarnings.messageWithBalance">DEVICE SECURITY COMPROMISED\n Any \'jailbreak\' app can access any other app\'s
+        keychain data (and steal your litecoins). Wipe this wallet immediately and restore on a secure device.</string>
     <!-- Jailbreak warning message -->
-    <string name="JailbreakWarnings.messageWithoutBalance">DEVICE SECURITY COMPROMISED\n Any \'jailbreak\' app can access any other app\'s keychain data (and steal your bitcoins).</string>
+    <string name="JailbreakWarnings.messageWithoutBalance">DEVICE SECURITY COMPROMISED\n Any \'jailbreak\' app can access any other
+        app\'s keychain data (and steal your litecoins).</string>
     <!-- Jailbreak warning title -->
     <string name="JailbreakWarnings.title">WARNING</string>
     <!-- Wipe wallet button -->
@@ -132,8 +134,8 @@
     <string name="ManageWallet.textFeildLabel">Wallet Name</string>
     <!-- Manage wallet modal title[ -->
     <string name="ManageWallet.title">Manage Wallet</string>
-    <!-- Buy bitcoin title -->
-    <string name="MenuButton.buy">Buy Bitcoin</string>
+    <!-- Buy litecoin title -->
+    <string name="MenuButton.buy">Buy Litecoin</string>
     <!-- Menu button title -->
     <string name="MenuButton.lock">Lock Wallet</string>
     <!-- Menu button title -->
@@ -218,7 +220,7 @@
     <string name="ReScan.subheader1">Estimated time</string>
     <!-- Subheader label -->
     <string name="ReScan.subheader2">When to Sync?</string>
-    <!-- Scan bitcoin address camera flash toggle -->
+    <!-- Scan litecoin address camera flash toggle -->
     <string name="Scanner.flashButtonLabel">Camera Flash</string>
     <!-- Security Center Info -->
     <string name="SecurityCenter.info">Breadwallet provides security features for protecting your money. Click each feature below to learn more.</string>
@@ -247,7 +249,7 @@
     <!-- Description for sending money label -->
     <string name="Send.descriptionLabel">What\'s this for?</string>
     <!-- Invalid address alert message -->
-    <string name="Send.invalidAddressTitle">Your clipboard does not have a valid bitcoin address.</string>
+    <string name="Send.invalidAddressTitle">Your clipboard does not have a valid litecoin address.</string>
     <!-- Send modal title -->
     <string name="Send.modalTitle">Send Money</string>
     <!-- Paste button label -->
