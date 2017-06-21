@@ -271,6 +271,10 @@ public class FragmentReceive extends Fragment {
     }
 
     private void updateQr() {
+        // TODO: This is a workaround so that the app doesn't crash on receiving litecoins...
+        // The proper fix: BRWalletManager should not rely on an Activity's context to function.
+        // It should hold on to the Application's context instead.
+        if (getContext() == null) return;
         new Thread(new Runnable() {
             @Override
             public void run() {
