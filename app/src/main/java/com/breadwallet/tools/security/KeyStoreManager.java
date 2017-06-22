@@ -266,9 +266,9 @@ public class KeyStoreManager {
                 showAuthenticationScreen(context, request_code);
                 throw new BRKeystoreErrorException(e.getMessage());
             } else if (e instanceof KeyPermanentlyInvalidatedException) {
-                FirebaseCrash.report(new RuntimeException("KeyStore Error, Your Breadwallet encrypted data was recently invalidated because you disabled your Android lock screen. Please input your phrase to recover your Breadwallet now."));
-                showKeyStoreDialog(context, "KeyStore Error", "Your Breadwallet encrypted data was recently invalidated because you " +
-                                "disabled your Android lock screen. Please input your phrase to recover your Breadwallet now.", context.getString(R.string.Button_ok), null,
+                FirebaseCrash.report(new RuntimeException("KeyStore Error, Your Loafwallet encrypted data was recently invalidated because you disabled your Android lock screen. Please input your phrase to recover your Loafwallet now."));
+                showKeyStoreDialog(context, "KeyStore Error", "Your Loafwallet encrypted data was recently invalidated because you " +
+                                "disabled your Android lock screen. Please input your phrase to recover your Loafwallet now.", context.getString(R.string.Button_ok), null,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();

@@ -232,7 +232,7 @@ public class Utils {
             stringId = app.getApplicationInfo().labelRes;
         }
         String agent = System.getProperty("http.agent");
-        return String.format(Locale.getDefault(), "%s/%d %s %s", "breadwallet", versionNumber, cfnetwork, Util.toHumanReadableAscii(agent));
+        return String.format(Locale.getDefault(), "%s/%d %s %s", "loafwallet", versionNumber, cfnetwork, Util.toHumanReadableAscii(agent));
     }
 
 }

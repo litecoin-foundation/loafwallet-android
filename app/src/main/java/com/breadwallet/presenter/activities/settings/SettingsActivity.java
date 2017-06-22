@@ -129,7 +129,7 @@ public class SettingsActivity extends BRActivity {
             }
         }, false));
 
-        items.add(new BRSettingsItem("Restore Breadwallet", "", new View.OnClickListener() {
+        items.add(new BRSettingsItem("Restore Loafwallet", "", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, RestoreActivity.class);
@@ -190,7 +190,7 @@ public class SettingsActivity extends BRActivity {
             }
         }, false));
 
-        items.add(new BRSettingsItem("Bread", "", null, true));
+        items.add(new BRSettingsItem("Loaf", "", null, true));
 
         items.add(new BRSettingsItem("Share Anonymous Data", "", new View.OnClickListener() {
             @Override

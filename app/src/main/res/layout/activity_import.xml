@@ -33,7 +33,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="9dp"
-        android:text="Importing a wallet transfers all your money into your Bread wallet in a single transaction."
+        android:text="Importing a wallet transfers all your money into your Loaf wallet in a single transaction."
         android:textColor="@color/almost_black"
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.0"

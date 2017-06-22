@@ -129,7 +129,7 @@ public class SecurityCenterActivity extends BRActivity {
     private void updateList() {
         boolean isPinSet = KeyStoreManager.getPinCode(this).length() == 6;
         itemList.clear();
-        itemList.add(new BRSecurityCenterItem("6-Digit PIN", "Unlocks your Bread, authorizes send money.",
+        itemList.add(new BRSecurityCenterItem("6-Digit PIN", "Unlocks your Loaf, authorizes send money.",
                 isPinSet ? R.drawable.ic_check_mark_blue : R.drawable.ic_check_mark_grey, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,7 @@ public class SecurityCenterActivity extends BRActivity {
                 : R.drawable.ic_check_mark_grey;
 
         if (Utils.isFingerprintAvailable(this)) {
-            itemList.add(new BRSecurityCenterItem("FingerPrint", "Unlocks your Bread, authorizes send money to set limit.",
+            itemList.add(new BRSecurityCenterItem("FingerPrint", "Unlocks your Loaf, authorizes send money to set limit.",
                     resId, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -159,7 +159,7 @@ public class SecurityCenterActivity extends BRActivity {
         }
 
         boolean isPaperKeySet = SharedPreferencesManager.getPhraseWroteDown(this);
-        itemList.add(new BRSecurityCenterItem("Paper Key", "Restores your Bread on new devices and after software updates.",
+        itemList.add(new BRSecurityCenterItem("Paper Key", "Restores your Loaf on new devices and after software updates.",
                 isPaperKeySet ? R.drawable.ic_check_mark_blue : R.drawable.ic_check_mark_grey, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

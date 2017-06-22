@@ -15,7 +15,7 @@ model {
         }
 
         productFlavors.with {
-            create("bread") {
+            create("loaf") {
                 applicationId "com.loafwallet"
                 resValues.with {
                     create() {

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
-        android:text="Help improve Bread by sharing your annoymous data with us. This does not include any financial information. We respect your financial privacy."
+        android:text="Help improve Loaf by sharing your annoymous data with us. This does not include any financial information. We respect your financial privacy."
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/title"

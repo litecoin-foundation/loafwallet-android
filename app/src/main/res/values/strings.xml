@@ -21,7 +21,7 @@
     <!-- Loading Wallet Message -->
     <string name="Account.loadingMessage">Loading Wallet</string>
     <!-- Default wallet name -->
-    <string name="AccountHeader.defaultWalletName">My Bread</string>
+    <string name="AccountHeader.defaultWalletName">My Loaf</string>
     <!-- Use Pin -->
     <string name="Fingerprint.usePin_Android">PIN</string>
     <!-- Device authentication required -->
@@ -35,7 +35,7 @@
     <!-- Search Hint -->
     <string name="AccountHeader.searchHint_Android">Search Transactions</string>
     <!-- Paper Key error-->
-    <string name="RecoveryPhrase.paperKeyError_Android">Paper Key error, please contact support at breadwallet.com</string>
+    <string name="RecoveryPhrase.paperKeyError_Android">Paper Key error, please contact support at loafwallet.com</string>
     <!-- Transaction rejected dialog -->
     <string name="BRWalletManager.transactionRejected_Android">Transaction rejected</string>
     <!-- Wallet out of sync dialog -->
@@ -49,7 +49,7 @@
     <!-- Device Encryption needed text -->
     <string name="IntroScreen.encryption.needed_Android">A device screen lock is needed to safeguard your wallet. Go to \"Settings\" > \"Security\" > \"Screen lock\" and enable to continue.</string>
     <!-- Allow camera access info -->
-    <string name="CameraPlugin.allowCameraAccess_Android">Allow camera access in \"Settings\" > \"Apps\" > \"breadwallet\" > \"Permissions\"</string>
+    <string name="CameraPlugin.allowCameraAccess_Android">Allow camera access in \"Settings\" > \"Apps\" > \"loafwallet\" > \"Permissions\"</string>
     <!-- Fingerprint Hint -->
     <string name="ImportKey.passwordProtectedKey_Android">Password Protected Key</string>
     <!-- Equals symbol -->
@@ -113,7 +113,7 @@
     <!-- Disabled until date -->
     <string name="LoginScreen.disabled">Disabled until: %1$s</string>
     <!-- Login Screen header -->
-    <string name="LoginScreen.header">bread</string>
+    <string name="LoginScreen.header">loaf</string>
     <!-- My Address button title -->
     <string name="LoginScreen.myAddress">My Address</string>
     <!-- Scan button title -->
@@ -121,7 +121,7 @@
     <!-- Login Screen sub-header -->
     <string name="LoginScreen.subheader">Enter Pin</string>
     <!-- TouchID prompt text -->
-    <string name="LoginScreen.touchIdPrompt">Unlock your Breadwallet</string>
+    <string name="LoginScreen.touchIdPrompt">Unlock your Loafwallet</string>
     <!-- Login with TouchID accessibility label -->
     <string name="LoginScreen.touchIdText">Login With TouchID</string>
     <!-- Wallet unlocked message -->
@@ -153,7 +153,7 @@
     <!-- Set Pin screen body -->
     <string name="PinCreationView.body">Write down your PIN and store it in a place you can access even if your phone is broken or lost.</string>
     <!-- Set Pin screen caption -->
-    <string name="PinCreationView.caption">Your PIN will be used to unlock your  Bread and send money.</string>
+    <string name="PinCreationView.caption">Your PIN will be used to unlock your  Loaf and send money.</string>
     <!-- Confirm pin instruction -->
     <string name="PinCreationView.confirmPinText">Re-Enter PIN</string>
     <!-- Set pin instruction -->
@@ -185,7 +185,7 @@
     <!-- Enter recovery phrase instruction -->
     <string name="RecoverWallet.instruction">Enter Recovery Phrase</string>
     <!-- Recover wallet intro -->
-    <string name="RecoverWallet.intro">Recover your Breadwallet with your recovery phrase.</string>
+    <string name="RecoverWallet.intro">Recover your Loafwallet with your recovery phrase.</string>
     <!-- Invalid phrase message -->
     <string name="RecoverWallet.invalid">The phrase you entered is invalid. Please double-check each word and try again.</string>
     <!-- Previous button accessibility label -->
@@ -223,19 +223,19 @@
     <!-- Scan litecoin address camera flash toggle -->
     <string name="Scanner.flashButtonLabel">Camera Flash</string>
     <!-- Security Center Info -->
-    <string name="SecurityCenter.info">Breadwallet provides security features for protecting your money. Click each feature below to learn more.</string>
+    <string name="SecurityCenter.info">Loafwallet provides security features for protecting your money. Click each feature below to learn more.</string>
     <!-- Paper Key cell description -->
-    <string name="SecurityCenter.paperKeyDescription">Restores your Bread on new devices and after software updates.</string>
+    <string name="SecurityCenter.paperKeyDescription">Restores your Loaf on new devices and after software updates.</string>
     <!-- Paper Key cell title -->
     <string name="SecurityCenter.paperKeyTitle">Paper Key</string>
     <!-- Pin cell description -->
-    <string name="SecurityCenter.pinDescription">Unlocks your Bread, authorizes send money.</string>
+    <string name="SecurityCenter.pinDescription">Unlocks your Loaf, authorizes send money.</string>
     <!-- Pin cell title -->
     <string name="SecurityCenter.pinTitle">6-Digit PIN</string>
     <!-- Security Center Title -->
     <string name="SecurityCenter.title">Security Center</string>
     <!-- Touch ID cell description -->
-    <string name="SecurityCenter.touchIdDescription">Unlocks your Bread, authorizes send money to set limit.</string>
+    <string name="SecurityCenter.touchIdDescription">Unlocks your Loaf, authorizes send money to set limit.</string>
     <!-- Touch ID cell title -->
     <string name="SecurityCenter.touchIdTitle">Touch ID</string>
     <!-- Send money amount label -->
@@ -243,7 +243,7 @@
     <!-- Camera not allowed message -->
     <string name="Send.cameraunavailableMessage">Go to Settings to Allow camera access.</string>
     <!-- Camera not allowed alert title -->
-    <string name="Send.cameraUnavailableTitle">Bread is not allowed to access the camera</string>
+    <string name="Send.cameraUnavailableTitle">Loaf is not allowed to access the camera</string>
     <!-- Currency Button label -->
     <string name="Send.defaultCurrencyLabel">LTC (\(S.Symbols.bits))</string>
     <!-- Description for sending money label -->
@@ -279,7 +279,7 @@
     <!-- Touch ID spending limit label -->
     <string name="Settings.touchIdLimit">Touch ID Spending Limit</string>
     <!-- Share data view body -->
-    <string name="ShareData.body">Help improve Bread by sharing your annoymous data with us. This does not include any financial information. We respect your financial privacy.</string>
+    <string name="ShareData.body">Help improve Loaf by sharing your annoymous data with us. This does not include any financial information. We respect your financial privacy.</string>
     <!-- Share data header -->
     <string name="ShareData.header">Share Data?</string>
     <!-- Share data switch label. -->
@@ -297,9 +297,9 @@
     <!-- Retry button label -->
     <string name="SyncingView.retry">Retry</string>
     <!-- Touch Id screen label -->
-    <string name="TouchIdSettings.label">Login to your Bread wallet and send money using just your finger print to a set limit.</string>
+    <string name="TouchIdSettings.label">Login to your Loaf wallet and send money using just your finger print to a set limit.</string>
     <!-- Touch id switch label. -->
-    <string name="TouchIdSettings.switchLabel">Enable Touch ID for Bread</string>
+    <string name="TouchIdSettings.switchLabel">Enable Touch ID for Loaf</string>
     <!-- Touch ID settings view title -->
     <string name="TouchIdSettings.title">Touch ID</string>
     <!-- Touch ID unavailable alert message -->
@@ -347,7 +347,7 @@
     <!-- Update pin caption text -->
     <string name="UpdatePin.caption">Write down your PIN and store it in a place you can access even if your phone is broken or lost.</string>
     <!-- Pin creation info. -->
-    <string name="UpdatePin.createInstruction">Your PIN will be used to unlock your Bread and send money.</string>
+    <string name="UpdatePin.createInstruction">Your PIN will be used to unlock your Loaf and send money.</string>
     <!-- Update Pin title -->
     <string name="UpdatePin.createTitle">Set PIN</string>
     <!-- Update Pin title -->

@@ -97,7 +97,7 @@ public class InputWordsActivity extends BRActivity {
         if (restore) {
             //change the labels
             title.setText("Restore Wallet");
-            description.setText("Enter the paper key for your current Bread wallet.");
+            description.setText("Enter the paper key for your current Loaf wallet.");
         } else if (resetPin) {
             //change the labels
             title.setText("Reset PIN");
