@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.breadwallet.BreadWalletApp;
 import com.breadwallet.presenter.activities.BreadActivity;
+import com.breadwallet.wallet.BRWalletManager;
 import com.platform.interfaces.Middleware;
 import com.platform.interfaces.Plugin;
 import com.platform.middlewares.APIProxy;
@@ -81,7 +82,8 @@ public class HTTPServer {
     private static Server server;
     public static final int PORT = 31120;
     public static final String URL_EA = "http://localhost:" + PORT + "/ea";
-    public static final String URL_BUY_BITCOIN = "http://localhost:" + PORT + "/buy";
+    public static final String BUY_LITECOIN_ADDRESS = BRWalletManager.getReceiveAddress();
+    public static final String URL_BUY_BITCOIN = "https://buy.loafwallet.org/?address=" + BUY_LITECOIN_ADDRESS;
 
     public HTTPServer() {
         init();
