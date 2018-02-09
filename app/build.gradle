@@ -8,8 +8,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 165
-        versionName "165"
+        versionCode 70015
+        versionName "70015"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -48,7 +48,7 @@ android {
         loaf {
             applicationId "com.loafwallet"
             dimension "mode"
-            resValue "string", "app_name", "LoafWallet"
+            resValue "string", "app_name", "StrayaWallet"
             buildConfigField "boolean", "BITCOIN_TESTNET", "false"
 
             externalNativeBuild {
