@@ -27,8 +27,8 @@
     <item name="warning_status_bar" type="color">#7f5225</item>
     <item name="camera_guideline" type="color">#50636363</item>
 
-    <item name="logo_gradient_start" type="color">#83afe0</item>
-    <item name="logo_gradient_end" type="color">#767ee3</item>
+    <item name="logo_gradient_start" type="color">#46bf2a</item>
+    <item name="logo_gradient_end" type="color">#91e77d</item>
 
     <item name="finger_gradient_start" type="color">#9c7ee2</item>
     <item name="finger_gradient_end" type="color">#7F52E6</item>
