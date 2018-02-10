@@ -3,9 +3,9 @@
   <!-- App name -->
   <string name="About.appName.android">StrayaWallet</string>
   <!-- About screen blog label -->
-  <string name="About.blog">Blog</string>
+  <string name="About.blog">Discord</string>
   <!-- About screen footer -->
-  <string name="About.footer">Made by the global Loaf team. Version %1$s</string>
+  <string name="About.footer">Made by the Aussie StrayaCoin team. Version %1$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Privacy Policy</string>
   <!-- About screen reddit label -->
@@ -15,7 +15,7 @@
   <!-- About screen title -->
   <string name="About.title">About</string>
   <!-- About screen twitter label -->
-  <string name="About.twitter">Twitter</string>
+  <string name="About.twitter">Facebook</string>
   <!-- Close modal button accessibility label -->
   <string name="AccessibilityLabels.close">Close</string>
   <!-- Support center accessibiliy label -->
@@ -613,7 +613,7 @@
   <!-- Moved $5.00 -->
   <string name="TransactionDetails.movedAmountDescription">Moved <b>%1$s</b></string>
   <!-- eg. Confirmed in Block: Not Confirmed -->
-  <string name="TransactionDetails.notConfirmedBlockHeightLabel">Not Confirmed</string>
+  <string name="TransactionDetails.notConfirmedBlockHeightLabel">Not Confirmed </string>
   <!-- "Received [$5] at [which of my addresses]" => This is the "Received [$5]" part. -->
   <string name="TransactionDetails.received">Received %1$s</string>
   <!-- Received $5.00 -->
