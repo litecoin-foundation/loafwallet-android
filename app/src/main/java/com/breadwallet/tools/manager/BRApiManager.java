@@ -169,7 +169,7 @@ public class BRApiManager {
 
 
     public static JSONArray fetchRates(Activity activity) {
-        String jsonString = urlGET(activity, "https://litecoin.com/api/v1/ticker");
+        String jsonString = urlGET(activity, "https://api.strayawallet.com/rates");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
@@ -197,7 +197,7 @@ public class BRApiManager {
     }
 
     public static void updateFeePerKb(Activity activity) {
-        String jsonString = urlGET(activity, "https://api.loafwallet.org/fee-per-kb");
+        String jsonString = urlGET(activity, "https://api.strayawallet.com/fee-per-kb");
         if (jsonString == null || jsonString.isEmpty()) {
             Log.e(TAG, "updateFeePerKb: failed to update fee, response string: " + jsonString);
             return;

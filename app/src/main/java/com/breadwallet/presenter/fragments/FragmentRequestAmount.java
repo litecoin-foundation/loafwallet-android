@@ -452,7 +452,7 @@ public class FragmentRequestAmount extends Fragment {
             String am = new BigDecimal(amount).divide(new BigDecimal(100000000), 8, BRConstants.ROUNDING_MODE).toPlainString();
             amountArg = "?amount=" + am;
         }
-        return QRUtils.generateQR(getActivity(), "litecoin:" + address + amountArg, mQrImage);
+        return QRUtils.generateQR(getActivity(), "strayacoin:" + address + amountArg, mQrImage);
     }
 
 

@@ -295,7 +295,7 @@ public class LoginActivity extends BRActivity {
                 }, 400);
             }
         });
-        unlockedText.animate().alpha(1f);
+/*        unlockedText.animate().alpha(1f); */
     }
 
     private void showFailedToUnlock() {
