@@ -1,4 +1,4 @@
-![ƀ](/images/icon.png) breadwallet for Android
+![ƀ](/images/icon.png) StrayaCoin Wallet for Android
 ----------------------------------
 
 [![download](/images/icon-google-play.png)]
