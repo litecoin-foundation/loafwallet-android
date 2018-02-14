@@ -2,11 +2,11 @@
 ----------------------------------
 
 [![download](/images/icon-google-play.png)]
-(https://play.google.com/store/apps/details?id=com.breadwallet)
+[![download](/images/icon-google-play.png)](https://play.google.com/store/apps/details?id=org.strayacoin.wallet)
 
 ###bitcoin done right
 
-This is the Android port of the breadwallet iOS app, which can be found [here](https://github.com/breadwallet/breadwallet/).
+This is the conversion of the Android LoafWallet, which can be found [here](https://github.com/litecoin-foundation/loafwallet-android).
 
 #####a completely standalone bitcoin wallet:
 
