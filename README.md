@@ -2,7 +2,7 @@
 ----------------------------------
 
 [![download](/images/icon-google-play.png)]
-[![download](/images/icon-google-play.png)](https://play.google.com/store/apps/details?id=org.strayacoin.wallet)
+
 
 ###bitcoin done right
 
