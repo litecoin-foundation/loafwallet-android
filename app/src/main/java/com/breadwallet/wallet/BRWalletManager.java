@@ -249,6 +249,7 @@ public class BRWalletManager {
 
     public static boolean refreshAddress(Context ctx) {
         String address = getReceiveAddress();
+
         if (Utils.isNullOrEmpty(address)) {
             Log.e(TAG, "refreshAddress: WARNING, retrieved address:" + address);
             return false;
@@ -399,7 +400,7 @@ public class BRWalletManager {
             BRExecutor.getInstance().forMainThreadTasks().execute(new Runnable() {
                 @Override
                 public void run() {
-                    String am = BRCurrency.getFormattedCurrencyString(ctx, "LTC", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(amount)));
+                    String am = BRCurrency.getFormattedCurrencyString(ctx, "NAH", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(amount)));
                     String amCur = BRCurrency.getFormattedCurrencyString(ctx, BRSharedPrefs.getIso(ctx), BRExchange.getAmountFromSatoshis(ctx, BRSharedPrefs.getIso(ctx), new BigDecimal(amount)));
                     String formatted = String.format("%s (%s)", am, amCur);
                     String strToShow = String.format(ctx.getString(R.string.TransactionDetails_received), formatted);

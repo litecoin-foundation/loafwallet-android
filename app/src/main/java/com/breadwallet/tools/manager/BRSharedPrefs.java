@@ -76,7 +76,9 @@ public class BRSharedPrefs {
             defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            defIso = Currency.getInstance(Locale.US).getCurrencyCode();
+//            defIso = Currency.getInstance(Locale.US).getCurrencyCode();
+//            defIso = Currency.getInstance("AUD").getCurrencyCode();
+            defIso = "BTC";
         }
         return settingsToGet.getString(BRConstants.CURRENT_CURRENCY, defIso);
     }
@@ -182,10 +184,10 @@ public class BRSharedPrefs {
         return prefs.getLong(BRConstants.ECONOMY_FEE_KB_PREFS, 0);
     }
 
-    public static void putEconomyFeePerKb(Context context, long fee) {
+    public static void putEconomyFeePerKb(Context context, long fee_economy) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putLong(BRConstants.ECONOMY_FEE_KB_PREFS, fee);
+        editor.putLong(BRConstants.ECONOMY_FEE_KB_PREFS, fee_economy);
         editor.apply();
     }
 

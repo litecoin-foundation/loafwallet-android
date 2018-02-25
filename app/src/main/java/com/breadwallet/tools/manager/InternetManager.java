@@ -14,6 +14,8 @@ import com.breadwallet.wallet.BRPeerManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.breadwallet.tools.listeners.SyncReceiver.app;
+
 
 /**
  * BreadWallet
@@ -69,7 +71,8 @@ public class InternetManager extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         boolean connected = false;
         if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-            NetworkInfo networkInfo = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
+            ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
                 connected = true;
                 BRPeerManager.getInstance().networkChanged(true);

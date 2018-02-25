@@ -160,7 +160,7 @@ public class FragmentTransactionItem extends Fragment {
 //        Log.e(TAG, "fillTexts fee: " + item.getFee());
 //        Log.e(TAG, "fillTexts hash: " + item.getHexId());
         //get the current iso
-        String iso = BRSharedPrefs.getPreferredBTC(getActivity()) ? "LTC" : BRSharedPrefs.getIso(getContext());
+        String iso = BRSharedPrefs.getPreferredBTC(getActivity()) ? "NAH" : BRSharedPrefs.getIso(getContext());
 //        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
 //            @Override
 //            public void run() {
@@ -320,7 +320,7 @@ public class FragmentTransactionItem extends Fragment {
 
         Date currentLocalTime = new Date(timeStamp == 0 ? System.currentTimeMillis() : timeStamp * 1000);
 
-        SimpleDateFormat date1 = new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault());
+        SimpleDateFormat date1 = new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
         SimpleDateFormat date2 = new SimpleDateFormat("HH:mm a", Locale.getDefault());
 
         String str1 = date1.format(currentLocalTime);

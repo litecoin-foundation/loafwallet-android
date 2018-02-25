@@ -23,14 +23,13 @@
         app:layout_constraintTop_toBottomOf="@+id/title"/>
 
     <com.breadwallet.presenter.customviews.BRText
-        app:customTFont="Celevenia.otf"
+        app:customTFont="CircularPro-Book.otf"
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="StrayaCoin"
-        android:textColor="@color/black"
-        android:textSize="26sp"
+        android:text="@string/About.strayacoin"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/view3"
         app:layout_constraintRight_toRightOf="@+id/view3"
         app:layout_constraintTop_toBottomOf="@+id/view3"/>
@@ -98,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:layout_marginLeft="32dp"
         android:text="@string/About.twitter"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view4"
@@ -109,27 +109,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:layout_marginLeft="0dp"
-        android:text="@string/About.blog"
+        android:layout_marginLeft="32dp"
+        android:text="@string/About.facebook"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintLeft_toLeftOf="@+id/divider1"/>
 
     <ImageView
         android:id="@+id/twitter_share_button"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintRight_toRightOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@+id/textView22"
         android:src="@drawable/ic_share"/>
 
     <ImageView
-        android:id="@+id/blog_share_button"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:id="@+id/strayacoin_share_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/facebook_share_button"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        android:src="@drawable/ic_share"/>
+
+    <ImageView
+        android:id="@+id/facebook_share_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintRight_toRightOf="@+id/view5"
@@ -166,8 +177,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
     <com.breadwallet.presenter.customviews.BRText
         app:customTFont="CircularPro-Book.otf"
@@ -175,15 +186,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/About.reddit"
+        android:layout_marginLeft="32dp"
+        android:text="@string/About.tradeogre"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider1"
         app:layout_constraintLeft_toLeftOf="@+id/divider1"/>
 
     <ImageView
-        android:id="@+id/reddit_share_button"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:id="@+id/tradeogre_share_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView21"
         app:layout_constraintRight_toRightOf="@+id/divider1"
         app:layout_constraintTop_toTopOf="@+id/textView21"

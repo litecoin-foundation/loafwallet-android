@@ -5,11 +5,11 @@ android {
     buildToolsVersion = '26.0.3'
     defaultConfig {
         testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
-        applicationId = 'com.loafwallet'
+        applicationId = 'org.strayacoin.wallet'
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 70015
-        versionName "70015"
+        versionCode 70040
+        versionName "1.0"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -46,9 +46,9 @@ android {
     flavorDimensions "mode"
     productFlavors {
         loaf {
-            applicationId "com.loafwallet"
+            applicationId "org.strayacoin.wallet"
             dimension "mode"
-            resValue "string", "app_name", "StrayaWallet"
+            resValue "string", "app_name", "Straya Wallet"
             buildConfigField "boolean", "BITCOIN_TESTNET", "false"
 
             externalNativeBuild {
@@ -120,7 +120,7 @@ android {
     compileSdkVersion 26
 }
 
-task copyResDirectoryToClasses(type: Copy){
+task copyResDirectoryToClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/debug/res"
 }
@@ -162,5 +162,6 @@ dependencies {
     implementation 'com.android.support.test:rules:1.0.1'
     implementation 'junit:junit:4.12'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+//    implementation 'com.google.android.gms:play-services-maps:11.8.0'
     androidTestCompile 'tools.fastlane:screengrab:1.1.0'
 }

@@ -99,6 +99,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private TextView priceChange;
 
     private TextView manageText;
+    private TextView specialMessage;
     //    private TextView walletName;
     private TextView emptyTip;
     private ConstraintLayout walletProgressLayout;
@@ -141,7 +142,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         getWindowManager().getDefaultDisplay().getSize(screenParametersPoint);
 
         initializeViews();
-
         setListeners();
 
         toolbarLayout.removeView(walletProgressLayout);
@@ -181,7 +181,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         Uri data = intent.getData();
         if (data == null) return;
         String scheme = data.getScheme();
-        if (scheme != null && (scheme.startsWith("litecoin") || scheme.startsWith("bitid"))) {
+        if (scheme != null && (scheme.startsWith("strayacoin") || scheme.startsWith("bitid"))) {
             String str = intent.getDataString();
             BitcoinUrlHandler.processRequest(this, str);
         }
@@ -377,7 +377,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         sendButton = (LinearLayout) findViewById(R.id.send_layout);
         receiveButton = (LinearLayout) findViewById(R.id.receive_layout);
         manageText = (TextView) findViewById(R.id.manage_text);
-//        walletName = (TextView) findViewById(R.id.wallet_name_text);
+        specialMessage = (TextView) findViewById(R.id.special_message);
         menuButton = (LinearLayout) findViewById(R.id.menu_layout);
         primaryPrice = (TextView) findViewById(R.id.primary_price);
         secondaryPrice = (TextView) findViewById(R.id.secondary_price);
@@ -468,7 +468,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
 
                 //amount in BTC units
                 BigDecimal btcAmount = BRExchange.getBitcoinForSatoshis(BreadActivity.this, amount);
-                final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "LTC", btcAmount);
+                final String formattedBTCAmount = BRCurrency.getFormattedCurrencyString(BreadActivity.this, "NAH", btcAmount);
 
                 //amount in currency units
                 BigDecimal curAmount = BRExchange.getAmountFromSatoshis(BreadActivity.this, iso, amount);

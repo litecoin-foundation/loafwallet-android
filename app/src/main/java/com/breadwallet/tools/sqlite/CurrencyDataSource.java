@@ -76,6 +76,7 @@ public class CurrencyDataSource implements BRDataSourceInterface {
         if (currencyEntities == null) return;
 
         try {
+
             database = openDatabase();
             database.beginTransaction();
             for (CurrencyEntity c : currencyEntities) {

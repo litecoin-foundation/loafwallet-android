@@ -22,9 +22,10 @@ public class AboutActivity extends BRActivity {
     private TextView policyText;
     private TextView infoText;
 
-    private ImageView redditShare;
+    private ImageView strayacoinShare;
+    private ImageView facebookShare;
     private ImageView twitterShare;
-    private ImageView blogShare;
+    private ImageView tradeogreShare;
     private static AboutActivity app;
 
     public static AboutActivity getApp() {
@@ -56,14 +57,15 @@ public class AboutActivity extends BRActivity {
 
         infoText.setText(String.format(Locale.getDefault(), getString(R.string.About_footer), verCode));
 
-        redditShare = (ImageView) findViewById(R.id.reddit_share_button);
+        strayacoinShare = (ImageView) findViewById(R.id.strayacoin_share_button);
+        facebookShare = (ImageView) findViewById(R.id.facebook_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
-        blogShare = (ImageView) findViewById(R.id.blog_share_button);
+        tradeogreShare = (ImageView) findViewById(R.id.tradeogre_share_button);
 
-        redditShare.setOnClickListener(new View.OnClickListener() {
+        strayacoinShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://reddit.com/r/strayacoin/"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.strayacoin.org/"));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
@@ -72,15 +74,23 @@ public class AboutActivity extends BRActivity {
         twitterShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Strayacrypto"));
+                startActivity(browserIntent);
+                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+            }
+        });
+        facebookShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/strayacoin/"));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
-        blogShare.setOnClickListener(new View.OnClickListener() {
+        tradeogreShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/sKuM48"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tradeogre.com/exchange/BTC-NAH"));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }

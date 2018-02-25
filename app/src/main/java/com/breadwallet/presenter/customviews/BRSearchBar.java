@@ -219,7 +219,7 @@ public class BRSearchBar extends android.support.v7.widget.Toolbar {
 
         final InputMethodManager keyboard = (InputMethodManager)
                 getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (b) {
+//        if (b) {
             clearSwitches();
             updateFilterButtonsUI(filterSwitches);
             new Handler().postDelayed(new Runnable() {
@@ -232,7 +232,7 @@ public class BRSearchBar extends android.support.v7.widget.Toolbar {
             if (TxManager.getInstance().adapter != null)
                 TxManager.getInstance().adapter.updateData();
 
-        } else {
+/*        } else {
             keyboard.hideSoftInputFromWindow(searchEdit.getWindowToken(), 0);
             clearSwitches();
             updateFilterButtonsUI(filterSwitches);
@@ -240,7 +240,7 @@ public class BRSearchBar extends android.support.v7.widget.Toolbar {
                 TxManager.getInstance().adapter.resetFilter();
             }
         }
-    }
+*/    }
 
 
 }

@@ -51,15 +51,31 @@
 
                     <ImageView
                         android:id="@+id/wallet_name_text"
-                        android:layout_width="128dp"
+                        android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/strayacoin_64"
+                        android:src="@drawable/strayacoin_256"
                         android:textColor="@color/white"
                         android:textSize="36sp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <com.breadwallet.presenter.customviews.BRText
+                        android:id="@+id/special_message"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="42dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/Special.message"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        app:customTFont="CircularPro-Book.otf"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
 

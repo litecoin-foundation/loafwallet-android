@@ -94,16 +94,16 @@ public class BRApiManager {
                     CurrencyEntity tmp = new CurrencyEntity();
                     try {
                         JSONObject tmpObj = (JSONObject) arr.get(i);
-                        tmp.name = tmpObj.getString("code");
+                        tmp.name = tmpObj.getString("name");
                         tmp.code = tmpObj.getString("code");
-                        tmp.rate = (float) tmpObj.getDouble("n");
+                        tmp.rate = (float) tmpObj.getDouble("rate");
                         String selectedISO = BRSharedPrefs.getIso(context);
 //                        Log.e(TAG,"selectedISO: " + selectedISO);
                         if (tmp.code.equalsIgnoreCase(selectedISO)) {
 //                            Log.e(TAG, "theIso : " + theIso);
 //                                Log.e(TAG, "Putting the shit in the shared preffs");
                             BRSharedPrefs.putIso(context, tmp.code);
-                            BRSharedPrefs.putCurrencyListPosition(context, i - 1);
+                            BRSharedPrefs.putCurrencyListPosition(context, i);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -167,21 +167,21 @@ public class BRApiManager {
         }
     }
 
-
     public static JSONArray fetchRates(Activity activity) {
-        String jsonString = urlGET(activity, "https://api.strayawallet.com/rates");
+//        String jsonString = "{\"data\":[{\"code\":\"BTC\",\"rate\":0.00001000,\"name\":\"Bitcoin\"}, {\"code\":\"AUD\",\"name\":\"Australian Dollar\",\"rate\":0.1228}, {\"code\":\"NZD\",\"name\":\"New Zealand Dollar\",\"rate\":0.1321}, {\"code\":\"USD\",\"name\":\"US Dollar\",\"rate\":0.0963}, {\"code\":\"GBP\",\"name\":\"British Pound Sterling\",\"rate\":0.0690}, {\"code\":\"KRW\",\"name\":\"Korean Won\",\"rate\":103.7212}, {\"code\":\"EUR\",\"name\":\"Euro\",\"rate\":0.0783}, {\"code\":\"JPY\",\"name\":\"Japanese Yen\",\"rate\":10.2945}, {\"code\":\"CAD\",\"name\":\"Canadian Dollar\",\"rate\":0.1217}, {\"code\":\"CNY\",\"name\":\"Chinese Yuan\",\"rate\":0.6103}, {\"code\":\"HKD\",\"name\":\"Hong Kong Dollar\",\"rate\":0.7535}, {\"code\":\"SGD\",\"name\":\"Singapore Dollar\",\"rate\":0.1271}]}";
+        String jsonString = urlGET(activity, "https://api.strayawallet.com/rates-android/");
         JSONArray jsonArray = null;
         if (jsonString == null) return null;
         try {
             JSONObject obj = new JSONObject(jsonString);
-            jsonArray = obj.getJSONArray("price");
+            jsonArray = obj.getJSONArray("data");
 
         } catch (JSONException ignored) {
         }
-        return jsonArray == null ? backupFetchRates(activity) : jsonArray;
+        return jsonArray; // == null ? backupFetchRates(activity) : jsonArray;
     }
 
-    public static JSONArray backupFetchRates(Activity activity) {
+/*    public static JSONArray backupFetchRates(Activity activity) {
         String jsonString = urlGET(activity, "https://bitpay.com/rates");
 
         JSONArray jsonArray = null;
@@ -195,9 +195,9 @@ public class BRApiManager {
         }
         return jsonArray;
     }
-
+*/
     public static void updateFeePerKb(Activity activity) {
-        String jsonString = urlGET(activity, "https://api.strayawallet.com/fee-per-kb");
+        String jsonString = urlGET(activity, "https://api.strayawallet.com/fee-per-kb/");
         if (jsonString == null || jsonString.isEmpty()) {
             Log.e(TAG, "updateFeePerKb: failed to update fee, response string: " + jsonString);
             return;
@@ -212,6 +212,7 @@ public class BRApiManager {
                 BRSharedPrefs.putFeePerKb(activity, fee);
                 BRWalletManager.getInstance().setFeePerKb(fee, isEconomyFee);
             }
+
             if (economyFee != 0 && economyFee < BRConstants.MAX_FEE_PER_KB) {
                 BRSharedPrefs.putEconomyFeePerKb(activity, economyFee);
             }

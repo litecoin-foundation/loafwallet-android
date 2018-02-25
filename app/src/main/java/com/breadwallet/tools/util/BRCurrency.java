@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import static com.breadwallet.tools.util.BRConstants.CURRENT_UNIT_BITS;
+import static com.breadwallet.tools.util.BRConstants.bitcoinSymbol;
 
 /**
  * BreadWallet
@@ -56,8 +57,10 @@ public class BRCurrency {
         String symbol = null;
         decimalFormatSymbols = currencyFormat.getDecimalFormatSymbols();
 //        int decimalPoints = 0;
-        if (Objects.equals(isoCurrencyCode, "LTC")) {
+        if (Objects.equals(isoCurrencyCode, "NAH")) {
             symbol = BRExchange.getBitcoinSymbol(app);
+        } else if (Objects.equals(isoCurrencyCode, "BTC")) {
+                symbol = bitcoinSymbol;
         } else {
             try {
                 currency = Currency.getInstance(isoCurrencyCode);
@@ -71,6 +74,7 @@ public class BRCurrency {
 //        currencyFormat.setMaximumFractionDigits(decimalPoints);
         currencyFormat.setGroupingUsed(true);
         currencyFormat.setMaximumFractionDigits(BRSharedPrefs.getCurrencyUnit(app) == BRConstants.CURRENT_UNIT_BITCOINS ? 8 : 2);
+// explanation (can be 0,1 or 2 ) == 2 ? 8 : 2)so that first tests (can be 0,1 or 2 ) == 2, if so, then 8decimal places (NAH), otherwise 2 decimal places, its a compact if statement.
         currencyFormat.setDecimalFormatSymbols(decimalFormatSymbols);
         currencyFormat.setNegativePrefix(decimalFormatSymbols.getCurrencySymbol() + "-");
         currencyFormat.setNegativeSuffix("");
@@ -79,16 +83,16 @@ public class BRCurrency {
 
     public static String getSymbolByIso(Context app, String iso) {
         String symbol;
-        if (Objects.equals(iso, "LTC")) {
-            String currencySymbolString = BRConstants.bitcoinLowercase;
+        if (Objects.equals(iso, "NAH")) {
+            String currencySymbolString = BRConstants.bitcoinUppercase;
             if (app != null) {
                 int unit = BRSharedPrefs.getCurrencyUnit(app);
                 switch (unit) {
                     case CURRENT_UNIT_BITS:
-                        currencySymbolString = BRConstants.bitcoinLowercase;
+                        currencySymbolString = BRConstants.bitcoinDunno;
                         break;
                     case BRConstants.CURRENT_UNIT_MBITS:
-                        currencySymbolString = "m" + BRConstants.bitcoinUppercase;
+                        currencySymbolString = BRConstants.bitcoinLowercase;
                         break;
                     case BRConstants.CURRENT_UNIT_BITCOINS:
                         currencySymbolString = BRConstants.bitcoinUppercase;
@@ -96,6 +100,9 @@ public class BRCurrency {
                 }
             }
             symbol = currencySymbolString;
+        } else if (Objects.equals(iso, "BTC")) {
+                String currencySymbolString = BRConstants.bitcoinSymbol;
+                symbol = currencySymbolString;
         } else {
             Currency currency;
             try {
@@ -110,17 +117,22 @@ public class BRCurrency {
 
     //for now only use for BTC and Bits
     public static String getCurrencyName(Context app, String iso) {
-        if (Objects.equals(iso, "LTC")) {
+        if (Objects.equals(iso, "NAH")) {
             if (app != null) {
                 int unit = BRSharedPrefs.getCurrencyUnit(app);
                 switch (unit) {
                     case CURRENT_UNIT_BITS:
-                        return "Bits";
+                        return "DUNNO";
                     case BRConstants.CURRENT_UNIT_MBITS:
-                        return "MBits";
+                        return "YEAH";
                     case BRConstants.CURRENT_UNIT_BITCOINS:
-                        return "LTC";
+                        return "NAH";
                 }
+            }
+        }
+        if (Objects.equals(iso, "BTC")) {
+            if (app != null) {
+                return "BTC";
             }
         }
         return iso;
@@ -129,7 +141,7 @@ public class BRCurrency {
     public static int getMaxDecimalPlaces(String iso) {
         if (Utils.isNullOrEmpty(iso)) return 8;
 
-        if (iso.equalsIgnoreCase("LTC")) {
+        if (iso.equalsIgnoreCase("NAH") || iso.equalsIgnoreCase("BTC")) {
             return 8;
         } else {
             Currency currency = Currency.getInstance(iso);
