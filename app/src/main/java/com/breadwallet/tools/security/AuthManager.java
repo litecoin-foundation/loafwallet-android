@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -24,6 +25,8 @@ import com.breadwallet.wallet.BRWalletManager;
 import com.jniwrappers.BRKey;
 
 import java.util.concurrent.TimeUnit;
+
+import static com.breadwallet.BreadApp.POSMode;
 
 /**
  * BreadWallet
@@ -233,7 +236,58 @@ public class AuthManager {
             return;
         }
 
-        if (keyguardManager.isKeyguardSecure()) {
+        if (BuildConfig.FLAVOR.equals("loaf")){
+            if (keyguardManager.isKeyguardSecure()) {
+
+                if (useFingerPrint) {
+
+                    fingerprintFragment = new FragmentFingerprint();
+                    Bundle args = new Bundle();
+                    args.putString("title", title);
+                    args.putString("message", message);
+                    fingerprintFragment.setArguments(args);
+                    fingerprintFragment.setCompletion(completion);
+                    FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
+                    transaction.add(android.R.id.content, fingerprintFragment, FragmentFingerprint.class.getName());
+                    transaction.addToBackStack(null);
+                    if (!app.isDestroyed())
+                        transaction.commit();
+                } else {
+                    breadPin = new FragmentPin();
+                    Bundle args = new Bundle();
+                    args.putString("title", title);
+                    args.putString("message", message);
+                    breadPin.setArguments(args);
+                    breadPin.setCompletion(completion);
+                    FragmentTransaction transaction = app.getFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(0, 0, 0, R.animator.plain_300);
+                    transaction.add(android.R.id.content, breadPin, breadPin.getClass().getName());
+                    transaction.addToBackStack(null);
+                    if (!app.isDestroyed()) {
+                        transaction.commit();
+                    }
+                }
+            } else {
+                BRDialog.showCustomDialog(app,
+                        "",
+                        app.getString(R.string.Prompts_NoScreenLock_body_android),
+                        app.getString(R.string.AccessibilityLabels_close),
+                        null,
+                        new BRDialogView.BROnClickListener() {
+                            @Override
+                            public void onClick(BRDialogView brDialogView) {
+                                app.finish();
+                            }
+                        }, null, new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                app.finish();
+                            }
+                        }, 0);
+            }
+
+        } else {
             if (useFingerPrint) {
 
                 fingerprintFragment = new FragmentFingerprint();
@@ -263,25 +317,7 @@ public class AuthManager {
                     transaction.commit();
                 }
             }
-        } else {
-            BRDialog.showCustomDialog(app,
-                    "",
-                    app.getString(R.string.Prompts_NoScreenLock_body_android),
-                    app.getString(R.string.AccessibilityLabels_close),
-                    null,
-                    new BRDialogView.BROnClickListener() {
-                @Override
-                public void onClick(BRDialogView brDialogView) {
-                    app.finish();
-                }
-            }, null, new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    app.finish();
-                }
-            }, 0);
         }
-
     }
 
     public static boolean isFingerPrintAvailableAndSetup(Context context) {

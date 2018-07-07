@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
@@ -46,6 +47,7 @@ import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.qrcode.QRUtils;
 import com.breadwallet.tools.security.BRKeyStore;
+import com.breadwallet.tools.sqlite.BusinessesDataSource;
 import com.breadwallet.tools.sqlite.MerkleBlockDataSource;
 import com.breadwallet.tools.sqlite.PeerDataSource;
 import com.breadwallet.tools.sqlite.TransactionDataSource;
@@ -467,26 +469,27 @@ public class BRWalletManager {
 
     public void startTheWalletIfExists(final Activity app) {
         final BRWalletManager m = BRWalletManager.getInstance();
-        if (!m.isPasscodeEnabled(app)) {
-            //Device passcode/password should be enabled for the app to work
-            BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), app.getString(R.string.Prompts_NoScreenLock_body_android),
-                    app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
-                        @Override
-                        public void onClick(BRDialogView brDialogView) {
-                            app.finish();
-                        }
-                    }, null, new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            app.finish();
-                        }
-                    }, 0);
-        } else {
+        if(BuildConfig.FLAVOR.equals("loaf")) {
+            if (!m.isPasscodeEnabled(app)) {
+                //Device passcode/password should be enabled for the app to work
+                BRDialog.showCustomDialog(app, app.getString(R.string.JailbreakWarnings_title), app.getString(R.string.Prompts_NoScreenLock_body_android),
+                        app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                            @Override
+                            public void onClick(BRDialogView brDialogView) {
+                                app.finish();
+                            }
+                        }, null, new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                app.finish();
+                            }
+                        }, 0);
+            }
+        }
             if (!m.noWallet(app)) {
                 BRAnimator.startBreadActivity(app, true);
             }
 
-        }
     }
 
     @WorkerThread
@@ -609,6 +612,8 @@ public class BRWalletManager {
 
     public native int feeForTransaction(String addressHolder, long amountHolder);
 
+    public native int feeForDistTransaction(String addressHolder, String devAddressHolder, String distAddressHolder, long amountHolder);
+
     public native int feeForTransactionAmount(long amountHolder);
 
     public native long getMinOutputAmount();
@@ -618,6 +623,7 @@ public class BRWalletManager {
     public native boolean isCreated();
 
     public native byte[] tryTransaction(String addressHolder, long amountHolder);
+    public native byte[] tryDistTransaction(String addressHolder, String DevAddressHolder, String DistAddressHolder, long amountHolder);
 
     // returns the given amount (amount is in satoshis) in local currency units (i.e. pennies, pence)
     // price is local currency units per bitcoin

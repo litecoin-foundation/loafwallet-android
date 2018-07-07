@@ -29,24 +29,21 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.NetworkOnMainThreadException;
-import android.util.Log;
 
-import com.breadwallet.presenter.activities.util.ActivityUTILS;
-import com.breadwallet.presenter.entities.BRPeerEntity;
-import com.breadwallet.presenter.entities.CurrencyEntity;
-import com.breadwallet.presenter.entities.PeerEntity;
+import com.breadwallet.presenter.entities.BRBusinessEntity;
 import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.util.BRConstants;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CurrencyDataSource implements BRDataSourceInterface {
-    private static final String TAG = CurrencyDataSource.class.getName();
+import static com.breadwallet.presenter.entities.BRBusinessEntity.*;
+
+public class BusinessesDataSource implements BRDataSourceInterface {
+    private static final String TAG = BusinessesDataSource.class.getName();
 
     private AtomicInteger mOpenCounter = new AtomicInteger();
 
@@ -54,38 +51,44 @@ public class CurrencyDataSource implements BRDataSourceInterface {
     private SQLiteDatabase database;
     private final BRSQLiteHelper dbHelper;
     private final String[] allColumns = {
-            BRSQLiteHelper.CURRENCY_CODE,
-            BRSQLiteHelper.CURRENCY_NAME,
-            BRSQLiteHelper.CURRENCY_RATE
+            BRSQLiteHelper.BUSINESS_COLUMN_ID,
+            BRSQLiteHelper.BUSINESS_BUSINESSNAME,
+            BRSQLiteHelper.BUSINESS_BUSINESSPRODUCTS,
+            BRSQLiteHelper.BUSINESS_LAT,
+            BRSQLiteHelper.BUSINESS_LNG,
+            BRSQLiteHelper.BUSINESS_DATESTART,
+            BRSQLiteHelper.BUSINESS_REGLENGTH
     };
 
-    private static CurrencyDataSource instance;
+    private static BusinessesDataSource instance;
 
-    public static CurrencyDataSource getInstance(Context context) {
+    public static BusinessesDataSource getInstance(Context context) {
         if (instance == null) {
-            instance = new CurrencyDataSource(context);
+            instance = new BusinessesDataSource(context);
         }
         return instance;
     }
 
-    public CurrencyDataSource(Context context) {
+    public BusinessesDataSource(Context context) {
         dbHelper = BRSQLiteHelper.getInstance(context);
     }
 
-    public void putCurrencies(Collection<CurrencyEntity> currencyEntities) {
-        if (currencyEntities == null) return;
+    public void putBusinesses(Collection<BRBusinessEntity> businessEntities) {
+        if (businessEntities == null) return;
 
         try {
 
             database = openDatabase();
             database.beginTransaction();
-            for (CurrencyEntity c : currencyEntities) {
+            for (BRBusinessEntity b : businessEntities) {
                 ContentValues values = new ContentValues();
-                values.put(BRSQLiteHelper.CURRENCY_CODE, c.code);
-                values.put(BRSQLiteHelper.CURRENCY_NAME, c.name);
-                values.put(BRSQLiteHelper.CURRENCY_RATE, c.rate);
-                database.insertWithOnConflict(BRSQLiteHelper.CURRENCY_TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
-
+                values.put(BRSQLiteHelper.BUSINESS_BUSINESSNAME, b.businessname);
+                values.put(BRSQLiteHelper.BUSINESS_BUSINESSPRODUCTS, b.businessproducts);
+                values.put(BRSQLiteHelper.BUSINESS_LAT, b.lat);
+                values.put(BRSQLiteHelper.BUSINESS_LNG, b.lng);
+                values.put(BRSQLiteHelper.BUSINESS_DATESTART, b.dateStart);
+                values.put(BRSQLiteHelper.BUSINESS_REGLENGTH, b.regLength);
+                database.insertWithOnConflict(BRSQLiteHelper.BUSINESS_TABLE_NAME, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             }
 
             database.setTransactionSuccessful();
@@ -99,29 +102,29 @@ public class CurrencyDataSource implements BRDataSourceInterface {
 
     }
 
-    public void deleteAllCurrencies() {
+    public void deleteAllBusinesses() {
         try {
             database = openDatabase();
-            database.delete(BRSQLiteHelper.CURRENCY_TABLE_NAME, BRSQLiteHelper.CURRENCY_CODE + " <> -1", null);
+            database.delete(BRSQLiteHelper.BUSINESS_TABLE_NAME, BRSQLiteHelper.BUSINESS_COLUMN_ID + " <> -1", null);
         } finally {
             closeDatabase();
         }
     }
 
-    public List<CurrencyEntity> getAllCurrencies() {
+    public List<BRBusinessEntity> getAllBusinesses() {
 
-        List<CurrencyEntity> currencies = new ArrayList<>();
+        List<BRBusinessEntity> businesses = new ArrayList<>();
         Cursor cursor = null;
         try {
             database = openDatabase();
 
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
-                    allColumns, null, null, null, null, "\'" + BRSQLiteHelper.CURRENCY_CODE + "\'");
+            cursor = database.query(BRSQLiteHelper.BUSINESS_TABLE_NAME,
+                    allColumns, null, null, null, null, "\'" + BRSQLiteHelper.BUSINESS_BUSINESSNAME + "\'");
 
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                CurrencyEntity curEntity = cursorToCurrency(cursor);
-                currencies.add(curEntity);
+                BRBusinessEntity businessEntity = cursorToBusiness(cursor);
+                businesses.add(businessEntity);
                 cursor.moveToNext();
             }
             // make sure to close the cursor
@@ -131,58 +134,13 @@ public class CurrencyDataSource implements BRDataSourceInterface {
             closeDatabase();
         }
 
-        return currencies;
+        return businesses;
     }
 
-    public List<String> getAllISOs() {
-        List<String> ISOs = new ArrayList<>();
-        Cursor cursor = null;
-        try {
-            database = openDatabase();
-
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
-                    allColumns, null, null, null, null, null);
-
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                CurrencyEntity curEntity = cursorToCurrency(cursor);
-                ISOs.add(curEntity.code);
-                cursor.moveToNext();
-            }
-            // make sure to close the cursor
-        } finally {
-            if (cursor != null)
-                cursor.close();
-            closeDatabase();
-        }
-
-        return ISOs;
-    }
-
-    public CurrencyEntity getCurrencyByIso(String iso) {
-        Cursor cursor = null;
-        try {
-            database = openDatabase();
-
-            cursor = database.query(BRSQLiteHelper.CURRENCY_TABLE_NAME,
-                    allColumns, BRSQLiteHelper.CURRENCY_CODE + "=\'" + iso + "\'", null, null, null, null);
-
-
-            cursor.moveToFirst();
-            if (!cursor.isAfterLast()) {
-                return cursorToCurrency(cursor);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-            closeDatabase();
-        }
-
-        return null;
-    }
-
-    private CurrencyEntity cursorToCurrency(Cursor cursor) {
-        return new CurrencyEntity(cursor.getString(0), cursor.getString(1), cursor.getFloat(2));
+    private BRBusinessEntity cursorToBusiness(Cursor cursor) {
+        BRBusinessEntity businessEntity = new BRBusinessEntity(cursor.getString(1), cursor.getString(2), cursor.getDouble(3),cursor.getDouble(4),cursor.getString(5),cursor.getInt(6));
+        businessEntity.setId(cursor.getInt(0));
+        return businessEntity;
     }
 
     @Override

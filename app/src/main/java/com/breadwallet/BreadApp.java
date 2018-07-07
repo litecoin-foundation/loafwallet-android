@@ -61,10 +61,14 @@ public class BreadApp extends Application {
     public static long backgroundedTime;
 
     private static Activity currentActivity;
+    public static boolean POSMode=true;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.FLAVOR.equals("loaf")) POSMode=false;
 
         if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
             HOST = "stage2.breadwallet.com";

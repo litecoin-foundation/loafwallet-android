@@ -21,13 +21,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
+import com.breadwallet.presenter.activities.settings.AdvancedActivity;
+import com.breadwallet.presenter.activities.settings.MapsActivity;
 import com.breadwallet.presenter.activities.settings.NodesActivity;
 import com.breadwallet.presenter.activities.settings.SecurityCenterActivity;
 import com.breadwallet.presenter.activities.settings.SettingsActivity;
 import com.breadwallet.presenter.activities.settings.WebViewActivity;
 import com.breadwallet.presenter.entities.BRMenuItem;
+import com.breadwallet.presenter.entities.BRSettingsItem;
 import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
@@ -37,6 +41,7 @@ import com.platform.HTTPServer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.breadwallet.BreadApp.POSMode;
 import static com.breadwallet.R.id.menu_listview;
 
 /**
@@ -108,7 +113,8 @@ public class FragmentMenu extends Fragment {
 
                 }
             }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_security), R.drawable.ic_shield, new View.OnClickListener() {
+        if (!POSMode)
+            itemList.add(new BRMenuItem(getString(R.string.MenuButton_security), R.drawable.ic_shield, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Activity app = getActivity();
@@ -117,13 +123,15 @@ public class FragmentMenu extends Fragment {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.ic_question_mark, new View.OnClickListener() {
+        if (!POSMode)
+            itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.ic_question_mark, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BRAnimator.showSupportFragment(getActivity(), null);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_settings), R.drawable.ic_settings, new View.OnClickListener() {
+        if (!POSMode)
+            itemList.add(new BRMenuItem(getString(R.string.MenuButton_settings), R.drawable.ic_settings, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SettingsActivity.class);
@@ -132,14 +140,38 @@ public class FragmentMenu extends Fragment {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, new View.OnClickListener() {
+
+        if (!POSMode)
+            itemList.add(new BRMenuItem(getString(R.string.MAPS_title), R.drawable.ic_map, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Activity from = getActivity();
-                from.getFragmentManager().popBackStack();
-                BRAnimator.startBreadActivity(from, true);
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                Activity app = getActivity();
+                app.startActivity(intent);
+                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
+        if(BuildConfig.FLAVOR.equals("POS")) {
+            itemList.add(new BRMenuItem(POSMode? "Turn Off POS Mode":"Turn On POS Mode", R.drawable.ic_map, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (POSMode) POSMode=false;
+                    else POSMode=true;
+                    final Activity from = getActivity();
+                    from.getFragmentManager().popBackStack();
+                    BRAnimator.startBreadActivity(from, !POSMode);
+                }
+            }));
+        }
+        if (!POSMode)
+            itemList.add(new BRMenuItem(getString(R.string.MenuButton_lock), R.drawable.ic_lock, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Activity from = getActivity();
+                    from.getFragmentManager().popBackStack();
+                    BRAnimator.startBreadActivity(from, true);
+                }
+            }));
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override

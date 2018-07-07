@@ -9,13 +9,13 @@
     <!-- About screen facebook label -->
     <string name="About.facebook">Facebook</string>
     <!-- About screen footer -->
-    <string name="About.footer">Made by the Aussie STRAYACOIN team.\nVersion 1.0 Build %1$s</string>
+    <string name="About.footer">Made by the Aussie STRAYACOIN team.\nBuild %1$s</string>
     <!-- Privay Policy button label -->
     <string name="About.privacy">Privacy Policy</string>
     <!-- About screen reddit label -->
     <string name="About.reddit">Reddit</string>
     <!-- About screen strayacoin label -->
-    <string name="About.strayacoin">strayacoin.org</string>
+    <string name="About.strayacoin">Strayacoin.org</string>
     <!-- Terms of Use button label -->
     <string name="About.terms">Terms of Use</string>
     <!-- About screen title -->
@@ -24,6 +24,8 @@
     <string name="About.tradeogre">Exchange (TradeOgre)</string>
     <!-- About screen twitter label -->
     <string name="About.twitter">Twitter</string>
+    <!-- About screen tradeogre label -->
+    <string name="About.wiki">StrayaCoin wiki</string>
     <!-- Close modal button accessibility label -->
     <string name="AccessibilityLabels.close">Close</string>
     <!-- Support center accessibiliy label -->
@@ -61,7 +63,7 @@
     <!-- Send success alert header label (confirmation that the send happened) -->
     <string name="Alerts.sendSuccess">Send Confirmation</string>
     <!-- Send success alert subheader label (e.g. the money was sent) -->
-    <string name="Alerts.sendSuccessSubheader">Money Sent!</string>
+    <string name="Alerts.sendSuccessSubheader">Strayacoin Sent!</string>
     <!-- Fingerprint was recognized by the scanner -->
     <string name="Alerts.touchIdSucceeded.android">Fingerprint recognized</string>
     <!-- JSON Serialization error message -->
@@ -130,6 +132,8 @@
     <string name="Confirmation.amountLabel">Amount to Send:</string>
     <!-- Network Fee: ($1.00) -->
     <string name="Confirmation.feeLabel">Network Fee:</string>
+    <!-- Network Fee: ($1.00) -->
+    <string name="Confirmation.POS.feeLabel">Fee (POS+Network):</string>
     <!-- eg. Processing time: This transaction is predicted to complete in [10-60 minutes]. -->
     <string name="Confirmation.processingTime">Processing time: This transaction is predicted to complete in %1$s.</string>
     <!-- Label for "send" button on final confirmation screen -->
@@ -172,8 +176,6 @@
     <string name="FeeSelector.regularTime">10-60 minutes</string>
     <!-- Fee Selector title -->
     <string name="FeeSelector.title">Processing Speed</string>
-    <!-- GPS view title -->
-    <string name="GPS.title">GPS Location</string>
     <!-- Checking private key balance progress view text -->
     <string name="Import.checking">Checking private key balance...</string>
     <!-- Sweep private key confirmation message -->
@@ -216,6 +218,11 @@
     <string name="Import.warning">Importing a wallet does not include transaction history or other details.</string>
     <!-- Wrong password alert message -->
     <string name="Import.wrongPassword">Wrong password, please try again.</string>
+    <!-- Strings for Square Integration -->
+    <string name="install_point_of_sale_confirm">Open Play Store</string>
+    <string name="install_point_of_sale_message">Please download Square Point of Sale from the Play Store.</string>
+    <string name="install_point_of_sale_title">Square Point of Sale is not installed</string>
+    <string name="result_title">Point of Sale API Result</string>
     <!-- Close app button -->
     <string name="JailbreakWarnings.close">Close</string>
     <!-- Ignore jailbreak warning button -->
@@ -238,6 +245,10 @@
     <string name="ManageWallet.textFeildLabel">Wallet Name</string>
     <!-- Manage wallet modal title -->
     <string name="ManageWallet.title">Manage Wallet</string>
+    <!-- GoogleMap view title -->
+    <string name="title_activity_maps">MAPS Location</string>
+    <!-- GoogleMap view title -->
+    <string name="MAPS_title">Find or Register Business</string>
     <!-- Buy NAH title -->
     <string name="MenuButton.buy">Buy NAH</string>
     <!-- Menu button title -->
@@ -290,6 +301,8 @@
     <string name="PaymentProtocol.Errors.unsupportedSignatureType">unsupported signature type</string>
     <!-- Untrusted certificate payment protocol error message -->
     <string name="PaymentProtocol.Errors.untrustedCertificate">untrusted certificate</string>
+    <!-- POS Title -->
+    <string name="POS_title">Toggle POS Mode</string>
     <!-- No passcode set warning body -->
     <string name="Prompts.NoPasscode.body">A device passcode is needed to safeguard your wallet. Go to settings and turn passcode on.</string>
     <!-- No Passcode set warning title -->
@@ -474,6 +487,36 @@
     <string name="Send.sendLabel">Send</string>
     <!-- Send screen title (as in "this is the screen for sending money") -->
     <string name="Send.title">Send</string>
+    <!-- Send button label (the action, "press here to register business") -->
+    <string name="RegisterBusiness.registerLabel">Register</string>
+    <!-- Send screen title (as in "this is the screen for registering a business") -->
+    <string name="RegisterBusiness.title">Register Business</string>
+    <!-- the label of RegisterBusiness Spinner-->
+    <string name="RegisterBusiness.durationLabel">Registeration Length</string>
+    <!-- the duration of registration to use in a spinner-->
+    <string-array name="RegisterBusiness.duration">
+        <item>Register for One Day (20NAH)</item>
+        <item>Register for One Week (30NAH)</item>
+        <item>Register for One Month (50NAH)</item>
+        <item>Register for Six Months (120NAH)</item>
+        <item>Register for Twelve Months (200NAH)</item>
+    </string-array>
+    <!-- Where is the business to be registered - Latitude-->
+    <string name="RegisterBusiness.LatLabel">Latitude</string>
+    <!-- Where is the business to be registered - Latitude-->
+    <string name="RegisterBusiness.LngLabel">Longitude</string>
+    <!-- What the Registration Business Name should read - label-->
+    <string name="RegisterBusiness.entryLabel">Business Name</string>
+    <!-- Who is the StrayaPOS Distributor - label-->
+    <string name="RegisterBusiness.StrayaPOSDistributorLabel">StrayaPOS Distributor (if any)</string>
+    <!-- Who is the StrayaPOS Distributor - entry-->
+    <string name="RegisterBusiness.StrayaPOSDistributorEntry">Paste StrayaCoin Address Here</string>
+    <!-- What the Registration should read -->
+    <string name="RegisterBusiness.entryText">Type Name Here</string>
+    <!-- What the Registration should read - label-->
+    <string name="RegisterBusinessProducts.entryLabel">Products or Services</string>
+    <!-- What the Registration should read -->
+    <string name="RegisterBusinessProducts.entryText">Type Products Here</string>
     <!-- Send money to label -->
     <string name="Send.toLabel">To</string>
     <!-- Adress already used alert message - first part -->
@@ -530,6 +573,8 @@
     <string name="StartPaperPhrase.date">You last wrote down your paper key on %1$s</string>
     <!-- Start view message -->
     <string name="StartViewController.message">The easy and secure way to use StrayaCoin.</string>
+    <!-- Start view message -->
+    <string name="StartViewControllerPOS.message">Designed for POS Applications.  \n0.5% fee on Send, in addition to network fees.\nBy Creating or Recovering Wallet,\nyou agree to these fees.</string>
     <!-- Syncing view connectiong state header text -->
     <string name="SyncingView.connecting">Connecting</string>
     <!-- Syncing view header text -->
@@ -715,6 +760,10 @@
     <!-- Top title of welcome screen -->
     <string name="Welcome.title">Welcome to StrayaWallet!</string>
     <!-- Wipe wallet alert message -->
+    <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
+    <string name="Welcome.POS.body">Straya POS is the official StrayaCoin POS Wallet, designed for POS Applications.\n\nIf you need help, look for the (?) in the top right of most screens.</string>
+    <!-- Top title of welcome screen -->
+    <string name="Welcome.POS.title">Welcome to StrayaPOS!</string>
     <string name="WipeWallet.alertMessage">Are you sure you want to delete this wallet?</string>
     <!-- Wipe wallet alert title -->
     <string name="WipeWallet.alertTitle">Wipe Wallet?</string>
@@ -743,5 +792,5 @@
     <!-- 1 of 3 -->
     <string name="WritePaperPhrase.step">%1$d of %2$d</string>
     <string name="Special.message"> </string>
-    <string name="title_activity_maps">Map</string>
+
 </resources>

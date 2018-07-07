@@ -45,7 +45,7 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
     }
 
     private static final String DATABASE_NAME = "loafwallet.db";
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 14;
 
     /**
      * MerkleBlock table
@@ -106,6 +106,27 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
             CURRENCY_NAME + " text," +
             CURRENCY_RATE + " integer );";
 
+    /**
+     * Businesses table
+     */
+
+    public static final String BUSINESS_TABLE_NAME = "businessTable";
+    public static final String BUSINESS_COLUMN_ID = "_id";
+    public static final String BUSINESS_BUSINESSNAME = "businessname";
+    public static final String BUSINESS_BUSINESSPRODUCTS = "businessproducts";
+    public static final String BUSINESS_LAT = "lat";
+    public static final String BUSINESS_LNG = "lng";
+    public static final String BUSINESS_DATESTART = "datestart";
+    public static final String BUSINESS_REGLENGTH = "reglength";
+
+    private static final String BUSINESS_DATABASE_CREATE = "create table if not exists " + BUSINESS_TABLE_NAME + "(" +
+            BUSINESS_COLUMN_ID + " integer primary key autoincrement, " +
+            BUSINESS_BUSINESSNAME + " text," +
+            BUSINESS_BUSINESSPRODUCTS + " text," +
+            BUSINESS_LAT + " real," +
+            BUSINESS_LNG + " real," +
+            BUSINESS_DATESTART + " text," +
+            BUSINESS_REGLENGTH + " integer );";
 
     @Override
     public void onCreate(SQLiteDatabase database) {
@@ -113,6 +134,7 @@ public class BRSQLiteHelper extends SQLiteOpenHelper {
         database.execSQL(TX_DATABASE_CREATE);
         database.execSQL(PEER_DATABASE_CREATE);
         database.execSQL(CURRENCY_DATABASE_CREATE);
+        database.execSQL(BUSINESS_DATABASE_CREATE);
 //        database.execSQL("PRAGMA journal_mode=WAL;");
     }
 

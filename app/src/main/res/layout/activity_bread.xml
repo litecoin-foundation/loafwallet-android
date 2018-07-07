@@ -55,7 +55,7 @@
                         android:layout_height="64dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/strayacoin_256"
+                        android:src="@drawable/strayacoin_256_alpha"
                         android:textColor="@color/white"
                         android:textSize="36sp"
                         android:textStyle="bold"
@@ -90,6 +90,7 @@
                         android:text="$0"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:customTFont="CircularPro-Book.otf"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -107,6 +108,7 @@
                         android:text="="
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:customTFont="CircularPro-Book.otf"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/primary_price"
@@ -124,6 +126,7 @@
                         android:text="b0"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:customTFont="CircularPro-Book.otf"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/equals"
@@ -308,6 +311,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal|center_vertical"
+            android:visibility="visible"
             android:orientation="vertical">
 
             <ImageView

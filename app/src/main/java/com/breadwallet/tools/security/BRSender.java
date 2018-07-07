@@ -7,6 +7,7 @@ import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
@@ -159,35 +160,70 @@ public class BRSender {
                 throw new InsufficientFundsException(amount, balance);
             }
 
-            long feeForTx = m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
-            throw new FeeNeedsAdjust(amount, balance, feeForTx);
+            long feeForTx;
+            if (BuildConfig.FLAVOR.equals("POS")) {
+                feeForTx=m.feeForDistTransaction(paymentRequest.addresses[0], paymentRequest.addresses[1], paymentRequest.addresses[2], paymentRequest.amount);
+                throw new FeeNeedsAdjust(amount, balance, feeForTx);
+            } else
+            {
+                feeForTx=m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
+                throw new FeeNeedsAdjust(amount, balance, feeForTx);
+            }
         }
         // payment successful
-        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-            @Override
-            public void run() {
-                byte[] tmpTx = m.tryTransaction(paymentRequest.addresses[0], paymentRequest.amount);
-                if (tmpTx == null) {
-                    //something went wrong, failed to create tx
-                    ((Activity) app).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            BRDialog.showCustomDialog(app, "", app.getString(R.string.Alerts_sendFailure), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
-                                @Override
-                                public void onClick(BRDialogView brDialogView) {
-                                    brDialogView.dismiss();
-                                }
-                            }, null, null, 0);
-
-                        }
-                    });
-                    return;
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] tmpTx = m.tryDistTransaction(paymentRequest.addresses[0], paymentRequest.addresses[1], paymentRequest.addresses[2], paymentRequest.amount);
+                    if (tmpTx == null) {
+                        //something went wrong, failed to create tx
+                        ((Activity) app).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                BRDialog.showCustomDialog(app, "", app.getString(R.string.Alerts_sendFailure), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                                    @Override
+                                    public void onClick(BRDialogView brDialogView) {
+                                        brDialogView.dismiss();
+                                    }
+                                }, null, null, 0);
+                            }
+                        });
+                        return;
+                    }
+                    paymentRequest.serializedTx = tmpTx;
+                    PostAuth.getInstance().setPaymentItem(paymentRequest);
+                    confirmPay(app, paymentRequest);
                 }
-                paymentRequest.serializedTx = tmpTx;
-                PostAuth.getInstance().setPaymentItem(paymentRequest);
-                confirmPay(app, paymentRequest);
-            }
-        });
+            });
+
+        } else
+        {
+            BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                @Override
+                public void run() {
+                    byte[] tmpTx = m.tryTransaction(paymentRequest.addresses[0], paymentRequest.amount);
+                    if (tmpTx == null) {
+                        //something went wrong, failed to create tx
+                        ((Activity) app).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                BRDialog.showCustomDialog(app, "", app.getString(R.string.Alerts_sendFailure), app.getString(R.string.AccessibilityLabels_close), null, new BRDialogView.BROnClickListener() {
+                                    @Override
+                                    public void onClick(BRDialogView brDialogView) {
+                                        brDialogView.dismiss();
+                                    }
+                                }, null, null, 0);
+                            }
+                        });
+                        return;
+                    }
+                    paymentRequest.serializedTx = tmpTx;
+                    PostAuth.getInstance().setPaymentItem(paymentRequest);
+                    confirmPay(app, paymentRequest);
+                }
+            });
+        }
 
     }
 
@@ -328,7 +364,7 @@ public class BRSender {
         Log.e(TAG, "confirmPay: limit: " + BRKeyStore.getSpendLimit(ctx));
 
         if (BRWalletManager.getInstance().getTotalSent() + request.amount > AuthManager.getInstance().getTotalLimit(ctx)) {
-            forcePin = true;
+                forcePin = true;
         }
 
         //successfully created the transaction, authenticate user
@@ -366,7 +402,15 @@ public class BRSender {
         String iso = BRSharedPrefs.getIso(ctx);
 
         BRWalletManager m = BRWalletManager.getInstance();
-        long feeForTx = m.feeForTransaction(request.addresses[0], request.amount);
+
+        long feeForTx;
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            feeForTx=m.feeForDistTransaction(request.addresses[0], request.addresses[1], request.addresses[2], request.amount);
+        } else
+        {
+            feeForTx=m.feeForTransaction(request.addresses[0], request.amount);
+        }
+
         if (feeForTx == 0) {
             long maxAmount = m.getMaxOutputAmount();
             if (maxAmount == -1) {
@@ -382,9 +426,22 @@ public class BRSender {
 
                 return null;
             }
-            feeForTx = m.feeForTransaction(request.addresses[0], maxAmount);
+
+            if (BuildConfig.FLAVOR.equals("POS")) {
+                feeForTx=m.feeForDistTransaction(request.addresses[0], request.addresses[1], request.addresses[2], maxAmount);
+            } else
+            {
+                feeForTx=m.feeForTransaction(request.addresses[0], maxAmount);
+            }
+
             feeForTx += (BRWalletManager.getInstance().getBalance(ctx) - request.amount) % 100;
         }
+
+
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            feeForTx += request.amount * 0.005;
+        }
+
         final long total = request.amount + feeForTx;
         String formattedAmountBTC = BRCurrency.getFormattedCurrencyString(ctx, "NAH", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(request.amount)));
         String formattedFeeBTC = BRCurrency.getFormattedCurrencyString(ctx, "NAH", BRExchange.getBitcoinForSatoshis(ctx, new BigDecimal(feeForTx)));
@@ -395,11 +452,20 @@ public class BRSender {
         String formattedTotal = BRCurrency.getFormattedCurrencyString(ctx, iso, BRExchange.getAmountFromSatoshis(ctx, iso, new BigDecimal(total)));
 
         //formatted text
-        return receiver + "\n\n"
-                + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountBTC + " (" + formattedAmount + ")"
-                + "\n"  + ctx.getString(R.string.Confirmation_feeLabel) + " " + formattedFeeBTC + " (" + formattedFee + ")"
-                + "\n"  + ctx.getString(R.string.Confirmation_totalLabel) + " "  + formattedTotalBTC + " (" + formattedTotal + ")"
-                + (request.comment == null ? "" : "\n\n" + request.comment);
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            return receiver + "\n\n"
+                    + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountBTC + " (" + formattedAmount + ")"
+                    + "\n"  + ctx.getString(R.string.Confirmation_POS_feeLabel) + " " + formattedFeeBTC + " (" + formattedFee + ")"
+                    + "\n"  + ctx.getString(R.string.Confirmation_totalLabel) + " "  + formattedTotalBTC + " (" + formattedTotal + ")"
+                    + (request.comment == null ? "" : "\n\n" + request.comment);
+        } else
+        {
+            return receiver + "\n\n"
+                    + ctx.getString(R.string.Confirmation_amountLabel) + " " + formattedAmountBTC + " (" + formattedAmount + ")"
+                    + "\n"  + ctx.getString(R.string.Confirmation_feeLabel) + " " + formattedFeeBTC + " (" + formattedFee + ")"
+                    + "\n"  + ctx.getString(R.string.Confirmation_totalLabel) + " "  + formattedTotalBTC + " (" + formattedTotal + ")"
+                    + (request.comment == null ? "" : "\n\n" + request.comment);
+        }
     }
 
     public String getReceiver(PaymentItem item) {
@@ -409,9 +475,12 @@ public class BRSender {
             certified = true;
         }
         StringBuilder allAddresses = new StringBuilder();
-        for (String s : item.addresses) {
-            allAddresses.append(s + ", ");
-        }
+
+        allAddresses.append(item.addresses[0]);
+//      for (String s : item.addresses) {
+//        allAddresses.append(s + ", ");
+//      }
+
         receiver = allAddresses.toString();
         allAddresses.delete(allAddresses.length() - 2, allAddresses.length());
         if (certified) {
@@ -431,11 +500,24 @@ public class BRSender {
 
     public boolean notEnoughForFee(Context app, PaymentItem paymentRequest) {
         BRWalletManager m = BRWalletManager.getInstance();
-        long feeForTx = m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
-        if (feeForTx == 0) {
-            feeForTx = m.feeForTransaction(paymentRequest.addresses[0], m.getMaxOutputAmount());
-            return feeForTx != 0;
+
+        long feeForTx;
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            feeForTx=m.feeForDistTransaction(paymentRequest.addresses[0], paymentRequest.addresses[1], paymentRequest.addresses[2], paymentRequest.amount);
+            if (feeForTx == 0) {
+                feeForTx = m.feeForDistTransaction(paymentRequest.addresses[0], paymentRequest.addresses[1], paymentRequest.addresses[2], m.getMaxOutputAmount());
+                return feeForTx != 0;
+            }
+        } else
+        {
+            feeForTx=m.feeForTransaction(paymentRequest.addresses[0], paymentRequest.amount);
+            if (feeForTx == 0) {
+                feeForTx = m.feeForTransaction(paymentRequest.addresses[0], m.getMaxOutputAmount());
+                return feeForTx != 0;
+            }
+
         }
+
         return false;
     }
 

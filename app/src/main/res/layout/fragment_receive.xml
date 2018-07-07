@@ -188,15 +188,33 @@
                     />
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/qr_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.75"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/ic_check_mark_grey"
                 />
+
+            <ImageView
+                android:id="@+id/square_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight=".25"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                android:src="@drawable/square_logo"
+                />
+        </LinearLayout>
 
             <com.breadwallet.presenter.customviews.BRText
                 android:id="@+id/address_text"

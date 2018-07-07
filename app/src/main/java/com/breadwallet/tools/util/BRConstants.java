@@ -88,6 +88,7 @@ public class BRConstants {
      */
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String RECEIVE_ADDRESS = "receive_address";
+    public static final String DIST_ADDRESS = "distributor_address";
     public static final String WALLET_NAME = "wallet_name";
     public static final String START_HEIGHT = "startHeight";
     public static final String LAST_BLOCK_HEIGHT = "lastBlockHeight";

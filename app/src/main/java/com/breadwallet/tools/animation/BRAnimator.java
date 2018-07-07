@@ -13,6 +13,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -31,6 +32,7 @@ import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.TxItem;
 import com.breadwallet.presenter.fragments.FragmentGreetings;
 import com.breadwallet.presenter.fragments.FragmentMenu;
+import com.breadwallet.presenter.fragments.FragmentRegisterBusiness;
 import com.breadwallet.presenter.fragments.FragmentSignal;
 import com.breadwallet.presenter.fragments.FragmentReceive;
 import com.breadwallet.presenter.fragments.FragmentRequestAmount;
@@ -159,6 +161,37 @@ public class BRAnimator {
 
     }
 
+    public static void showRegisterBusinessFragment(Activity app, final String bitcoinUrl, double lat, double lng) {
+        if (app == null) {
+            Log.e(TAG, "showRegisterBusinessFragment: app is null");
+            return;
+        }
+        FragmentRegisterBusiness fragmentRegisterBusiness = (FragmentRegisterBusiness) app.getFragmentManager().findFragmentByTag(FragmentRegisterBusiness.class.getName());
+        if (fragmentRegisterBusiness != null && fragmentRegisterBusiness.isAdded()) {
+            fragmentRegisterBusiness.setUrl(bitcoinUrl);
+            fragmentRegisterBusiness.setLat(lat);
+            fragmentRegisterBusiness.setLng(lng);
+            return;
+        }
+        try {
+            fragmentRegisterBusiness = new FragmentRegisterBusiness();
+            if (bitcoinUrl != null && !bitcoinUrl.isEmpty()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", bitcoinUrl);
+                bundle.putDouble("lat", lat);
+                bundle.putDouble("lng", lng);
+                fragmentRegisterBusiness.setArguments(bundle);
+            }
+            app.getFragmentManager().beginTransaction()
+                    .setCustomAnimations(0, 0, 0, R.animator.plain_300)
+                    .add(android.R.id.content, fragmentRegisterBusiness, FragmentRegisterBusiness.class.getName())
+                    .addToBackStack(FragmentRegisterBusiness.class.getName()).commit();
+        } finally {
+
+        }
+
+    }
+
     public static void showSupportFragment(Activity app, String articleId) {
         if (app == null) {
             Log.e(TAG, "showSupportFragment: app is null");
@@ -183,7 +216,6 @@ public class BRAnimator {
         } finally {
 
         }
-
     }
 
     public static void showTransactionPager(Activity app, List<TxItem> items, int position) {
@@ -366,6 +398,7 @@ public class BRAnimator {
     }
 
     public static void startBreadActivity(Activity from, boolean auth) {
+
         Class toStart = auth ? LoginActivity.class : BreadActivity.class;
         Intent intent = new Intent(from, toStart);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BuildConfig;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.security.BRKeyStore;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
@@ -65,12 +66,19 @@ public class BRActivity extends Activity {
         BreadApp.activityCounter.incrementAndGet();
         BreadApp.setBreadContext(this);
         //lock wallet if 3 minutes passed
-        if (BreadApp.backgroundedTime != 0 && (System.currentTimeMillis() - BreadApp.backgroundedTime >= 180 * 1000)) {
-            if (!BRKeyStore.getPinCode(this).isEmpty()) {
-                BreadApp.backgroundedTime = System.currentTimeMillis();
-                BRAnimator.startBreadActivity(this, true);
+//        if (BuildConfig.FLAVOR.equals("loaf")) {
+            if (BreadApp.backgroundedTime != 0 && (System.currentTimeMillis() - BreadApp.backgroundedTime >= 180 * 1000)) {
+                if (!BRKeyStore.getPinCode(this).isEmpty()) {
+                    BreadApp.backgroundedTime = System.currentTimeMillis();
+                    BRAnimator.startBreadActivity(this, true);
+                }
             }
-        }
+//        } else
+//        {
+//            BreadApp.backgroundedTime = System.currentTimeMillis();
+//            BRAnimator.startBreadActivity(this, true);
+//        }
+
     }
 
     @Override
@@ -80,30 +88,47 @@ public class BRActivity extends Activity {
 
             case BRConstants.PAY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            PostAuth.getInstance().onPublishTxAuth(BRActivity.this, true);
-                        }
-                    });
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                PostAuth.getInstance().onPublishTxAuth(BRActivity.this, true);
+                            }
+                        });
+                    else
+                        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                PostAuth.getInstance().onPublishTxAuth(BRActivity.this, false);
+                            }
+                        });
                 }
                 break;
             case BRConstants.REQUEST_PHRASE_BITID:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onBitIDAuth(BRActivity.this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onBitIDAuth(BRActivity.this, true);
+                    else
+                        PostAuth.getInstance().onBitIDAuth(BRActivity.this, false);
 
                 }
                 break;
 
             case BRConstants.PAYMENT_PROTOCOL_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onPaymentProtocolRequest(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onPaymentProtocolRequest(this, true);
+                    else
+                        PostAuth.getInstance().onPaymentProtocolRequest(this, false);
                 }
                 break;
 
             case BRConstants.CANARY_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onCanaryCheck(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onCanaryCheck(this, true);
+                    else
+                        PostAuth.getInstance().onCanaryCheck(this, false);
                 } else {
                     finish();
                 }
@@ -111,17 +136,26 @@ public class BRActivity extends Activity {
 
             case BRConstants.SHOW_PHRASE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onPhraseCheckAuth(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onPhraseCheckAuth(this, true);
+                    else
+                        PostAuth.getInstance().onPhraseCheckAuth(this, false);
                 }
                 break;
             case BRConstants.PROVE_PHRASE_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onPhraseProveAuth(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onPhraseProveAuth(this, true);
+                    else
+                        PostAuth.getInstance().onPhraseProveAuth(this, false);
                 }
                 break;
             case BRConstants.PUT_PHRASE_RECOVERY_WALLET_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onRecoverWalletAuth(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onRecoverWalletAuth(this, true);
+                    else
+                        PostAuth.getInstance().onRecoverWalletAuth(this, false);
                 } else {
                     finish();
                 }
@@ -159,7 +193,10 @@ public class BRActivity extends Activity {
 
             case BRConstants.PUT_PHRASE_NEW_WALLET_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
-                    PostAuth.getInstance().onCreateWalletAuth(this, true);
+                    if(BuildConfig.FLAVOR.equals("loaf"))
+                        PostAuth.getInstance().onCreateWalletAuth(this, true);
+                    else
+                        PostAuth.getInstance().onCreateWalletAuth(this, false);
                 } else {
                     Log.e(TAG, "WARNING: resultCode != RESULT_OK");
                     BRWalletManager m = BRWalletManager.getInstance();

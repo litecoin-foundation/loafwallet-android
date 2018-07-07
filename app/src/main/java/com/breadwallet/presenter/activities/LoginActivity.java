@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.camera.ScanQRActivity;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
@@ -41,6 +42,7 @@ import com.platform.APIClient;
 
 import org.junit.Assert;
 
+import static com.breadwallet.BreadApp.POSMode;
 import static com.breadwallet.R.color.white;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
 import static com.breadwallet.tools.util.BRConstants.SCANNER_REQUEST;
@@ -89,7 +91,7 @@ public class LoginActivity extends BRActivity {
             return;
         }
 
-        if (BRKeyStore.getPinCode(this).length() == 4) pinLimit = 4;
+       if (BRKeyStore.getPinCode(this).length() == 4) pinLimit = 4;
 
         keyboard = (BRKeyboard) findViewById(R.id.brkeyboard);
         pinLayout = (LinearLayout) findViewById(R.id.pinLayout);
@@ -170,6 +172,10 @@ public class LoginActivity extends BRActivity {
                 }
             }
         });
+
+        if (POSMode) {
+            unlockWallet();
+        }
 
         boolean useFingerprint = AuthManager.isFingerPrintAvailableAndSetup(this) && BRSharedPrefs.getUseFingerprint(this);
 //        Log.e(TAG, "onCreate: isFingerPrintAvailableAndSetup: " + useFingerprint);

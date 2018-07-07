@@ -1,15 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion = 26
+     compileSdkVersion = 23
     buildToolsVersion = '26.0.3'
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
     defaultConfig {
         testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
         applicationId = 'org.strayacoin.wallet'
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 70040
-        versionName "1.0"
+        versionCode 70067
+        versionName "1.1"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -18,7 +21,7 @@ android {
         ndk {
             // Specifies the ABI configurations of your native
             // libraries Gradle should build and package with your APK.
-            abiFilters 'x86', 'x86_64', 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
         }
         externalNativeBuild {
             cmake {
@@ -50,36 +53,52 @@ android {
             dimension "mode"
             resValue "string", "app_name", "Straya Wallet"
             buildConfigField "boolean", "BITCOIN_TESTNET", "false"
-
+            buildConfigField "boolean", "POS_WALLET", "false"
             externalNativeBuild {
                 cmake {
                     // When you specify a version of CMake, as shown below,
                     // the Android plugin searches for its binary within your
                     // PATH environmental variable.
                     cFlags "-DBITCOIN_TESTNET=0"
+                    cFlags "-DPOS_WALLET=0"
                     targets "core-lib"
                 }
             }
         }
-
         loafTestnet {
             applicationId "com.loafwallet.testnet"
             dimension "mode"
             resValue "string", "app_name", "LoafWallet-testnet"
             buildConfigField "boolean", "BITCOIN_TESTNET", "true"
-
+            buildConfigField "boolean", "POS_WALLET", "false"
             externalNativeBuild {
                 cmake {
                     // When you specify a version of CMake, as shown below,
                     // the Android plugin searches for its binary within your
                     // PATH environmental variable.
                     cFlags "-DBITCOIN_TESTNET=1"
+                    cFlags "-DPOS_WALLET=0"
                     targets "core-lib"
                 }
             }
-
         }
-
+        POS {
+            applicationId 'org.strayacoin.pos'
+            dimension "mode"
+            resValue "string", "app_name", "Straya POS"
+            buildConfigField "boolean", "BITCOIN_TESTNET", "false"
+            buildConfigField "boolean", "POS_WALLET", "true"
+            externalNativeBuild {
+                cmake {
+                    // When you specify a version of CMake, as shown below,
+                    // the Android plugin searches for its binary within your
+                    // PATH environmental variable.
+                    cFlags "-DBITCOIN_TESTNET=0"
+                    cFlags "-DPOS_WALLET=1"
+                    targets "core-lib"
+                }
+            }
+        }
     }
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
@@ -100,7 +119,6 @@ android {
         release {
             minifyEnabled = false
             debuggable = false
-
             ndk {
                 minifyEnabled = false
                 debuggable = false
@@ -109,13 +127,11 @@ android {
         debug {
             debuggable = true
             minifyEnabled = false
-
             ndk {
                 minifyEnabled = false
                 debuggable = true
             }
         }
-
     }
     compileSdkVersion 26
 }
@@ -153,15 +169,17 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
-    implementation 'com.google.firebase:firebase-core:11.6.0'
-    implementation 'com.google.firebase:firebase-crash:11.6.0'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-crash:11.8.0'
     implementation 'io.sigpipe:jbsdiff:1.0'
-    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.google.zxing:core:3.3.1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support.test:runner:1.0.1'
     implementation 'com.android.support.test:rules:1.0.1'
     implementation 'junit:junit:4.12'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-//    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.google.android.gms:play-services-location:11.0.1'
     androidTestCompile 'tools.fastlane:screengrab:1.1.0'
+    compile 'com.squareup.sdk:point-of-sale-sdk:2.0'
 }

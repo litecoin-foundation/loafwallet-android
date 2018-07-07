@@ -115,11 +115,12 @@ public class FragmentSupport extends Fragment {
         if (0 != (getActivity().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
-        webSettings.setDomStorageEnabled(true);
+        webSettings.setDomStorageEnabled(false);
         webSettings.setJavaScriptEnabled(true);
 
         if (articleId != null && !articleId.isEmpty())
-            theUrl = theUrl + "/article?slug=" + articleId;
+//            theUrl = theUrl + "/article?slug=" + articleId;
+            theUrl = theUrl + "";
 
         Log.d(TAG, "onCreate: theUrl: " + theUrl + ", articleId: " + articleId);
         webView.loadUrl(theUrl);

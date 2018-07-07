@@ -144,6 +144,17 @@ public class BRSharedPrefs {
         editor.apply();
     }
 
+    public static String getDistAddress(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getString(BRConstants.DIST_ADDRESS, "SUuRv3YopiymMAJ4NrCEJPzk2Q3nXZVyRe");
+    }
+
+    public static void putDistAddress(Context ctx, String distAddr) {
+        SharedPreferences.Editor editor = ctx.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(BRConstants.DIST_ADDRESS, distAddr);
+        editor.apply();
+    }
+
     public static String getWalletName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(BRConstants.PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getString(BRConstants.WALLET_NAME, "My Loaf");

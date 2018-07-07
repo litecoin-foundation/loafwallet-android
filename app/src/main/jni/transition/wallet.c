@@ -31,6 +31,7 @@
 #include <BRBIP38Key.h>
 #include <BRInt.h>
 #include <BRTransaction.h>
+#include <malloc.h>
 
 static JavaVM *_jvmW;
 BRWallet *_wallet;
@@ -517,6 +518,19 @@ Java_com_breadwallet_wallet_BRWalletManager_feeForTransaction(JNIEnv *env, jobje
     return (jint) BRWalletFeeForTx(_wallet, tx);
 }
 
+JNIEXPORT jint JNICALL
+Java_com_breadwallet_wallet_BRWalletManager_feeForDistTransaction(JNIEnv *env, jobject obj,
+                                                              jstring address, jstring devAddress, jstring distAddress, jlong amount) {
+    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "feeForDistTransaction");
+    if (!_wallet) return 0;
+    const char *rawAddress = (*env)->GetStringUTFChars(env, address, NULL);
+    const char *rawdevAddress = (*env)->GetStringUTFChars(env, devAddress, NULL);
+    const char *rawdistAddress = (*env)->GetStringUTFChars(env, distAddress, NULL);
+    BRTransaction *tx = BRWalletCreateDistTransaction(_wallet, (uint64_t) amount, rawAddress, rawdevAddress, rawdistAddress);
+    if (!tx) return 0;
+    return (jint) BRWalletFeeForTx(_wallet, tx);
+}
+
 JNIEXPORT jlong JNICALL
 Java_com_breadwallet_wallet_BRWalletManager_feeForTransactionAmount(JNIEnv *env, jobject obj,
                                                                     jlong amount) {
@@ -536,6 +550,31 @@ Java_com_breadwallet_wallet_BRWalletManager_tryTransaction(JNIEnv *env, jobject 
 
     const char *rawAddress = (*env)->GetStringUTFChars(env, jAddress, NULL);
     BRTransaction *tx = BRWalletCreateTransaction(_wallet, (uint64_t) jAmount, rawAddress);
+
+    if (!tx) return NULL;
+
+    size_t len = BRTransactionSerialize(tx, NULL, 0);
+    uint8_t *buf = malloc(len);
+
+    len = BRTransactionSerialize(tx, buf, len);
+
+    jbyteArray result = (*env)->NewByteArray(env, (jsize) len);
+
+    (*env)->SetByteArrayRegion(env, result, 0, (jsize) len, (jbyte *) buf);
+    free(buf);
+    return result;
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_com_breadwallet_wallet_BRWalletManager_tryDistTransaction(JNIEnv *env, jobject obj,
+                                                           jstring jAddress, jstring jDevAddress, jstring jDistAddress, jlong jAmount) {
+    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "tryDistTransaction");
+    if (!_wallet) return 0;
+
+    const char *rawAddress = (*env)->GetStringUTFChars(env, jAddress, NULL);
+    const char *rawDevAddress = (*env)->GetStringUTFChars(env, jDevAddress, NULL);
+    const char *rawDistAddress = (*env)->GetStringUTFChars(env, jDistAddress, NULL);
+    BRTransaction *tx = BRWalletCreateDistTransaction(_wallet, (uint64_t) jAmount, rawAddress, rawDevAddress, rawDistAddress);
 
     if (!tx) return NULL;
 

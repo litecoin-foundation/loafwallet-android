@@ -54,6 +54,8 @@ import static com.breadwallet.presenter.activities.SetPinActivity.introSetPitAct
 import static com.breadwallet.tools.animation.BRAnimator.t1Size;
 import static com.breadwallet.tools.animation.BRAnimator.t2Size;
 import static com.breadwallet.tools.util.BRConstants.PLATFORM_ON;
+import static com.breadwallet.BreadApp.POSMode;
+
 
 /**
  * BreadWallet
@@ -149,6 +151,19 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
         setUpBarFlipper();
 
         BRAnimator.init(this);
+        if (POSMode) {
+            primaryPrice.setVisibility(View.INVISIBLE);
+            secondaryPrice.setVisibility(View.INVISIBLE);
+            equals.setVisibility(View.INVISIBLE);
+            sendButton.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            primaryPrice.setVisibility(View.VISIBLE);
+            secondaryPrice.setVisibility(View.VISIBLE);
+            equals.setVisibility(View.VISIBLE);
+            sendButton.setVisibility(View.VISIBLE);
+        }
         primaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t1Size);//make it the size it should be after animation to get the X
         secondaryPrice.setTextSize(TypedValue.COMPLEX_UNIT_PX, t2Size);//make it the size it should be after animation to get the X
 

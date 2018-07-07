@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.breadwallet.BreadApp;
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.settings.WebViewActivity;
 import com.breadwallet.presenter.entities.TxItem;
@@ -43,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.breadwallet.BreadApp.POSMode;
 import static com.platform.HTTPServer.URL_SUPPORT;
 
 /**
@@ -178,18 +180,58 @@ public class FragmentTransactionItem extends Fragment {
 
         //calculated and formatted amount for iso
         String amountWithFee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, txAmount));
-        String amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, item.getFee() == -1 ? txAmount : txAmount.subtract(new BigDecimal(item.getFee()))));
-        //calculated and formatted fee for iso
-        String fee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, new BigDecimal(item.getFee())));
-        //description (Sent $24.32 ....)
+
+        String amount = "";
+        String fee = "";
+        //regular transaction
+        if (BuildConfig.FLAVOR.equals("loaf")) {
+            if (sent) {
+                amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, item.getFee() == -1 ? txAmount : txAmount.subtract(new BigDecimal(item.getFee()))));
+            } else
+            {
+                amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, txAmount));
+            }
+            //calculated and formatted fee for iso
+            fee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, new BigDecimal(item.getFee())));
+            //description (Sent $24.32 ....)
+        } else
+        //POS transaction
+        {
+
+            if (sent) {  //show the combined POS fee and transaction fee
+                BigDecimal largerFee = txAmount.subtract(new BigDecimal (item.getFee()));
+                largerFee = largerFee.multiply(new BigDecimal(0.00497512437810945));
+                largerFee.setScale(0, BigDecimal.ROUND_DOWN);
+                largerFee = largerFee.add(new BigDecimal (item.getFee()));
+                largerFee.setScale(0, BigDecimal.ROUND_DOWN);
+                amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, item.getFee() == -1 ? txAmount : txAmount.subtract(largerFee)));
+                //calculated and formatted fee for iso
+                fee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, largerFee));
+                //description (Sent $24.32 ....)
+            } else
+            {  //just show the normal transaction fee
+                amount = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, txAmount));
+                //calculated and formatted fee for iso
+                fee = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, new BigDecimal(item.getFee())));
+                //description (Sent $24.32 ....)
+            }
+        }
         Spannable descriptionString = sent ? new SpannableString(String.format(getString(R.string.TransactionDetails_sent), amountWithFee)) : new SpannableString(String.format(getString(R.string.TransactionDetails_received), amount));
 
         String startingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, new BigDecimal(sent ? item.getBalanceAfterTx() + txAmount.longValue() : item.getBalanceAfterTx() - txAmount.longValue())));
         String endingBalance = BRCurrency.getFormattedCurrencyString(getActivity(), iso, BRExchange.getAmountFromSatoshis(getActivity(), iso, new BigDecimal(item.getBalanceAfterTx())));
+
         String commentString = item.metaData == null || item.metaData.comment == null ? "" : item.metaData.comment;
         String sb = String.format(getString(R.string.Transaction_starting), startingBalance);
         String eb = String.format(getString(R.string.Transaction_ending), endingBalance);
-        String amountString = String.format("%s %s\n\n%s\n%s", amount, item.getFee() == -1 ? "" : String.format(getString(R.string.Transaction_fee), fee), sb, eb);
+
+        String amountString="";
+        if (!POSMode) {
+            amountString = String.format("%s %s\n\n%s\n%s", amount, item.getFee() == -1 ? "" : String.format(getString(R.string.Transaction_fee), fee), sb, eb);
+        }
+        else {
+            amountString = String.format("%s %s", amount, item.getFee() == -1 ? "" : String.format(getString(R.string.Transaction_fee), fee));
+        }
 
         String addr = item.getTo()[0];
         String toFrom = sent ? String.format(getString(R.string.TransactionDetails_to), addr) : String.format(getString(R.string.TransactionDetails_from), addr);

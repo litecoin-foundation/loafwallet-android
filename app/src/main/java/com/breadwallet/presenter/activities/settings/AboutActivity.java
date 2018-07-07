@@ -23,9 +23,8 @@ public class AboutActivity extends BRActivity {
     private TextView infoText;
 
     private ImageView strayacoinShare;
-    private ImageView facebookShare;
     private ImageView twitterShare;
-    private ImageView tradeogreShare;
+    private ImageView wikiShare;
     private static AboutActivity app;
 
     public static AboutActivity getApp() {
@@ -58,9 +57,8 @@ public class AboutActivity extends BRActivity {
         infoText.setText(String.format(Locale.getDefault(), getString(R.string.About_footer), verCode));
 
         strayacoinShare = (ImageView) findViewById(R.id.strayacoin_share_button);
-        facebookShare = (ImageView) findViewById(R.id.facebook_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
-        tradeogreShare = (ImageView) findViewById(R.id.tradeogre_share_button);
+        wikiShare = (ImageView) findViewById(R.id.wiki_share_button);
 
         strayacoinShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,18 +77,11 @@ public class AboutActivity extends BRActivity {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
-        facebookShare.setOnClickListener(new View.OnClickListener() {
+
+        wikiShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/strayacoin/"));
-                startActivity(browserIntent);
-                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-            }
-        });
-        tradeogreShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tradeogre.com/exchange/BTC-NAH"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://strayacoin.wiki"));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }

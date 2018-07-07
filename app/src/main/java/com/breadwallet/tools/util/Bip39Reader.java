@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.tools.manager.BRReportsManager;
 import com.google.firebase.crash.FirebaseCrash;
 
@@ -50,15 +51,21 @@ public class Bip39Reader {
     public static List<String> bip39List(Context context, String lang) {
 
         String[] langs = null;
-        if (lang == null)
-            langs = LANGS; //return all the words for all langs
-        else {
-            boolean exists = false;
-            for (String s : LANGS) if (s.equalsIgnoreCase(lang)) exists = true;
-            if (exists)
-                langs = new String[]{lang};//if lang is one of the language we support for paper key creation, then use it
-            else
-                langs = new String[]{"en"};// if not than return 'en'
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            langs = new String[]{"aussie"};// POS Wallet uses a different set
+        } else
+        {
+            if (lang == null)
+                langs = LANGS; //return all the words for all langs
+            else {
+                boolean exists = false;
+                for (String s : LANGS) if (s.equalsIgnoreCase(lang)) exists = true;
+                if (exists)
+                    langs = new String[]{lang};//if lang is one of the language we support for paper key creation, then use it
+                else
+                    langs = new String[]{"en"};// if not than return 'en'
+            }
+
         }
 
         List<String> result = new ArrayList<>();

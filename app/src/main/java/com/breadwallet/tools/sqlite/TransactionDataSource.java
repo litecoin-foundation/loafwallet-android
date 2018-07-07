@@ -90,7 +90,7 @@ public class TransactionDataSource implements BRDataSourceInterface {
 
     public BRTransactionEntity putTransaction(BRTransactionEntity transactionEntity) {
         Cursor cursor = null;
-        try {
+         try {
             database = openDatabase();
             ContentValues values = new ContentValues();
             values.put(BRSQLiteHelper.TX_COLUMN_ID, transactionEntity.getTxHash());

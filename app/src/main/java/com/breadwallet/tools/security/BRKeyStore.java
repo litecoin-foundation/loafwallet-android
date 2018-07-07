@@ -13,6 +13,7 @@ import android.security.keystore.UserNotAuthenticatedException;
 import android.util.Base64;
 import android.util.Log;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.exceptions.BRKeystoreErrorException;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -230,14 +231,24 @@ public class BRKeyStore {
 
         // Set the alias of the entry in Android KeyStore where the key will appear
         // and the constrains (purposes) in the constructor of the Builder
-        keyGenerator.init(new KeyGenParameterSpec.Builder(alias,
-                KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
-                .setBlockModes(NEW_BLOCK_MODE)
-                .setUserAuthenticationRequired(auth_required)
-                .setUserAuthenticationValidityDurationSeconds(AUTH_DURATION_SEC)
-                .setRandomizedEncryptionRequired(false)
-                .setEncryptionPaddings(NEW_PADDING)
-                .build());
+        if (BuildConfig.FLAVOR.equals("loaf"))
+            keyGenerator.init(new KeyGenParameterSpec.Builder(alias,
+                    KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
+                    .setBlockModes(NEW_BLOCK_MODE)
+                    .setUserAuthenticationRequired(auth_required)
+                    .setUserAuthenticationValidityDurationSeconds(AUTH_DURATION_SEC)
+                    .setRandomizedEncryptionRequired(false)
+                    .setEncryptionPaddings(NEW_PADDING)
+                    .build());
+        else
+            keyGenerator.init(new KeyGenParameterSpec.Builder(alias,
+                    KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
+                    .setBlockModes(NEW_BLOCK_MODE)
+                    .setUserAuthenticationRequired(false)
+                    .setUserAuthenticationValidityDurationSeconds(AUTH_DURATION_SEC)
+                    .setRandomizedEncryptionRequired(false)
+                    .setEncryptionPaddings(NEW_PADDING)
+                    .build());
         return keyGenerator.generateKey();
 
     }
@@ -762,28 +773,34 @@ public class BRKeyStore {
         // Create the Confirm Credentials screen. You can customize the title and description. Or
         // we will provide a generic one for you if you leave it null
         Log.e(TAG, "showAuthenticationScreen: ");
-        if (context instanceof Activity) {
-            Activity app = (Activity) context;
-            KeyguardManager mKeyguardManager = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
-            if (mKeyguardManager == null) {
-                NullPointerException ex = new NullPointerException("KeyguardManager is null in showAuthenticationScreen");
-                BRReportsManager.reportBug(ex, true);
-                return;
-            }
-            Intent intent = mKeyguardManager.createConfirmDeviceCredentialIntent(context.getString(R.string.UnlockScreen_touchIdTitle_android), context.getString(R.string.UnlockScreen_touchIdPrompt_android));
-//        Assert.assertTrue(intent != null);
-            if (intent != null) {
-                Log.e(TAG, "showAuthenticationScreen: starting activity");
-                app.startActivityForResult(intent, requestCode);
+
+            if (context instanceof Activity) {
+                Activity app = (Activity) context;
+                KeyguardManager mKeyguardManager = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
+                if (mKeyguardManager == null) {
+                    NullPointerException ex = new NullPointerException("KeyguardManager is null in showAuthenticationScreen");
+                    BRReportsManager.reportBug(ex, true);
+                    return;
+                }
+                Intent intent = mKeyguardManager.createConfirmDeviceCredentialIntent(context.getString(R.string.UnlockScreen_touchIdTitle_android), context.getString(R.string.UnlockScreen_touchIdPrompt_android));
+                //        Assert.assertTrue(intent != null);
+                if(BuildConfig.FLAVOR.equals("loaf")) {
+                    if (intent != null) {
+                        Log.e(TAG, "showAuthenticationScreen: starting activity");
+                        app.startActivityForResult(intent, requestCode);
+                    } else {
+                        Log.e(TAG, "showAuthenticationScreen: failed to create intent for auth");
+                        BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: failed to create intent for auth"));
+                        app.finish();
+                    }
+                } else {
+                        app.startActivityForResult(intent, requestCode);
+                }
+
             } else {
-                Log.e(TAG, "showAuthenticationScreen: failed to create intent for auth");
-                BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: failed to create intent for auth"));
-                app.finish();
+                BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: context is not activity!"));
+                Log.e(TAG, "showAuthenticationScreen: context is not activity!");
             }
-        } else {
-            BRReportsManager.reportBug(new RuntimeException("showAuthenticationScreen: context is not activity!"));
-            Log.e(TAG, "showAuthenticationScreen: context is not activity!");
-        }
     }
 
     public static byte[] readBytesFromFile(String path) {

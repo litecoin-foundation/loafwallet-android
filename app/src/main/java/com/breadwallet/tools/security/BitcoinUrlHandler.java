@@ -1,9 +1,13 @@
 package com.breadwallet.tools.security;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
+import com.breadwallet.BreadApp;
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
+import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.entities.PaymentItem;
 import com.breadwallet.presenter.entities.PaymentRequestWrapper;
@@ -11,6 +15,7 @@ import com.breadwallet.presenter.entities.RequestObject;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BREventManager;
+import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.threads.PaymentProtocolTask;
 import com.breadwallet.wallet.BRWalletManager;
 
@@ -21,6 +26,8 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.support.test.InstrumentationRegistry.getContext;
 
 
 /**
@@ -181,9 +188,18 @@ public class BitcoinUrlHandler {
         RequestObject requestObject = getRequestFromString(url);
         if (requestObject == null || requestObject.address == null || requestObject.address.isEmpty())
             return false;
-        final String[] addresses = new String[1];
-        addresses[0] = requestObject.address;
 
+        final String[] addresses = new String[3];
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            addresses[0] = requestObject.address;
+            addresses[1] = "SUuRv3YopiymMAJ4NrCEJPzk2Q3nXZVyRe";
+            addresses[2] = BRSharedPrefs.getDistAddress(app);
+        } else
+        {
+            addresses[0] = requestObject.address;
+            addresses[1] = null;
+            addresses[2] = null;
+        }
         String amount = requestObject.amount;
 
         if (amount == null || amount.isEmpty() || new BigDecimal(amount).doubleValue() == 0) {

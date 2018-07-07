@@ -20,59 +20,60 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID_STL=gnustl_static -DANDROID_TOOLCH
 # -Wint-conversion -Wbool-conversion -Wenum-conversion -Wassign-enum -Wno-shorten-64-to-32 -Wpointer-sign -Wnewline-eof
 # -Wdeprecated-declarations -Wno-sign-conversion
 
+
 add_library( # Specifies the name of the library.
-             core-lib
+               core-lib
 
-             # Sets the library as a shared library.
-             SHARED
+               # Sets the library as a shared library.
+               SHARED
 
-             # Provides a relative path to your source file(s).
-             src/main/jni/loafwallet-core/BRAddress.c
-             src/main/jni/loafwallet-core/BRAddress.h
-             src/main/jni/loafwallet-core/BRArray.h
-             src/main/jni/loafwallet-core/BRBase58.c
-             src/main/jni/loafwallet-core/BRBase58.h
-             src/main/jni/loafwallet-core/BRBIP32Sequence.c
-             src/main/jni/loafwallet-core/BRBIP32Sequence.h
-             src/main/jni/loafwallet-core/BRBIP38Key.c
-             src/main/jni/loafwallet-core/BRBIP38Key.h
-             src/main/jni/loafwallet-core/BRBIP39Mnemonic.c
-             src/main/jni/loafwallet-core/BRBIP39Mnemonic.h
-             src/main/jni/loafwallet-core/BRBIP39WordsEn.h
-             src/main/jni/loafwallet-core/BRBloomFilter.c
-             src/main/jni/loafwallet-core/BRBloomFilter.h
-             src/main/jni/loafwallet-core/BRCrypto.c
-             src/main/jni/loafwallet-core/BRCrypto.h
-             src/main/jni/loafwallet-core/BRInt.h
-             src/main/jni/loafwallet-core/BRKey.c
-             src/main/jni/loafwallet-core/BRKey.h
-             src/main/jni/loafwallet-core/BRMerkleBlock.c
-             src/main/jni/loafwallet-core/BRMerkleBlock.h
-             src/main/jni/loafwallet-core/BRPaymentProtocol.c
-             src/main/jni/loafwallet-core/BRPaymentProtocol.h
-             src/main/jni/loafwallet-core/BRPeer.c
-             src/main/jni/loafwallet-core/BRPeer.h
-             src/main/jni/loafwallet-core/BRPeerManager.c
-             src/main/jni/loafwallet-core/BRPeerManager.h
-             src/main/jni/loafwallet-core/BRSet.c
-             src/main/jni/loafwallet-core/BRSet.h
-             src/main/jni/loafwallet-core/BRTransaction.c
-             src/main/jni/loafwallet-core/BRTransaction.h
-             src/main/jni/loafwallet-core/BRWallet.c
-             src/main/jni/loafwallet-core/BRWallet.h
+               # Provides a relative path to your source file(s).
+               src/main/jni/loafwallet-core/BRAddress.c
+               src/main/jni/loafwallet-core/BRAddress.h
+               src/main/jni/loafwallet-core/BRArray.h
+               src/main/jni/loafwallet-core/BRBase58.c
+               src/main/jni/loafwallet-core/BRBase58.h
+               src/main/jni/loafwallet-core/BRBIP32Sequence.c
+               src/main/jni/loafwallet-core/BRBIP32Sequence.h
+               src/main/jni/loafwallet-core/BRBIP38Key.c
+               src/main/jni/loafwallet-core/BRBIP38Key.h
+               src/main/jni/loafwallet-core/BRBIP39Mnemonic.c
+               src/main/jni/loafwallet-core/BRBIP39Mnemonic.h
+               src/main/jni/loafwallet-core/BRBIP39WordsEn.h
+               src/main/jni/loafwallet-core/BRBloomFilter.c
+               src/main/jni/loafwallet-core/BRBloomFilter.h
+               src/main/jni/loafwallet-core/BRCrypto.c
+               src/main/jni/loafwallet-core/BRCrypto.h
+               src/main/jni/loafwallet-core/BRInt.h
+               src/main/jni/loafwallet-core/BRKey.c
+               src/main/jni/loafwallet-core/BRKey.h
+               src/main/jni/loafwallet-core/BRMerkleBlock.c
+               src/main/jni/loafwallet-core/BRMerkleBlock.h
+               src/main/jni/loafwallet-core/BRPaymentProtocol.c
+               src/main/jni/loafwallet-core/BRPaymentProtocol.h
+               src/main/jni/loafwallet-core/BRPeer.c
+               src/main/jni/loafwallet-core/BRPeer.h
+               src/main/jni/loafwallet-core/BRPeerManager.c
+               src/main/jni/loafwallet-core/BRPeerManager.h
+               src/main/jni/loafwallet-core/BRSet.c
+               src/main/jni/loafwallet-core/BRSet.h
+               src/main/jni/loafwallet-core/BRTransaction.c
+               src/main/jni/loafwallet-core/BRTransaction.h
+               src/main/jni/loafwallet-core/BRWallet.c
+               src/main/jni/loafwallet-core/BRWallet.h
 
-             src/main/jni/transition/core.c
-             src/main/jni/transition/core.h
-             src/main/jni/transition/JNIBase58.c
-             src/main/jni/transition/JNIBase58.h
-             src/main/jni/transition/JNIBIP32Sequence.c
-             src/main/jni/transition/JNIBIP32Sequence.h
-             src/main/jni/transition/JNIKey.c
-             src/main/jni/transition/JNIKey.h
-             src/main/jni/transition/PeerManager.c
-             src/main/jni/transition/PeerManager.h
-             src/main/jni/transition/wallet.c
-             src/main/jni/transition/wallet.h)
+               src/main/jni/transition/core.c
+               src/main/jni/transition/core.h
+               src/main/jni/transition/JNIBase58.c
+               src/main/jni/transition/JNIBase58.h
+               src/main/jni/transition/JNIBIP32Sequence.c
+               src/main/jni/transition/JNIBIP32Sequence.h
+               src/main/jni/transition/JNIKey.c
+               src/main/jni/transition/JNIKey.h
+               src/main/jni/transition/PeerManager.c
+               src/main/jni/transition/PeerManager.h
+               src/main/jni/transition/wallet.c
+               src/main/jni/transition/wallet.h)
 
 
 include_directories(src/main/jni/loafwallet-core/)

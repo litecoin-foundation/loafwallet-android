@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
@@ -69,6 +70,7 @@ public class IntroActivity extends BRActivity implements Serializable {
     private static IntroActivity app;
     private View splashScreen;
     private ImageButton faq;
+    private TextView textViewPOS;
 
     public static IntroActivity getApp() {
         return app;
@@ -88,6 +90,15 @@ public class IntroActivity extends BRActivity implements Serializable {
         newWalletButton = (Button) findViewById(R.id.button_new_wallet);
         recoverWalletButton = (Button) findViewById(R.id.button_recover_wallet);
         splashScreen = findViewById(R.id.splash_screen);
+
+        textViewPOS = (TextView) findViewById(R.id.textViewPOS);
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            textViewPOS.setVisibility(View.VISIBLE);
+        } else {
+            textViewPOS.setVisibility(View.GONE);
+        }
+
+
         setListeners();
         updateBundles();
 

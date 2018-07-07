@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.settings.SecurityCenterActivity;
 import com.breadwallet.presenter.activities.settings.SettingsActivity;
@@ -68,6 +69,8 @@ public class FragmentGreetings extends Fragment {
     private BRButton ok;
     private ConstraintLayout mainLayout;
     private RelativeLayout background;
+    private TextView POSTitle;
+    private TextView POSBody;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -79,6 +82,13 @@ public class FragmentGreetings extends Fragment {
         ok = (BRButton) rootView.findViewById(R.id.ok);
         mainLayout = (ConstraintLayout) rootView.findViewById(R.id.signal_layout);
         background = (RelativeLayout) rootView.findViewById(R.id.layout);
+
+        if (BuildConfig.FLAVOR.equals("POS")) {
+            POSTitle = (TextView) rootView.findViewById(R.id.BRText3);
+            POSTitle.setText(R.string.Welcome_POS_title);
+            POSBody = (TextView) rootView.findViewById(R.id.BRText4);
+            POSBody.setText(R.string.Welcome_POS_body);
+        }
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,14 +129,13 @@ public class FragmentGreetings extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onResume() {
+        super.onResume();
     }
 
 }

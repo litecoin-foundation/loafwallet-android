@@ -69,6 +69,7 @@ public class FragmentReceive extends Fragment {
     public TextView mTitle;
     public TextView mAddress;
     public ImageView mQrImage;
+    public ImageView mSquareImage;
     public LinearLayout backgroundLayout;
     public LinearLayout signalLayout;
     private String receiveAddress;
@@ -95,6 +96,7 @@ public class FragmentReceive extends Fragment {
         mTitle = (TextView) rootView.findViewById(R.id.title);
         mAddress = (TextView) rootView.findViewById(R.id.address_text);
         mQrImage = (ImageView) rootView.findViewById(R.id.qr_image);
+        mSquareImage = (ImageView) rootView.findViewById(R.id.square_image);
         backgroundLayout = (LinearLayout) rootView.findViewById(R.id.background_layout);
         signalLayout = (LinearLayout) rootView.findViewById(R.id.signal_layout);
         shareButton = (BRButton) rootView.findViewById(R.id.share_button);
@@ -110,6 +112,7 @@ public class FragmentReceive extends Fragment {
         close = (ImageButton) rootView.findViewById(R.id.close_button);
         separator2 = rootView.findViewById(R.id.separator2);
         separator2.setVisibility(View.GONE);
+        mSquareImage.setVisibility(View.GONE);
         setListeners();
         BRWalletManager.getInstance().addBalanceChangedListener(new BRWalletManager.OnBalanceChanged() {
             @Override

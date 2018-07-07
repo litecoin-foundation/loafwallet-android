@@ -85,6 +85,11 @@ Java_com_breadwallet_wallet_BRWalletManager_feeForTransaction(JNIEnv *env, jobje
                                                               jstring address,
                                                               jlong amount);
 
+JNIEXPORT jint JNICALL
+Java_com_breadwallet_wallet_BRWalletManager_feeForDistTransaction(JNIEnv *env, jobject obj,
+                                                                  jstring address, jstring devaddress, jstring distaddress,
+                                                              jlong amount);
+
 JNIEXPORT jboolean JNICALL Java_com_breadwallet_wallet_BRWalletManager_isCreated(JNIEnv *env,
                                                                                  jobject obj);
 
@@ -97,6 +102,10 @@ JNIEXPORT jobjectArray JNICALL Java_com_breadwallet_wallet_BRWalletManager_getTr
 JNIEXPORT jobject JNICALL
 Java_com_breadwallet_wallet_BRWalletManager_tryTransaction(JNIEnv *env, jobject obj,
                                                            jstring jAddress, jlong jAmount);
+
+JNIEXPORT jobject JNICALL
+Java_com_breadwallet_wallet_BRWalletManager_tryDistTransaction(JNIEnv *env, jobject obj,
+                                                           jstring jAddress, jstring jDevAddress, jstring jDistAddress, jlong jAmount);
 
 JNIEXPORT jboolean JNICALL
 Java_com_breadwallet_wallet_BRWalletManager_transactionIsVerified(JNIEnv *env, jobject obj,

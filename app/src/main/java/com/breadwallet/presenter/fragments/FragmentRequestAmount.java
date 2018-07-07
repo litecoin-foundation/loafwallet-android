@@ -1,12 +1,19 @@
 package com.breadwallet.presenter.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +27,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.breadwallet.BuildConfig;
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRButton;
 import com.breadwallet.presenter.customviews.BRKeyboard;
@@ -39,12 +48,24 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+import com.squareup.sdk.pos.ChargeRequest;
+import com.squareup.sdk.pos.CurrencyCode;
+import com.squareup.sdk.pos.PosClient;
+import com.squareup.sdk.pos.PosSdk;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import static android.widget.Toast.LENGTH_LONG;
+import static com.breadwallet.tools.listeners.SyncReceiver.app;
 import static com.platform.HTTPServer.URL_SUPPORT;
+import static com.squareup.sdk.pos.CurrencyCode.AUD;
+import static com.squareup.sdk.pos.CurrencyCode.USD;
+import static com.squareup.sdk.pos.PosApi.AUTO_RETURN_NO_TIMEOUT;
 
 
 /**
@@ -81,6 +102,7 @@ public class FragmentRequestAmount extends Fragment {
     public TextView mTitle;
     public TextView mAddress;
     public ImageView mQrImage;
+    public ImageView mSquareImage;
     public LinearLayout backgroundLayout;
     public LinearLayout signalLayout;
     private String receiveAddress;
@@ -99,6 +121,8 @@ public class FragmentRequestAmount extends Fragment {
     private int keyboardIndex;
     //    private int currListIndex;
     private ImageButton close;
+    private PosClient posClient;
+    private static final int CHARGE_REQUEST_CODE = 0xF00D;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,6 +149,7 @@ public class FragmentRequestAmount extends Fragment {
         mTitle = (TextView) rootView.findViewById(R.id.title);
         mAddress = (TextView) rootView.findViewById(R.id.address_text);
         mQrImage = (ImageView) rootView.findViewById(R.id.qr_image);
+        mSquareImage = (ImageView) rootView.findViewById(R.id.square_image);
         shareButton = (BRButton) rootView.findViewById(R.id.share_button);
         shareEmail = (Button) rootView.findViewById(R.id.share_email);
         shareTextMessage = (Button) rootView.findViewById(R.id.share_text);
@@ -154,6 +179,13 @@ public class FragmentRequestAmount extends Fragment {
         signalLayout.removeView(shareButtonsLayout);
         signalLayout.removeView(copiedLayout);
         signalLayout.removeView(request);
+
+        mSquareImage.setVisibility(View.GONE);
+
+        // Replace YOUR_CLIENT_ID with your Square-assigned client application ID,
+        // available from the Application Dashboard.
+
+        posClient = PosSdk.createClient(getActivity(), "sq0idp-VDuM8YgDLmmEiVbzYFA5PQ");  //production
 
         showCurrencyList(false);
         selectedIso = BRSharedPrefs.getPreferredBTC(getContext()) ? "NAH" : BRSharedPrefs.getIso(getContext());
@@ -197,6 +229,17 @@ public class FragmentRequestAmount extends Fragment {
             public void onClick(View v) {
                 removeCurrencySelector();
                 showKeyboard(false);
+            }
+        });
+
+        mSquareImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!BRAnimator.isClickAllowed()) return;
+                startTransaction();
+                Activity app = getActivity();
+                if (app != null)
+                    app.getFragmentManager().popBackStack();
             }
         });
 
@@ -336,6 +379,100 @@ public class FragmentRequestAmount extends Fragment {
 
     }
 
+    private void startTransaction() {
+        if (!posClient.isPointOfSaleInstalled()) {
+            new AlertDialog.Builder(getActivity()).setTitle(R.string.install_point_of_sale_title)
+                    .setMessage(getString(R.string.install_point_of_sale_message))
+                    .setPositiveButton(getString(R.string.install_point_of_sale_confirm),
+                            new DialogInterface.OnClickListener() {
+                                @Override public void onClick(DialogInterface dialog, int which) {
+                                    posClient.openPointOfSalePlayStoreListing();
+                                }
+                            })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+            return;
+        }
+
+        int amount = (int) (Double.parseDouble(amountEdit.getText().toString())*100);
+        Set<ChargeRequest.TenderType> tenderTypes = EnumSet.noneOf(ChargeRequest.TenderType.class);
+            tenderTypes.add(ChargeRequest.TenderType.CARD);
+            tenderTypes.add(ChargeRequest.TenderType.CASH);
+            tenderTypes.add(ChargeRequest.TenderType.CARD_ON_FILE);
+            tenderTypes.add(ChargeRequest.TenderType.OTHER);
+        long timeout = AUTO_RETURN_NO_TIMEOUT;
+
+        ChargeRequest chargeRequest =
+                new ChargeRequest.Builder(amount, CurrencyCode.valueOf("AUD"))
+                        .autoReturn(timeout, TimeUnit.MILLISECONDS)
+                        .restrictTendersTo(tenderTypes)
+                        .build();
+        try {
+            Intent chargeIntent = posClient.createChargeIntent(chargeRequest);
+            startActivityForResult(chargeIntent, CHARGE_REQUEST_CODE);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity(),"Square Point of Sale was just uninstalled.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHARGE_REQUEST_CODE) {
+            if (data == null) {
+                // This can happen if Square Point of Sale was uninstalled or crashed while we're waiting for a
+                // result.
+                Toast.makeText(getActivity(),"No Result from Square Point of Sale", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (resultCode == Activity.RESULT_OK) {
+                ChargeRequest.Success success = posClient.parseChargeSuccess(data);
+                onTransactionSuccess(success);
+            } else {
+                ChargeRequest.Error error = posClient.parseChargeError(data);
+                onTransactionError(error);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void onTransactionSuccess(ChargeRequest.Success successResult) {
+        CharSequence message = Html.fromHtml("<b><font color='#00aa00'>Success</font></b><br><br>"
+                + "<b>Client RealTransaction Id</b><br>"
+                + successResult.clientTransactionId
+                + "<br><br><b>Server RealTransaction Id</b><br>"
+                + successResult.serverTransactionId
+                + "<br><br><b>Request Metadata</b><br>"
+                + successResult.requestMetadata);
+        showResult(message);
+        Log.d(TAG, message.toString());
+    }
+
+    private void onTransactionError(ChargeRequest.Error errorResult) {
+        CharSequence message = Html.fromHtml("<b><font color='#aa0000'>Error</font></b><br><br>"
+                + "<b>Error Key</b><br>"
+                + errorResult.code
+                + "<br><br><b>Error Description</b><br>"
+                + errorResult.debugDescription
+                + "<br><br><b>Request Metadata</b><br>"
+                + errorResult.requestMetadata);
+        showResult(message);
+        Log.d(TAG, message.toString());
+    }
+
+    private void showResult(CharSequence message) {
+        new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.result_title))
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
+    }
+
+    /** Helper method to remove the need for casting and avoid @Nullable warnings. */
+/*    private <T extends View> T findView(@IdRes int id) {
+        //noinspection unchecked
+        return (T) findViewById(id);
+    }
+*/
     @Override
     public void onStop() {
         super.onStop();
@@ -394,6 +531,9 @@ public class FragmentRequestAmount extends Fragment {
                 return;
             amountBuilder.append(dig);
             updateText();
+
+            if (BuildConfig.FLAVOR.equals("POS"))
+            mSquareImage.setVisibility(View.VISIBLE);
         }
     }
 
