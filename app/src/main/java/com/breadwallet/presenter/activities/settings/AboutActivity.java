@@ -24,6 +24,7 @@ public class AboutActivity extends BRActivity {
 
     private ImageView strayacoinShare;
     private ImageView twitterShare;
+    private ImageView facebookShare;
     private ImageView wikiShare;
     private static AboutActivity app;
 
@@ -58,6 +59,7 @@ public class AboutActivity extends BRActivity {
 
         strayacoinShare = (ImageView) findViewById(R.id.strayacoin_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
+        facebookShare = (ImageView) findViewById(R.id.facebook_share_button);
         wikiShare = (ImageView) findViewById(R.id.wiki_share_button);
 
         strayacoinShare.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +74,16 @@ public class AboutActivity extends BRActivity {
         twitterShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Strayacrypto"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Strayacoin"));
+                startActivity(browserIntent);
+                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+            }
+        });
+
+        facebookShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com/Strayacoin"));
                 startActivity(browserIntent);
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
@@ -86,6 +97,7 @@ public class AboutActivity extends BRActivity {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }
         });
+
         policyText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

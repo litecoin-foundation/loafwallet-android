@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-     compileSdkVersion = 23
+
+    compileSdkVersion = 26
     buildToolsVersion = '26.0.3'
     dexOptions {
         javaMaxHeapSize "4g"
@@ -11,8 +12,8 @@ android {
         applicationId = 'org.strayacoin.wallet'
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 70067
-        versionName "1.1"
+        versionCode 70073
+        versionName "1.2"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,

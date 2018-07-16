@@ -9,7 +9,7 @@
     <!-- About screen facebook label -->
     <string name="About.facebook">Facebook</string>
     <!-- About screen footer -->
-    <string name="About.footer">Made by the Aussie STRAYACOIN team.\nBuild %1$s</string>
+    <string name="About.footer">Made by the Aussie Strayacoin team.\nBuild %1$s</string>
     <!-- Privay Policy button label -->
     <string name="About.privacy">Privacy Policy</string>
     <!-- About screen reddit label -->

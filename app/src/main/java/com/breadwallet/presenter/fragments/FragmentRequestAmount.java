@@ -180,15 +180,27 @@ public class FragmentRequestAmount extends Fragment {
         signalLayout.removeView(copiedLayout);
         signalLayout.removeView(request);
 
-        mSquareImage.setVisibility(View.GONE);
+        if (BuildConfig.FLAVOR.equals("POS"))
+        {
 
-        // Replace YOUR_CLIENT_ID with your Square-assigned client application ID,
-        // available from the Application Dashboard.
+            // Replace YOUR_CLIENT_ID with your Square-assigned client application ID,
+            // available from the Application Dashboard.
+            posClient = PosSdk.createClient(getActivity(), "sq0idp-VDuM8YgDLmmEiVbzYFA5PQ");  //production
 
-        posClient = PosSdk.createClient(getActivity(), "sq0idp-VDuM8YgDLmmEiVbzYFA5PQ");  //production
+            isoButton.setVisibility(View.GONE);
+            selectedIso = BRSharedPrefs.getIso(getContext());
+
+            if (!posClient.isPointOfSaleInstalled()) {
+                mSquareImage.setVisibility(View.GONE);
+            }
+        }
+        else
+        {
+            mSquareImage.setVisibility(View.GONE);
+            selectedIso = BRSharedPrefs.getPreferredBTC(getContext()) ? "NAH" : BRSharedPrefs.getIso(getContext());
+        }
 
         showCurrencyList(false);
-        selectedIso = BRSharedPrefs.getPreferredBTC(getContext()) ? "NAH" : BRSharedPrefs.getIso(getContext());
 
         signalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -380,6 +392,8 @@ public class FragmentRequestAmount extends Fragment {
     }
 
     private void startTransaction() {
+
+        //TODO the code below for checking if Square is installed is not actually required, since the Square button is hidden during onCreateView if it is not installed.
         if (!posClient.isPointOfSaleInstalled()) {
             new AlertDialog.Builder(getActivity()).setTitle(R.string.install_point_of_sale_title)
                     .setMessage(getString(R.string.install_point_of_sale_message))
@@ -393,7 +407,7 @@ public class FragmentRequestAmount extends Fragment {
                     .show();
             return;
         }
-
+        if (amountEdit.getText().length()<1) return;
         int amount = (int) (Double.parseDouble(amountEdit.getText().toString())*100);
         Set<ChargeRequest.TenderType> tenderTypes = EnumSet.noneOf(ChargeRequest.TenderType.class);
             tenderTypes.add(ChargeRequest.TenderType.CARD);
@@ -403,7 +417,7 @@ public class FragmentRequestAmount extends Fragment {
         long timeout = AUTO_RETURN_NO_TIMEOUT;
 
         ChargeRequest chargeRequest =
-                new ChargeRequest.Builder(amount, CurrencyCode.valueOf("AUD"))
+                new ChargeRequest.Builder(amount, CurrencyCode.valueOf(BRSharedPrefs.getIso(getContext())))
                         .autoReturn(timeout, TimeUnit.MILLISECONDS)
                         .restrictTendersTo(tenderTypes)
                         .build();
@@ -531,9 +545,6 @@ public class FragmentRequestAmount extends Fragment {
                 return;
             amountBuilder.append(dig);
             updateText();
-
-            if (BuildConfig.FLAVOR.equals("POS"))
-            mSquareImage.setVisibility(View.VISIBLE);
         }
     }
 
