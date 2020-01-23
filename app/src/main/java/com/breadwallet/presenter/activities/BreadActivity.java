@@ -23,13 +23,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.transition.ChangeBounds;
+import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
+import androidx.transition.TransitionSet;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRSearchBar;
 import com.breadwallet.presenter.fragments.FragmentManage;
 import com.breadwallet.tools.animation.BRAnimator;
+import com.breadwallet.tools.animation.TextSizeTransition;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.InternetManager;
 import com.breadwallet.tools.manager.SyncManager;
@@ -269,15 +273,26 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     }
 
     private void setPriceTags(boolean ltcPreferred, boolean animate) {
-        primaryPrice.setTextSize(ltcPreferred ? primaryTextSize : secondaryTextSize);
-        secondaryPrice.setTextSize(ltcPreferred ? secondaryTextSize : primaryTextSize);
 
         ConstraintSet set = new ConstraintSet();
         set.clone(toolBarConstraintLayout);
 
         if (animate) {
-            TransitionManager.beginDelayedTransition(toolBarConstraintLayout);
+            TransitionSet textSizeTransition = new TransitionSet()
+                    .setOrdering(TransitionSet.ORDERING_TOGETHER)
+                    .addTransition(new TextSizeTransition())
+                    .addTransition(new ChangeBounds());
+
+            TransitionSet transition = new TransitionSet()
+                    .setOrdering(TransitionSet.ORDERING_SEQUENTIAL)
+                    .addTransition(new Fade(Fade.OUT))
+                    .addTransition(textSizeTransition)
+                    .addTransition(new Fade(Fade.IN));
+            TransitionManager.beginDelayedTransition(toolBarConstraintLayout, transition);
         }
+
+        primaryPrice.setTextSize(ltcPreferred ? primaryTextSize : secondaryTextSize);
+        secondaryPrice.setTextSize(ltcPreferred ? secondaryTextSize : primaryTextSize);
 
         int[] ids = {primaryPrice.getId(), secondaryPrice.getId(), equals.getId()};
         // Clear views constraints
