@@ -127,6 +127,14 @@ android {
                 minifyEnabled = false
                 debuggable = false
             }
+
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Crashlytics
+                // servers. By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
+            }
         }
         debug {
             debuggable = true
@@ -185,5 +193,8 @@ dependencies {
 
     // Firebase Crashlytics.
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+
+    // Firebase Crashlytics NDK
+    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
 
 }
