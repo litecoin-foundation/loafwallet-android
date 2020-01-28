@@ -1,23 +1,18 @@
 package com.breadwallet;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
-import com.breadwallet.tools.security.BRKeyStore;
 import com.breadwallet.tools.util.Utils;
-import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +66,7 @@ public class BreadApp extends Application {
         if (Utils.isEmulatorOrDebug(this)) {
 //            BRKeyStore.putFailCount(0, this);
             HOST = "stage2.breadwallet.com";
-            FirebaseCrash.setCrashCollectionEnabled(false);
-//            FirebaseCrash.report(new RuntimeException("test with new json file"));
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false);
         }
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
