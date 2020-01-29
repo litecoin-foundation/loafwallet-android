@@ -63,11 +63,14 @@ public class BreadApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        boolean enableCrashlytics = true;
         if (Utils.isEmulatorOrDebug(this)) {
 //            BRKeyStore.putFailCount(0, this);
             HOST = "stage2.breadwallet.com";
-            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false);
+            enableCrashlytics = false;
         }
+
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
