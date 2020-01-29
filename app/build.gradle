@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
@@ -196,5 +198,4 @@ dependencies {
 
     // Firebase Crashlytics NDK
     implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
-
 }
