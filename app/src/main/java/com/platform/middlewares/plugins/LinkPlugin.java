@@ -143,7 +143,7 @@ public class LinkPlugin implements Plugin {
 
                     JSONObject json;
                     try {
-                        json = new JSONObject(new String(body)); //just check for validity
+                        json = new JSONObject(new String(body)); //TODO: just check for validity
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.e(TAG, "handle: the json is not valid:" + target + " " + baseRequest.getMethod());
@@ -173,7 +173,6 @@ public class LinkPlugin implements Plugin {
                     app.startActivity(postInt);
                     ((Activity) app).overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
                     return BRHTTPHelper.handleSuccess(204, null, baseRequest, response, null);
-
             }
         }
         return false;
