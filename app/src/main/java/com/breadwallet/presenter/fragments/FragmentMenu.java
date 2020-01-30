@@ -70,7 +70,6 @@ public class FragmentMenu extends Fragment {
     public ConstraintLayout signalLayout;
     private ImageButton close;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -193,11 +192,6 @@ public class FragmentMenu extends Fragment {
             return convertView;
 
         }
-
-        @Override
-        public int getCount() {
-            return super.getCount();
-        }
     }
 
     @Override
@@ -213,16 +207,4 @@ public class FragmentMenu extends Fragment {
         });
 
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
 }
