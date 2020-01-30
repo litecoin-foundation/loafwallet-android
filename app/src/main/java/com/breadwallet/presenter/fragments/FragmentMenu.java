@@ -5,11 +5,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.settings.SecurityCenterActivity;
@@ -62,7 +62,6 @@ import static com.breadwallet.R.id.menu_listview;
  */
 
 public class FragmentMenu extends Fragment {
-    private static final String TAG = FragmentMenu.class.getName();
 
     public TextView mTitle;
     public ListView mListView;
@@ -75,12 +74,10 @@ public class FragmentMenu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // The last two arguments ensure LayoutParams are inflated
-        // properly.
 
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-        background = (RelativeLayout) rootView.findViewById(R.id.layout);
-        signalLayout = (ConstraintLayout) rootView.findViewById(R.id.signal_layout);
+        background = rootView.findViewById(R.id.layout);
+        signalLayout = rootView.findViewById(R.id.signal_layout);
         background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +86,7 @@ public class FragmentMenu extends Fragment {
             }
         });
 
-        close = (ImageButton) rootView.findViewById(R.id.close_button);
+        close = rootView.findViewById(R.id.close_button);
 
         itemList = new ArrayList<>();
         boolean buyBitcoinEnabled = APIClient.getInstance(getActivity()).isFeatureEnabled(APIClient.FeatureFlags.BUY_BITCOIN.toString());
@@ -172,13 +169,11 @@ public class FragmentMenu extends Fragment {
 
     public class MenuListAdapter extends ArrayAdapter<BRMenuItem> {
 
-//        private List<BRMenuItem> items;
         private Context mContext;
         private int defaultLayoutResource = R.layout.menu_list_item;
 
         public MenuListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BRMenuItem> items) {
             super(context, resource, items);
-//            this.items = items;
             this.mContext = context;
         }
 
@@ -186,17 +181,15 @@ public class FragmentMenu extends Fragment {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if (convertView == null) {
-                // inflate the background
                 LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
                 convertView = inflater.inflate(defaultLayoutResource, parent, false);
             }
-            TextView text = (TextView) convertView.findViewById(R.id.item_text);
-            ImageView icon = (ImageView) convertView.findViewById(R.id.item_icon);
+            TextView text = convertView.findViewById(R.id.item_text);
+            ImageView icon = convertView.findViewById(R.id.item_icon);
 
             text.setText(getItem(position).text);
             icon.setImageResource(getItem(position).resId);
             convertView.setOnClickListener(getItem(position).listener);
-//            applyBlur();
             return convertView;
 
         }
