@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import androidx.annotation.Nullable;
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.BreadActivity;
 import com.breadwallet.presenter.activities.LoginActivity;
@@ -411,7 +412,7 @@ public class BRAnimator {
         }
     }
 
-    public static void animateSignalSlide(ViewGroup signalLayout, final boolean reverse, final OnSlideAnimationEnd listener) {
+    public static void animateSignalSlide(ViewGroup signalLayout, final boolean reverse, @Nullable final OnSlideAnimationEnd listener) {
         float translationY = signalLayout.getTranslationY();
         float signalHeight = signalLayout.getHeight();
         signalLayout.setTranslationY(reverse ? translationY : translationY + signalHeight);

@@ -121,11 +121,7 @@ public class FragmentSupport extends Fragment {
             public void onGlobalLayout() {
                 observer.removeOnGlobalLayoutListener(this);
                 BRAnimator.animateBackgroundDim(backgroundLayout, false);
-                BRAnimator.animateSignalSlide(signalLayout, false, new BRAnimator.OnSlideAnimationEnd() {
-                    @Override
-                    public void onAnimationEnd() {
-                    }
-                });
+                BRAnimator.animateSignalSlide(signalLayout, false, null);
             }
         });
     }
