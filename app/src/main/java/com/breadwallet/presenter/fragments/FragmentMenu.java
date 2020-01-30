@@ -139,8 +139,7 @@ public class FragmentMenu extends Fragment {
             @Override
             public void onClick(View v) {
                 Activity app = getActivity();
-                if (app != null)
-                    app.getFragmentManager().popBackStack();
+                app.getFragmentManager().popBackStack();
             }
         });
         mTitle = rootView.findViewById(R.id.title);
