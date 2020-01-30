@@ -168,20 +168,18 @@ public class FragmentMenu extends Fragment {
 
     public class MenuListAdapter extends ArrayAdapter<BRMenuItem> {
 
-        private Context mContext;
-        private int defaultLayoutResource = R.layout.menu_list_item;
+        private LayoutInflater mInflater;
 
         public MenuListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<BRMenuItem> items) {
             super(context, resource, items);
-            this.mContext = context;
+            mInflater = ((Activity) context).getLayoutInflater();
         }
 
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if (convertView == null) {
-                LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-                convertView = inflater.inflate(defaultLayoutResource, parent, false);
+                convertView = mInflater.inflate(R.layout.menu_list_item, parent, false);
             }
             TextView text = convertView.findViewById(R.id.item_text);
             ImageView icon = convertView.findViewById(R.id.item_icon);
