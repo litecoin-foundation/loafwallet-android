@@ -2,7 +2,6 @@ package com.breadwallet.presenter.activities.settings;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
@@ -19,7 +18,6 @@ import com.breadwallet.presenter.activities.util.ActivityUTILS;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.util.Utils;
-import com.platform.BRHTTPHelper;
 import com.platform.HTTPServer;
 import com.platform.middlewares.plugins.LinkPlugin;
 
@@ -31,8 +29,12 @@ import java.util.Map;
 
 public class WebViewActivity extends BRActivity {
     private static final String TAG = WebViewActivity.class.getName();
+    private static final String URL_EXTRA = "url";
+    private static final String JSON_EXTRA = "json";
+    private static final String ARTICLE_ID_EXTRA = "articleId";
+
+
     WebView webView;
-    String theUrl;
     public static boolean appVisible = false;
     private static WebViewActivity app;
     private String onCloseUrl;
@@ -47,14 +49,13 @@ public class WebViewActivity extends BRActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
-        webView = (WebView) findViewById(R.id.web_view);
+        webView = findViewById(R.id.web_view);
         webView.setBackgroundColor(0);
         webView.setWebChromeClient(new BRWebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Log.d(TAG, "shouldOverrideUrlLoading: " + request.getUrl());
-//                Log.d(TAG, "shouldOverrideUrlLoading: " + request.getMethod());
                 if ((onCloseUrl != null && request.getUrl().toString().equalsIgnoreCase(onCloseUrl)) || request.getUrl().toString().contains("_close")) {
                     onBackPressed();
                     onCloseUrl = null;
@@ -62,21 +63,15 @@ public class WebViewActivity extends BRActivity {
                 }
                 return false;
             }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                Log.d(TAG, "onPageStarted: " + url);
-                super.onPageStarted(view, url, favicon);
-            }
         });
 
-        theUrl = getIntent().getStringExtra("url");
-        String json = getIntent().getStringExtra("json");
+        String theUrl = getIntent().getStringExtra(URL_EXTRA);
+        String json = getIntent().getStringExtra(JSON_EXTRA);
         if (!setupServerMode(theUrl)) {
             webView.loadUrl(theUrl);
             return;
         }
-        String articleId = getIntent().getStringExtra("articleId");
+        String articleId = getIntent().getStringExtra(ARTICLE_ID_EXTRA);
         if (Utils.isNullOrEmpty(theUrl)) throw new IllegalArgumentException("No url extra!");
 
         WebSettings webSettings = webView.getSettings();
@@ -128,7 +123,7 @@ public class WebViewActivity extends BRActivity {
             if (method.equalsIgnoreCase("get")) {
                 webView.loadUrl(url, httpHeaders);
             } else if (method.equalsIgnoreCase("post")) {
-                webView.postUrl(url, body);//todo find a way to add the headers to the post request too
+                webView.postUrl(url, body); //TODO: find a way to add the headers to the post request too
             } else {
                 throw new NullPointerException("unexpected method: " + method);
             }
