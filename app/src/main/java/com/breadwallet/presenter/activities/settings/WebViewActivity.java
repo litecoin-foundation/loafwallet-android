@@ -27,9 +27,9 @@ import java.util.Map;
 
 public class WebViewActivity extends BRActivity {
     private static final String TAG = WebViewActivity.class.getName();
-    private static final String URL_EXTRA = "url";
-    private static final String JSON_EXTRA = "json";
-    private static final String ARTICLE_ID_EXTRA = "articleId";
+    public static final String URL_EXTRA = "url";
+    public static final String JSON_EXTRA = "json";
+    public static final String ARTICLE_ID_EXTRA = "articleId";
 
     WebView webView;
     public static boolean appVisible = false;

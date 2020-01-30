@@ -197,7 +197,7 @@ public class SettingsActivity extends BRActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(SettingsActivity.this, WebViewActivity.class);
-                    intent.putExtra("url", HTTPServer.URL_EA);
+                    intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_EA);
                     Activity app = SettingsActivity.this;
                     app.startActivity(intent);
                     app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);

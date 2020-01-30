@@ -92,7 +92,7 @@ public class FragmentMenu extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                    intent.putExtra("url", HTTPServer.URL_BUY);
+                    intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_BUY);
                     Activity app = getActivity();
                     app.startActivity(intent);
                     app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
