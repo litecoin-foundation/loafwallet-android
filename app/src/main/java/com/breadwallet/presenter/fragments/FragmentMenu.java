@@ -34,8 +34,6 @@ import com.platform.HTTPServer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.breadwallet.R.id.menu_listview;
-
 /**
  * BreadWallet
  * <p>
@@ -143,7 +141,7 @@ public class FragmentMenu extends Fragment {
             }
         });
         mTitle = rootView.findViewById(R.id.title);
-        mListView = rootView.findViewById(menu_listview);
+        mListView = rootView.findViewById(R.id.menu_listview);
         mListView.setAdapter(new MenuListAdapter(getContext(), R.layout.menu_list_item, itemList));
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
 
@@ -188,7 +186,6 @@ public class FragmentMenu extends Fragment {
             icon.setImageResource(item.resId);
             convertView.setOnClickListener(item.listener);
             return convertView;
-
         }
     }
 
