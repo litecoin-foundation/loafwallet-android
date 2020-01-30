@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.ConsoleMessage;
-import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -33,7 +31,6 @@ public class WebViewActivity extends BRActivity {
     private static final String JSON_EXTRA = "json";
     private static final String ARTICLE_ID_EXTRA = "articleId";
 
-
     WebView webView;
     public static boolean appVisible = false;
     private static WebViewActivity app;
@@ -51,7 +48,7 @@ public class WebViewActivity extends BRActivity {
 
         webView = findViewById(R.id.web_view);
         webView.setBackgroundColor(0);
-        webView.setWebChromeClient(new BRWebChromeClient());
+        webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -164,20 +161,6 @@ public class WebViewActivity extends BRActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-    }
-
-    private class BRWebChromeClient extends WebChromeClient {
-        @Override
-        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            Log.e(TAG, "onConsoleMessage: consoleMessage: " + consoleMessage.message());
-            return super.onConsoleMessage(consoleMessage);
-        }
-
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-            Log.e(TAG, "onJsAlert: " + message + ", url: " + url);
-            return super.onJsAlert(view, url, message, result);
-        }
     }
 
     @Override
