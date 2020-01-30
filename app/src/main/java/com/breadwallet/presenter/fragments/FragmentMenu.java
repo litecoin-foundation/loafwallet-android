@@ -184,9 +184,10 @@ public class FragmentMenu extends Fragment {
             TextView text = convertView.findViewById(R.id.item_text);
             ImageView icon = convertView.findViewById(R.id.item_icon);
 
-            text.setText(getItem(position).text);
-            icon.setImageResource(getItem(position).resId);
-            convertView.setOnClickListener(getItem(position).listener);
+            final BRMenuItem item = getItem(position);
+            text.setText(item.text);
+            icon.setImageResource(item.resId);
+            convertView.setOnClickListener(item.listener);
             return convertView;
 
         }
