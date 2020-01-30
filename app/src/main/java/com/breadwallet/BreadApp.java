@@ -50,13 +50,11 @@ public class BreadApp extends Application {
     private static final String TAG = BreadApp.class.getName();
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
-    // host is the server(s) on which the API is hosted
     public static String HOST = "api.breadwallet.com";
     private static List<OnAppBackgrounded> listeners;
     private static Timer isBackgroundChecker;
     public static AtomicInteger activityCounter = new AtomicInteger();
     public static long backgroundedTime;
-    public static boolean appInBackground;
 
     private static Activity currentActivity;
 
@@ -76,17 +74,8 @@ public class BreadApp extends Application {
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int DISPLAY_WIDTH_PX = size.x;
         DISPLAY_HEIGHT_PX = size.y;
         mFingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
-
-//        addOnBackgroundedListener(new OnAppBackgrounded() {
-//            @Override
-//            public void onBackgrounded() {
-//
-//            }
-//        });
-
     }
 
 
