@@ -72,7 +72,9 @@ public class WebViewActivity extends BRActivity {
             return;
         }
         String articleId = getIntent().getStringExtra(ARTICLE_ID_EXTRA);
-        if (Utils.isNullOrEmpty(theUrl)) throw new IllegalArgumentException("No url extra!");
+        if (Utils.isNullOrEmpty(theUrl)) {
+            throw new IllegalArgumentException("No url extra!");
+        }
 
         WebSettings webSettings = webView.getSettings();
 
@@ -82,8 +84,9 @@ public class WebViewActivity extends BRActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        if (articleId != null && !articleId.isEmpty())
+        if (articleId != null && !articleId.isEmpty()) {
             theUrl = theUrl + "/" + articleId;
+        }
 
         Log.d(TAG, "onCreate: theUrl: " + theUrl + ", articleId: " + articleId);
         if (json != null) {
@@ -92,8 +95,9 @@ public class WebViewActivity extends BRActivity {
             webView.loadUrl(theUrl);
         }
 
-        if (articleId != null && !articleId.isEmpty())
+        if (articleId != null && !articleId.isEmpty()) {
             navigate(articleId);
+        }
     }
 
     private void request(WebView webView, String jsonString) {
