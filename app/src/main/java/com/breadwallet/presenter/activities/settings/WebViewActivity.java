@@ -23,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class WebViewActivity extends BRActivity {
     private static final String TAG = WebViewActivity.class.getName();
@@ -113,7 +112,6 @@ public class WebViewActivity extends BRActivity {
             }
             onCloseUrl = closeOn;
 
-            Map<String, String> httpHeaders = new HashMap<>();
             JSONObject jsonHeaders = new JSONObject(headers);
             while (jsonHeaders.keys().hasNext()) {
                 String key = jsonHeaders.keys().next();
@@ -122,9 +120,9 @@ public class WebViewActivity extends BRActivity {
             byte[] body = strBody.getBytes();
 
             if (method.equalsIgnoreCase("get")) {
-                webView.loadUrl(url, httpHeaders);
+                webView.loadUrl(url, new HashMap<String, String>());
             } else if (method.equalsIgnoreCase("post")) {
-                webView.postUrl(url, body); //TODO: find a way to add the headers to the post request too
+                webView.postUrl(url, body); // TODO: find a way to add the headers to the post request too
             } else {
                 throw new NullPointerException("unexpected method: " + method);
             }
