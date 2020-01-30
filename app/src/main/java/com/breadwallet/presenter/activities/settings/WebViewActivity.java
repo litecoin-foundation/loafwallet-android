@@ -81,18 +81,18 @@ public class WebViewActivity extends BRActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        if (articleId != null && !articleId.isEmpty()) {
+        boolean hasArticle = articleId != null && !articleId.isEmpty();
+        if (hasArticle) {
             theUrl = theUrl + "/" + articleId;
         }
 
-        Log.d(TAG, "onCreate: theUrl: " + theUrl + ", articleId: " + articleId);
         if (json != null) {
             request(webView, json);
         } else {
             webView.loadUrl(theUrl);
         }
 
-        if (articleId != null && !articleId.isEmpty()) {
+        if (hasArticle) {
             navigate(articleId);
         }
     }
@@ -132,7 +132,6 @@ public class WebViewActivity extends BRActivity {
             Log.e(TAG, "request: Failed to parse json or not enough params: " + jsonString);
             e.printStackTrace();
         }
-
     }
 
     private void navigate(String to) {
