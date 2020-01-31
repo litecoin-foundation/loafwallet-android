@@ -218,7 +218,7 @@ public class Utils {
         }
         String release = Build.VERSION.RELEASE;
 //        return String.format("%s/%d %s %s/%s", "Bread", versionNumber, cfnetwork, "Android", release);
-        return "Loaf/" + versionNumber + " " + cfnetwork + " Android/" + release;
+        return "Litewallet/" + versionNumber + " " + cfnetwork + " Android/" + release;
     }
 
     public static String reverseHex(String hex) {
