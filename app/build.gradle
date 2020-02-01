@@ -19,8 +19,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 290
-        versionName "v1.18.0"
+        versionCode 304
+        versionName "v1.18.1"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
