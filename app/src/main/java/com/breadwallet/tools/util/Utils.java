@@ -10,13 +10,13 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import androidx.core.app.ActivityCompat;
-import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 
@@ -89,7 +89,7 @@ public class Utils {
         Log.e(specsTag, "* Build.CPU_ABI: " + Build.CPU_ABI);
         Runtime rt = Runtime.getRuntime();
         long maxMemory = rt.maxMemory();
-        Log.e(specsTag, "* maxMemory:" + Long.toString(maxMemory));
+        Log.e(specsTag, "* maxMemory:" + maxMemory);
         Log.e(specsTag, "----------------------------PHONE SPECS----------------------------");
         Log.e(specsTag, "");
     }
@@ -104,7 +104,6 @@ public class Utils {
     }
 
     public static String getFormattedDateFromLong(Context app, long time) {
-
         SimpleDateFormat formatter = new SimpleDateFormat("M/d@ha", Locale.getDefault());
         boolean is24HoursFormat = false;
         if (app != null) {
@@ -121,9 +120,6 @@ public class Utils {
     }
 
     public static String formatTimeStamp(long time, String pattern) {
-//        SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(time);
         return android.text.format.DateFormat.format(pattern, time).toString();
     }
 
@@ -211,21 +207,16 @@ public class Utils {
     }
 
     public static String getAgentString(Context app, String cfnetwork) {
-
         int versionNumber = 0;
         if (app != null) {
             try {
-                PackageInfo pInfo = null;
-                pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
+                PackageInfo pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
                 versionNumber = pInfo.versionCode;
-
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        String release = Build.VERSION.RELEASE;
-//        return String.format("%s/%d %s %s/%s", "Bread", versionNumber, cfnetwork, "Android", release);
-        return "Loaf/" + String.valueOf(versionNumber) + " " + cfnetwork + " Android/" + release;
+        return String.format("%s/%d %s Android/%s", "Litewallet", versionNumber, cfnetwork, Build.VERSION.RELEASE, Locale.ENGLISH);
     }
 
     public static String reverseHex(String hex) {

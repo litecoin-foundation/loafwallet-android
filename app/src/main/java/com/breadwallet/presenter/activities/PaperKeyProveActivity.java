@@ -27,6 +27,7 @@ import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.security.SmartValidator;
+import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.tools.util.Bip39Reader;
 import java.util.Locale;
@@ -97,11 +98,12 @@ public class PaperKeyProveActivity extends BRActivity {
         wordEditSecond.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.submit || id == EditorInfo.IME_NULL) {
+                if (id == EditorInfo.IME_NULL
+                        || id == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
                     submit.performClick();
-                    return true;
-                }
-                return false;
+                return true;
             }
         });
 

@@ -101,7 +101,7 @@
         android:text="@string/UnlockScreen.subheader"
         android:textColor="@color/white"
         android:textSize="@dimen/sub_header"
-        app:customTFont="CircularPro-Book.otf"
+        app:customTFont="BarlowSemiCondensed-Medium.ttf"
         app:layout_constraintBottom_toTopOf="@+id/pinLayout"
         app:layout_constraintLeft_toLeftOf="@+id/pinLayout"
         app:layout_constraintRight_toRightOf="@+id/pinLayout"/>
@@ -133,7 +133,7 @@
             android:text="@string/UnlockScreen.myAddress"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:customBFont="CircularPro-Medium.otf"
+            app:customBFont="BarlowSemiCondensed-Medium.ttf"
             app:isBreadButton="false" />
 
         <com.breadwallet.presenter.customviews.BRButton
@@ -147,7 +147,7 @@
             android:text="@string/UnlockScreen.scan"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:customBFont="CircularPro-Medium.otf" />
+            app:customBFont="BarlowSemiCondensed-Medium.ttf" />
     </LinearLayout>
 
     <ImageView
@@ -176,7 +176,7 @@
         android:text="@string/UnlockScreen.unlocked"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:customTFont="CircularPro-Book.otf"
+        app:customTFont="BarlowSemiCondensed-Medium.ttf"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/unlocked_image"
         app:layout_constraintHorizontal_bias="0.461"
@@ -192,7 +192,7 @@
         android:text="@string/About.appVersion"
         android:textColor="@color/white_trans"
         android:textSize="14sp"
-        app:customTFont="CircularPro-Book.otf"
+        app:customTFont="BarlowSemiCondensed-Medium.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttons_layout"/>
 

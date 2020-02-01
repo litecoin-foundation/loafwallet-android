@@ -97,7 +97,7 @@ public class BRButton extends Button {
         bRect = new RectF(0, 0, 100, 100);
         TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.BRButton);
         String customFont = a.getString(R.styleable.BRButton_customBFont);
-        FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "CircularPro-Medium.otf" : customFont);
+        FontManager.setCustomFont(ctx, this, Utils.isNullOrEmpty(customFont) ? "BarlowSemiCondensed-Medium.ttf" : customFont);
         float px16 = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
         //check attributes you need, for example all paddings
         int[] attributes = new int[]{android.R.attr.paddingStart, android.R.attr.paddingTop, android.R.attr.paddingEnd, android.R.attr.paddingBottom, R.attr.isBreadButton, R.attr.buttonType};

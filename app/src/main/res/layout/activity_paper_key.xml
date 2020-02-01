@@ -31,7 +31,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/header"
-            app:customTFont="CircularPro-Bold.otf"
+            app:customTFont="BarlowSemiCondensed-Bold.ttf"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -143,7 +143,7 @@
         android:layout_marginTop="16dp"
         android:text="1 of 12"
         android:textColor="@color/light_gray"
-        app:customTFont="CircularPro-Medium.otf"/>
+        app:customTFont="BarlowSemiCondensed-Medium.ttf"/>
 
 
 </RelativeLayout>
