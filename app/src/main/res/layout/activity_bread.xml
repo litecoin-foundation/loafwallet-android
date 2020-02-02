@@ -327,7 +327,7 @@
         <!--                android:text="@string/MenuButton.buy"-->
         <!--                android:textAllCaps="true"-->
         <!--                android:textColor="@color/pin_pad_text"-->
-        <!--                app:customTFont="CircularPro-Medium.otf"/>-->
+        <!--                app:customTFont="BarlowSemiCondensed-Medium.ttf"/>-->
         <!--        </LinearLayout>-->
 
         <LinearLayout
