@@ -97,15 +97,15 @@ android {
         quiet false
         explainIssues true
         // if true, stop the gradle build if errors are found
-        abortOnError false
+        abortOnError true
         // if true, only report errors
         ignoreWarnings false
 
         checkReleaseBuilds false
 
-        disable 'MissingTranslation'
+        //disable 'MissingTranslation'
 
-        disable 'InvalidPackage'
+        //disable 'InvalidPackage'
 
         // Turns off checks for the issue IDs you specify.
         //example: disable 'TypographyFractions','TypographyQuotes'
