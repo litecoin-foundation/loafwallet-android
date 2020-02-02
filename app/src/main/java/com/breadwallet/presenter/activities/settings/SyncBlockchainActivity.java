@@ -41,13 +41,6 @@ public class SyncBlockchainActivity extends BRActivity {
         ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showSupportFragment(app, BRConstants.reScan);
-            }
-        });
 
         scanButton = (Button) findViewById(R.id.button_scan);
         scanButton.setOnClickListener(new View.OnClickListener() {

@@ -129,20 +129,6 @@ public class FragmentRequestAmount extends Fragment {
         // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                Activity app = getActivity();
-//                if (app == null) {
-//                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
-//                    return;
-//                }
-//
-//                BRAnimator.showSupportFragment(app, BRConstants.requestAmount);
-            }
-        });
-
         mTitle.setText(getString(R.string.Receive_request));
         setListeners();
 

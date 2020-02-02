@@ -107,7 +107,7 @@
             android:layout_height="@dimen/faq_dimen"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/bread_margin"
-            android:background="@drawable/faq_clear_disable"
+            android:visibility="invisible"
             android:clickable="false"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="81dp"/>

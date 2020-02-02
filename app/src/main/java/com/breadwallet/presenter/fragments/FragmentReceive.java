@@ -119,19 +119,6 @@ public class FragmentReceive extends Fragment {
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                Activity app = getActivity();
-//                if (app == null) {
-//                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
-//                    return;
-//                }
-//
-//                BRAnimator.showSupportFragment(app, BRConstants.receive);
-            }
-        });
 
         signalLayout.removeView(shareButtonsLayout);
         signalLayout.removeView(copiedLayout);

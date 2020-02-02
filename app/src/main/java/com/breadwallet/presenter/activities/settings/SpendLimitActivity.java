@@ -58,14 +58,6 @@ public class SpendLimitActivity extends BRActivity {
         // Hiding until layouts are built.
         ImageButton faq = findViewById(R.id.faq_button);
 
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showSupportFragment(app, BRConstants.fingerprintSpendingLimit);
-            }
-        });
-
         listView = findViewById(R.id.limit_list);
         listView.setFooterDividersEnabled(true);
         adapter = new LimitAdaptor(this);
