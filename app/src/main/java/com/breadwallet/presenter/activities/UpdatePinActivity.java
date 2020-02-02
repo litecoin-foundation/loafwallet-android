@@ -71,15 +71,6 @@ public class UpdatePinActivity extends BRActivity {
         // Hiding until layouts are built.
         faq = (ImageButton) findViewById(R.id.faq_button);
 
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showSupportFragment(app, BRConstants.setPin);
-            }
-        });
-
-
         keyboard.addOnInsertListener(new BRKeyboard.OnInsertListener() {
             @Override
             public void onClick(String key) {

@@ -53,14 +53,6 @@ public class SetPinActivity extends BRActivity {
         // Hiding until layouts are built.
         faq = (ImageButton) findViewById(R.id.faq_button);
 
-        faq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showSupportFragment(app, BRConstants.setPin);
-            }
-        });
-
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
         dot3 = findViewById(R.id.dot3);

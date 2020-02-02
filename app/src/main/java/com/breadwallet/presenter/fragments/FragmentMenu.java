@@ -108,13 +108,9 @@ public class FragmentMenu extends Fragment {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.faq_clear_disable, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (!BRAnimator.isClickAllowed()) return;
-//                BRAnimator.showSupportFragment(getActivity(), null);
-            }
-        }));
+        //TODO: Refactor with new FAQ / Support design using on-board FAQ data
+        itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.faq_question_white, null) {
+        });
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_settings), R.drawable.ic_settings, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
