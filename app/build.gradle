@@ -96,16 +96,11 @@ android {
         // set to true to turn off analysis progress reporting by lint
         quiet false
         explainIssues true
-        // if true, stop the gradle build if errors are found
-        abortOnError true
+
         // if true, only report errors
         ignoreWarnings false
 
         checkReleaseBuilds false
-
-        //disable 'MissingTranslation'
-
-        //disable 'InvalidPackage'
 
         // Turns off checks for the issue IDs you specify.
         //example: disable 'TypographyFractions','TypographyQuotes'
