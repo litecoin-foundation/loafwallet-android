@@ -108,11 +108,11 @@ public class FragmentMenu extends Fragment {
                 app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.fade_down);
             }
         }));
-        itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.ic_question_mark, new View.OnClickListener() {
+        itemList.add(new BRMenuItem(getString(R.string.MenuButton_support), R.drawable.faq_clear_disable, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(getActivity(), null);
+//                if (!BRAnimator.isClickAllowed()) return;
+//                BRAnimator.showSupportFragment(getActivity(), null);
             }
         }));
         itemList.add(new BRMenuItem(getString(R.string.MenuButton_settings), R.drawable.ic_settings, new View.OnClickListener() {

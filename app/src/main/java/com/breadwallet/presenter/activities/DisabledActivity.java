@@ -42,13 +42,16 @@ public class DisabledActivity extends BRActivity {
 //        attempts = (TextView) findViewById(R.id.attempts_label);
         resetButton = (Button) findViewById(R.id.reset_button);
 
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
-
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(DisabledActivity.this, BRConstants.walletDisabled);
+//                if (!BRAnimator.isClickAllowed()) return;
+//                BRAnimator.showSupportFragment(DisabledActivity.this, BRConstants.walletDisabled);
             }
         });
 

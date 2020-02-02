@@ -181,19 +181,19 @@ public class FragmentSend extends Fragment {
             }
         });
         keyboardIndex = signalLayout.indexOfChild(keyboardLayout);
-
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
-
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                Activity app = getActivity();
-                if (app == null) {
-                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
-                    return;
-                }
-                BRAnimator.showSupportFragment(app, BRConstants.send);
+//                if (!BRAnimator.isClickAllowed()) return;
+//                Activity app = getActivity();
+//                if (app == null) {
+//                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
+//                    return;
+//                }
+//               BRAnimator.showSupportFragment(app, BRConstants.send);
             }
         });
 

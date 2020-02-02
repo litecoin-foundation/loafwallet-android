@@ -107,18 +107,20 @@ public class FragmentTransactionItem extends Fragment {
         mTxHashLink = (TextView) rootView.findViewById(R.id.tx_hash_link);
         close = (ImageButton) rootView.findViewById(R.id.close_button);
 
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                Activity app = getActivity();
-                if (app == null) {
-                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
-                    return;
-                }
-                BRAnimator.showSupportFragment(app, BRConstants.transactionDetails);
+//                if (!BRAnimator.isClickAllowed()) return;
+//                Activity app = getActivity();
+//                if (app == null) {
+//                    Log.e(TAG, "onClick: app is null, can't start the webview with url: " + URL_SUPPORT);
+//                    return;
+//                }
+//                BRAnimator.showSupportFragment(app, BRConstants.transactionDetails);
             }
         });
 

@@ -45,9 +45,9 @@
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="@dimen/bread_margin"
-                android:background="@drawable/faq_question_white"
+                android:background="@drawable/faq_clear_disable"
+                android:clickable="false"
                 />
-
 
         </RelativeLayout>
 

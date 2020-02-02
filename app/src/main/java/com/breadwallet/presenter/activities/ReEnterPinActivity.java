@@ -51,12 +51,13 @@ public class ReEnterPinActivity extends BRActivity {
         pinLayout = (LinearLayout) findViewById(R.id.pinLayout);
 
         ImageButton faq = (ImageButton) findViewById(R.id.faq_button);
-
+        //TODO: all views are using the layout of this button. Views should be refactored without it
+        // Hiding until layouts are built.
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!BRAnimator.isClickAllowed()) return;
-                BRAnimator.showSupportFragment(app, BRConstants.setPin);
+//                if (!BRAnimator.isClickAllowed()) return;
+//                BRAnimator.showSupportFragment(app, BRConstants.setPin);
             }
         });
 

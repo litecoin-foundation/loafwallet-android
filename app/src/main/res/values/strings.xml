@@ -241,7 +241,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">Settings</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">Support</string>
+  <string name="MenuButton.support">Support:      litewallet@litecoinfoundation.net</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">Create New Wallet</string>
   <!-- Menu modal title -->
