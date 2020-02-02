@@ -80,7 +80,6 @@
         android:layout_marginEnd="@dimen/bread_margin"
         android:layout_marginTop="0dp"
         android:visibility="invisible"
-        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title"

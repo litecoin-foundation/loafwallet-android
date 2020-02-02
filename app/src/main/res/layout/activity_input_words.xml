@@ -30,7 +30,6 @@
         android:layout_marginEnd="@dimen/bread_margin"
         android:layout_marginTop="@dimen/bread_margin"
         android:visibility="invisible"
-        android:clickable="false"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />

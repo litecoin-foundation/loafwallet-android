@@ -46,7 +46,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_margin="@dimen/bread_margin"
                 android:visibility="invisible"
-                android:clickable="false"
                 />
 
         </RelativeLayout>

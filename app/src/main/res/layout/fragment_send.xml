@@ -68,7 +68,6 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="@dimen/bread_margin"
                 android:visibility="invisible"
-                android:clickable="false"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="81dp" />
         </RelativeLayout>

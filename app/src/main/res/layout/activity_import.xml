@@ -108,7 +108,6 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/bread_margin"
             android:visibility="invisible"
-            android:clickable="false"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="81dp"/>
 
