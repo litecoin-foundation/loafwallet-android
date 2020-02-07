@@ -216,7 +216,7 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        return String.format("%s/%d %s Android/%s", "Litewallet", versionNumber, cfnetwork, Build.VERSION.RELEASE, Locale.ENGLISH);
+        return String.format(Locale.ENGLISH, "%s/%d %s Android/%s", "Litewallet", versionNumber, cfnetwork, Build.VERSION.RELEASE);
     }
 
     public static String reverseHex(String hex) {
