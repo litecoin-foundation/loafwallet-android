@@ -19,7 +19,7 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 604
+        versionCode 603
         versionName "v1.18.3"
         multiDexEnabled true
 
