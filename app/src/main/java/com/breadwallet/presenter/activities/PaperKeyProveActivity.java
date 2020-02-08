@@ -93,15 +93,17 @@ public class PaperKeyProveActivity extends BRActivity {
 
             }
         }, 500);
- 
+
+
         wordEditSecond.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.button_submit || id == EditorInfo.IME_NULL) {
+                if (id == EditorInfo.IME_NULL
+                        || id == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
                     submit.performClick();
-                    return true;
-                }
-                return false;
+                return true;
             }
         });
 
