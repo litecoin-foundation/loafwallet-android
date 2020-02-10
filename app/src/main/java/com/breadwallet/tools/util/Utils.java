@@ -179,6 +179,7 @@ public class Utils {
 
     public static boolean isFingerprintEnrolled(Context app) {
         FingerprintManager fingerprintManager = (FingerprintManager) app.getSystemService(FINGERPRINT_SERVICE);
+        if (fingerprintManager == null) return false;
         // Device doesn't support fingerprint authentication
         return ActivityCompat.checkSelfPermission(app, Manifest.permission.USE_FINGERPRINT) == PackageManager.PERMISSION_GRANTED && fingerprintManager.isHardwareDetected() && fingerprintManager.hasEnrolledFingerprints();
     }
