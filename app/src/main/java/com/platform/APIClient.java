@@ -348,11 +348,11 @@ public class APIClient {
                     response.close();
                     return sendRequest(new Request.Builder().url(newLocation).get().build(), needsAuth, 0);
                 }
-                return new Response.Builder().code(500).request(request).body(ResponseBody.create(null, new byte[0])).protocol(Protocol.HTTP_1_1).build();
+                return new Response.Builder().code(500).request(request).body(ResponseBody.create(null, new byte[0])).message("").protocol(Protocol.HTTP_1_1).build();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return new Response.Builder().code(599).request(request).body(ResponseBody.create(null, new byte[0])).protocol(Protocol.HTTP_1_1).build();
+            return new Response.Builder().code(599).request(request).body(ResponseBody.create(null, new byte[0])).protocol(Protocol.HTTP_1_1).message("").build();
         }
 
         if (response.header("content-encoding") != null && response.header("content-encoding").equalsIgnoreCase("gzip")) {
