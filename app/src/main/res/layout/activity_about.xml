@@ -151,19 +151,18 @@
         app:layout_constraintBottom_toTopOf="@+id/info_text"/>
 
     <com.breadwallet.presenter.customviews.BRText
-        app:customTFont="BarlowSemiCondensed-Medium.ttf"
         android:id="@+id/info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/About.footer"
+        android:textAlignment="center"
+        app:customTFont="BarlowSemiCondensed-Medium.ttf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <com.breadwallet.presenter.customviews.BRText
         app:customTFont="BarlowSemiCondensed-Medium.ttf"

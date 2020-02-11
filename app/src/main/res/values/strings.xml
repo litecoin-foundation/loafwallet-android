@@ -5,7 +5,7 @@
   <!-- About screen blog label -->
   <string name="About.blog">Website</string>
   <!-- About screen footer -->
-  <string name="About.footer">Made by the global Litewallet team. Version %1$s</string>
+  <string name="About.footer">Made by the Litewallet Team of the Litecoin Foundation\n%1$s %2$s</string>
   <!-- About app version -->
   <string name="About.appVersion">%1$s</string>
   <!-- Privay Policy button label -->

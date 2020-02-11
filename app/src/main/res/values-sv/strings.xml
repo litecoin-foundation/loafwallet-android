@@ -5,7 +5,7 @@
   <!-- About screen blog label -->
   <string name="About.blog">Blogg</string>
   <!-- About screen footer -->
-  <string name="About.footer">Skapad av det lokala teamet för Loaf. Version %1$s</string>
+  <string name="About.footer">Tillverkad av Litewallet Team av Litecoin Foundation\n%1$s %2$s</string>
   <!-- Privay Policy button label -->
   <string name="About.privacy">Sekretesspolicy</string>
   <!-- About screen reddit label -->

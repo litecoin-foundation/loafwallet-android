@@ -52,9 +52,10 @@ public class AboutActivity extends BRActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        int verCode = pInfo != null ? pInfo.versionCode : 0;
-
-        infoText.setText(String.format(Locale.getDefault(), getString(R.string.About_footer), verCode));
+        String verName = pInfo != null ? pInfo.versionName : " ";
+        Long verCode = pInfo != null ? pInfo.getLongVersionCode() : 0;
+        String verCodeString = "("+Long.toString(verCode)+")";
+        infoText.setText(String.format(Locale.getDefault(), getString(R.string.About_footer), verName,verCodeString));
 
         redditShare = (ImageView) findViewById(R.id.reddit_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);
