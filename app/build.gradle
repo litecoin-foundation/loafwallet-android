@@ -20,11 +20,7 @@ android {
             android.signingConfigs.release.storePassword = props['storePassword']
             android.signingConfigs.release.keyAlias = props['keyAlias']
             android.signingConfigs.release.keyPassword = props['keyPassword']
-        } else {
-            android.buildTypes.release.signingConfig = null
         }
-    }else {
-        android.buildTypes.release.signingConfig = null
     }
 
     compileSdkVersion = 29
