@@ -105,7 +105,7 @@ public class IntroActivity extends BRActivity implements Serializable {
             e.printStackTrace();
         }
         String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format("%1$s",verName));
+        versionText.setText(String.format(Locale.US, "%1$s", verName));
 
         if (Utils.isEmulatorOrDebug(this))
             Utils.printPhoneSpecs();

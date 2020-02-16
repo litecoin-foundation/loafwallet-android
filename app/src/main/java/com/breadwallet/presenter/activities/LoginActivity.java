@@ -130,7 +130,7 @@ public class LoginActivity extends BRActivity {
             e.printStackTrace();
         }
         String verName = pInfo != null ? pInfo.versionName : " ";
-        versionText.setText(String.format("%1$s",verName));
+        versionText.setText(String.format(Locale.US, "%1$s", verName));
 
         setUpOfflineButtons();
 

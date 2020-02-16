@@ -53,7 +53,7 @@ public class AboutActivity extends BRActivity {
             e.printStackTrace();
         }
         String verName = pInfo != null ? pInfo.versionName : " ";
-        infoText.setText(String.format(getString(R.string.About_footer), verName));
+        infoText.setText(getString(R.string.About_footer, verName));
 
         redditShare = (ImageView) findViewById(R.id.reddit_share_button);
         twitterShare = (ImageView) findViewById(R.id.twitter_share_button);

@@ -243,7 +243,7 @@
   <!-- Menu button title -->
   <string name="MenuButton.settings">Instellingen</string>
   <!-- Menu button title -->
-  <string name="MenuButton.support">Ondersteunin:      litewallet@litecoinfoundation.netg</string>
+  <string name="MenuButton.support">Ondersteuning:      litewallet@litecoinfoundation.net</string>
   <!-- button label -->
   <string name="MenuViewController.createButton">Nieuwe Portemonnee Creëren</string>
   <!-- Menu modal title -->
