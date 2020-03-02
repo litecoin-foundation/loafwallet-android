@@ -5,13 +5,6 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
-
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,6 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
+
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRButton;
 import com.breadwallet.presenter.customviews.BRDialogView;
@@ -42,19 +42,18 @@ import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
-import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.security.BRSender;
+import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
-import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.BRCurrency;
+import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
 
 import static com.breadwallet.tools.security.BitcoinUrlHandler.getRequestFromString;
-import static com.platform.HTTPServer.URL_SUPPORT;
 
 
 /**
@@ -163,11 +162,6 @@ public class FragmentSend extends Fragment {
         isoText.requestLayout();
 
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
-        signalLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
 
         showFeeSelectionButtons(feeButtonsShown);
 
@@ -428,10 +422,10 @@ public class FragmentSend extends Fragment {
                 BigDecimal litoshiAmount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount);
 
                 BRSender.getInstance().sendTransaction(getContext(),
-                            new PaymentItem(new String[]{BRConstants.DONATION_ADDRESS1},
-                                    null, litoshiAmount.longValue(),
-                                    null,
-                                    false, BRConstants.DONATION_MEMO));
+                        new PaymentItem(new String[]{BRConstants.DONATION_ADDRESS1},
+                                null, litoshiAmount.longValue(),
+                                null,
+                                false, BRConstants.DONATION_MEMO));
             }
         });
 
