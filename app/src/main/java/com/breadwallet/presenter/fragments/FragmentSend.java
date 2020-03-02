@@ -99,7 +99,6 @@ public class FragmentSend extends Fragment {
     private EditText amountEdit;
     private TextView balanceText;
     private TextView feeText;
-    private TextView donateText;
     private ImageView edit;
     private long curBalance;
     private String selectedIso;
@@ -143,7 +142,6 @@ public class FragmentSend extends Fragment {
         amountEdit = (EditText) rootView.findViewById(R.id.amount_edit);
         balanceText = (TextView) rootView.findViewById(R.id.balance_text);
         feeText = (TextView) rootView.findViewById(R.id.fee_text);
-        donateText = (TextView) rootView.findViewById(R.id.donateLabel);
         edit = (ImageView) rootView.findViewById(R.id.edit);
         isoButton = (Button) rootView.findViewById(R.id.iso_button);
         keyboardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
@@ -204,7 +202,6 @@ public class FragmentSend extends Fragment {
                     amountEdit.setTextSize(24);
                     balanceText.setVisibility(View.VISIBLE);
                     feeText.setVisibility(View.VISIBLE);
-                    donateText.setVisibility(View.VISIBLE);
                     edit.setVisibility(View.VISIBLE);
                     isoText.setTextColor(getContext().getColor(R.color.almost_black));
                     isoText.setText(BRCurrency.getSymbolByIso(getActivity(), selectedIso));
@@ -430,10 +427,6 @@ public class FragmentSend extends Fragment {
                 BigDecimal bigAmount = new BigDecimal(BRConstants.DONATION_AMOUNT_BASE);
                 BigDecimal litoshiAmount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount);
 
-                if (litoshiAmount.longValue() > BRWalletManager.getInstance().getBalance(getActivity())) {
-                     SpringAnimator.donationFailShakeAnimation(getActivity(), donateText);
-                }
-
                 BRSender.getInstance().sendTransaction(getContext(),
                             new PaymentItem(new String[]{BRConstants.DONATION_ADDRESS1},
                                     null, litoshiAmount.longValue(),
@@ -636,10 +629,11 @@ public class FragmentSend extends Fragment {
         setAmount();
         String balanceString;
         String iso = selectedIso;
+        String currencySymbol = BRCurrency.getSymbolByIso(getActivity(), selectedIso);
         curBalance = BRWalletManager.getInstance().getBalance(getActivity());
         if (!amountLabelOn)
-            isoText.setText(BRCurrency.getSymbolByIso(getActivity(), selectedIso));
-        isoButton.setText(String.format("%s(%s)", BRCurrency.getCurrencyName(getActivity(), selectedIso), BRCurrency.getSymbolByIso(getActivity(), selectedIso)));
+            isoText.setText(currencySymbol);
+        isoButton.setText(String.format("%s(%s)", BRCurrency.getCurrencyName(getActivity(), selectedIso), currencySymbol));
         //Balance depending on ISO
         long satoshis = (Utils.isNullOrEmpty(tmpAmount) || tmpAmount.equalsIgnoreCase(".")) ? 0 :
                 (selectedIso.equalsIgnoreCase("btc") ? BRExchange.getSatoshisForBitcoin(getActivity(), new BigDecimal(tmpAmount)).longValue() : BRExchange.getSatoshisFromAmount(getActivity(), selectedIso, new BigDecimal(tmpAmount)).longValue());
@@ -681,6 +675,7 @@ public class FragmentSend extends Fragment {
         balanceString = String.format(getString(R.string.Send_balance), formattedBalance);
         balanceText.setText(String.format("%s", balanceString));
         feeText.setText(String.format(getString(R.string.Send_fee), aproxFee));
+        donate.setText(getString(R.string.Donate_titleLabel, currencySymbol));
         amountLayout.requestLayout();
     }
 
