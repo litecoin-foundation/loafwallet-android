@@ -621,7 +621,6 @@ public class FragmentSend extends Fragment {
         if (getActivity() == null) return;
         String tmpAmount = amountBuilder.toString();
         setAmount();
-        String balanceString;
         String iso = selectedIso;
         String currencySymbol = BRCurrency.getSymbolByIso(getActivity(), selectedIso);
         curBalance = BRWalletManager.getInstance().getBalance(getActivity());
@@ -666,8 +665,7 @@ public class FragmentSend extends Fragment {
             if (!amountLabelOn)
                 isoText.setTextColor(getContext().getColor(R.color.almost_black));
         }
-        balanceString = String.format(getString(R.string.Send_balance), formattedBalance);
-        balanceText.setText(String.format("%s", balanceString));
+        balanceText.setText(getString(R.string.Send_balance, formattedBalance));
         feeText.setText(String.format(getString(R.string.Send_fee), aproxFee));
         donate.setText(getString(R.string.Donate_titleLabel, currencySymbol));
         amountLayout.requestLayout();
