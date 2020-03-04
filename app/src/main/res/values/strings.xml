@@ -742,5 +742,11 @@
   <string name="Donate.titleLabel">Donate to the Litecoin Foundation (%1$s)</string>
 
   <string name="Donate.tapLabel">%1 %2($s)</string>
+  <string name="Confirmation.processingAndDonationTime">Processing time: These transactions will take %1$s minutes to process.</string>
+    <string name="Donate.title.confirmation">Confirm Donation</string>
+  <string name="Confirmation.donateLabel">Amount to Donate:</string>
+  <string name="Confirmation.staticAddressLabel">Address:</string>
+  <string name="Donate.word">Donate</string>
+  <string name="Donate.toThe">"Donate to the "</string>
 
 </resources>

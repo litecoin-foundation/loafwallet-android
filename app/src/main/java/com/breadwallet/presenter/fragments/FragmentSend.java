@@ -413,19 +413,7 @@ public class FragmentSend extends Fragment {
                 if (!BRAnimator.isClickAllowed()) {
                     return;
                 }
-
-                //TODO: leaving this for a dynamic donation mechanism will refactor method (getSatoshisFromAmount) then
-                String iso = selectedIso;
-
-                //get amount in satoshis from any isos
-                BigDecimal bigAmount = new BigDecimal(BRConstants.DONATION_AMOUNT_BASE);
-                BigDecimal litoshiAmount = BRExchange.getSatoshisFromAmount(getActivity(), iso, bigAmount);
-
-                BRSender.getInstance().sendTransaction(getContext(),
-                        new PaymentItem(new String[]{BRConstants.DONATION_ADDRESS1},
-                                null, litoshiAmount.longValue(),
-                                null,
-                                false, BRConstants.DONATION_MEMO));
+                BRAnimator.showDynamicDonationFragment(getActivity());
             }
         });
 
@@ -668,6 +656,7 @@ public class FragmentSend extends Fragment {
         balanceText.setText(getString(R.string.Send_balance, formattedBalance));
         feeText.setText(String.format(getString(R.string.Send_fee), aproxFee));
         donate.setText(getString(R.string.Donate_titleLabel, currencySymbol));
+        donate.setEnabled(curBalance >= BRConstants.DONATION_AMOUNT * 2);
         amountLayout.requestLayout();
     }
 
