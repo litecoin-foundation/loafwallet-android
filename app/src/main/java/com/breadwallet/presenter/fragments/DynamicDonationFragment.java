@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -68,19 +67,6 @@ public class DynamicDonationFragment extends Fragment {
 
         chosenAddress = BRConstants.DONATION_ADDRESSES[0];
         addressVal.setText(chosenAddress.second);
-
-        NumberPicker donationAddressesPicker = view.findViewById(R.id.donationAddressesPicker);
-        donationAddressesPicker.setMinValue(0);
-        donationAddressesPicker.setWrapSelectorWheel(true);
-        donationAddressesPicker.setDisplayedValues(addresses());
-        donationAddressesPicker.setMaxValue(BRConstants.DONATION_ADDRESSES.length - 1);
-        donationAddressesPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                chosenAddress = BRConstants.DONATION_ADDRESSES[newVal];
-                addressVal.setText(chosenAddress.second);
-            }
-        });
 
         Spinner spinner = view.findViewById(R.id.spinnerAddresses);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -159,12 +145,12 @@ public class DynamicDonationFragment extends Fragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                //NO-OP
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                //NO-OP
             }
         });
 
@@ -186,9 +172,9 @@ public class DynamicDonationFragment extends Fragment {
     }
 
     private String[] addresses() {
-        String[] addresses = new String[2];
+        String[] addresses = new String[BRConstants.DONATION_ADDRESSES.length];
         for (int i = 0; i < BRConstants.DONATION_ADDRESSES.length; i++) {
-            addresses[i] = String.valueOf(BRConstants.DONATION_ADDRESSES[i].first);
+            addresses[i] = getString(R.string.Donate_toThe) + BRConstants.DONATION_ADDRESSES[i].first;
         }
         return addresses;
     }
