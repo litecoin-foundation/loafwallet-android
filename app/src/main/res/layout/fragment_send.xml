@@ -403,7 +403,7 @@
                 android:minHeight="50dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="@string/Donate.titleLabel"
+                tools:text="@string/Donate.title"
                 android:textColor="@color/light_gray"
                 android:textSize="18sp"
                 app:buttonType="2"

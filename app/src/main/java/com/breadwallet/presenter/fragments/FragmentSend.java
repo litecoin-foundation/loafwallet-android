@@ -655,7 +655,7 @@ public class FragmentSend extends Fragment {
         }
         balanceText.setText(getString(R.string.Send_balance, formattedBalance));
         feeText.setText(String.format(getString(R.string.Send_fee), aproxFee));
-        donate.setText(getString(R.string.Donate_titleLabel, currencySymbol));
+        donate.setText(getString(R.string.Donate_title, currencySymbol));
         donate.setEnabled(curBalance >= BRConstants.DONATION_AMOUNT * 2);
         amountLayout.requestLayout();
     }
