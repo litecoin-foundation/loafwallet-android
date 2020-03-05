@@ -71,22 +71,43 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:descendantFocusability="blocksDescendants"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/addressVal"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
             app:layout_constraintTop_toBottomOf="@id/addressVal" />
+
+        <Spinner
+            android:id="@+id/spinnerAddresses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/addressVal"
+            app:layout_constraintStart_toEndOf="@id/donateToTheLbl"
+            app:layout_constraintTop_toBottomOf="@id/addressVal" />
+
+        <com.breadwallet.presenter.customviews.BRText
+            android:id="@+id/donateToTheLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Donate.toThe"
+            android:textSize="15sp"
+            app:customTFont="BarlowSemiCondensed-Light.ttf"
+            app:layout_constraintBottom_toBottomOf="@id/spinnerAddresses"
+            app:layout_constraintStart_toStartOf="@+id/addressLbl"
+            app:layout_constraintTop_toTopOf="@id/spinnerAddresses" />
 
         <com.breadwallet.presenter.customviews.BRText
             android:id="@+id/processingTimeLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:customTFont="BarlowSemiCondensed-Light.ttf"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="@+id/addressVal"
             app:layout_constraintStart_toStartOf="@+id/addressLbl"
-            app:layout_constraintTop_toBottomOf="@id/donationAddressesPicker"
+            app:layout_constraintTop_toBottomOf="@id/spinnerAddresses"
             tools:text="@string/Confirmation.processingAndDonationTime" />
-
-
+        
         <com.breadwallet.presenter.customviews.BRText
             android:id="@+id/amountLbl"
             android:layout_width="wrap_content"
@@ -139,7 +160,6 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/feeLbl"
             tools:text="$0.00 (L 0.000001)" />
-
 
         <com.breadwallet.presenter.customviews.BRText
             android:id="@+id/totalLbl"
@@ -202,7 +222,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelBut"
             app:layout_constraintTop_toTopOf="@+id/cancelBut" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,10 +6,13 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -78,6 +81,23 @@ public class DynamicDonationFragment extends Fragment {
                 addressVal.setText(chosenAddress.second);
             }
         });
+
+        Spinner spinner = view.findViewById(R.id.spinnerAddresses);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chosenAddress = BRConstants.DONATION_ADDRESSES[position];
+                addressVal.setText(chosenAddress.second);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //NO-OP
+            }
+        });
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, addresses());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         TextView processingTimeLbl = view.findViewById(R.id.processingTimeLbl);
         processingTimeLbl.setText(getString(R.string.Confirmation_processingAndDonationTime, "2.5-5"));
@@ -168,7 +188,7 @@ public class DynamicDonationFragment extends Fragment {
     private String[] addresses() {
         String[] addresses = new String[2];
         for (int i = 0; i < BRConstants.DONATION_ADDRESSES.length; i++) {
-            addresses[i] = getString(R.string.Donate_toThe) + BRConstants.DONATION_ADDRESSES[i].first;
+            addresses[i] = String.valueOf(BRConstants.DONATION_ADDRESSES[i].first);
         }
         return addresses;
     }
