@@ -199,19 +199,13 @@
 
             <com.breadwallet.presenter.customviews.BRButton
                 android:id="@+id/iso_button"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                style="@style/Send_ActionButStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="4dp"
-                android:minHeight="40dp"
                 android:text="iso"
-                android:textColor="@color/light_gray"
                 android:textSize="18sp"
                 app:buttonType="2"
                 app:isBreadButton="true"
@@ -233,7 +227,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret
             android:id="@+id/fee_buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
