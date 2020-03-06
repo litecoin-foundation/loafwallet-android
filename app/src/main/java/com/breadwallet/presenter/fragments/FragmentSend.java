@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -29,7 +31,6 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.breadwallet.R;
-import com.breadwallet.presenter.customviews.BRButton;
 import com.breadwallet.presenter.customviews.BRDialogView;
 import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
@@ -42,6 +43,7 @@ import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.manager.FontManager;
 import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.threads.BRExecutor;
@@ -106,8 +108,6 @@ public class FragmentSend extends Fragment {
     private LinearLayout keyboardLayout;
     private ImageButton close;
     private ConstraintLayout amountLayout;
-    private BRButton regular;
-    private BRButton economy;
     private BRLinearLayoutWithCaret feeLayout;
     private boolean feeButtonsShown = false;
     private BRText feeDescription;
@@ -149,8 +149,6 @@ public class FragmentSend extends Fragment {
         feeDescription = (BRText) rootView.findViewById(R.id.fee_description);
         warningText = (BRText) rootView.findViewById(R.id.warning_text);
 
-        regular = (BRButton) rootView.findViewById(R.id.left_button);
-        economy = (BRButton) rootView.findViewById(R.id.right_button);
         close = (ImageButton) rootView.findViewById(R.id.close_button);
         selectedIso = BRSharedPrefs.getPreferredLTC(getContext()) ? "LTC" : BRSharedPrefs.getIso(getContext());
 
@@ -162,6 +160,8 @@ public class FragmentSend extends Fragment {
         isoText.requestLayout();
 
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
+
+        setupFeesSelector(rootView);
 
         showFeeSelectionButtons(feeButtonsShown);
 
@@ -178,11 +178,52 @@ public class FragmentSend extends Fragment {
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
         showKeyboard(false);
-        setButton(true);
 
         signalLayout.setLayoutTransition(BRAnimator.getDefaultTransition());
 
         return rootView;
+    }
+
+    private void setupFeesSelector(View rootView) {
+        RadioGroup feesSegment = rootView.findViewById(R.id.fees_segment);
+        for (int i = 0; i < feesSegment.getChildCount(); i++) {
+            FontManager.setCustomFont(getContext(), (RadioButton) feesSegment.getChildAt(i), "BarlowSemiCondensed-Medium.ttf");
+        }
+        feesSegment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                onFeeTypeSelected(checkedId);
+            }
+        });
+        onFeeTypeSelected(R.id.regular_fee_but);
+    }
+
+    private void onFeeTypeSelected(int checkedId) {
+        switch (checkedId) {
+            case R.id.regular_fee_but:
+                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getFeePerKb(getContext()), false);
+                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_regularTime)));
+                warningText.setVisibility(View.GONE);
+                break;
+            case R.id.economy_fee_but:
+                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getEconomyFeePerKb(getContext()), false);
+                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_economyTime)));
+                warningText.setText(R.string.FeeSelector_economyWarning);
+                warningText.setTextColor(getResources().getColor(R.color.red_text, null));
+                warningText.setVisibility(View.VISIBLE);
+                break;
+            case R.id.luxury_fee_but:
+                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getEconomyFeePerKb(getContext()), false);
+                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_luxuryTime)));
+                warningText.setText(R.string.FeeSelector_luxuryMessage);
+                warningText.setTextColor(getResources().getColor(R.color.light_gray, null));
+                warningText.setVisibility(View.VISIBLE);
+                // TODO: handle is  isEconomyFee and LuxuryFee
+                break;
+            default:
+                break;
+        }
+        updateText();
     }
 
     private void setListeners() {
@@ -457,20 +498,7 @@ public class FragmentSend extends Fragment {
             }
         });
 
-        regular.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setButton(true);
-            }
-        });
-        economy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setButton(false);
-            }
-        });
 //        updateText();
-
     }
 
     private void showKeyboard(boolean b) {
@@ -478,14 +506,12 @@ public class FragmentSend extends Fragment {
 
         if (!b) {
             signalLayout.removeView(keyboardLayout);
-
         } else {
             Utils.hideKeyboard(getActivity());
             if (signalLayout.indexOfChild(keyboardLayout) == -1)
                 signalLayout.addView(keyboardLayout, curIndex);
             else
                 signalLayout.removeView(keyboardLayout);
-
         }
     }
 
@@ -545,7 +571,6 @@ public class FragmentSend extends Fragment {
     public void onResume() {
         super.onResume();
         loadMetaData();
-
     }
 
     @Override
@@ -683,7 +708,6 @@ public class FragmentSend extends Fragment {
             signalLayout.removeView(feeLayout);
         } else {
             signalLayout.addView(feeLayout, signalLayout.indexOfChild(amountLayout) + 1);
-
         }
     }
 
@@ -701,30 +725,6 @@ public class FragmentSend extends Fragment {
             }
         }
         amountEdit.setText(newAmount.toString());
-    }
-
-    private void setButton(boolean isRegular) {
-        if (isRegular) {
-            isEconomyFee = false;
-            BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getFeePerKb(getContext()), false);
-            regular.setTextColor(getContext().getColor(R.color.white));
-            regular.setBackground(getContext().getDrawable(R.drawable.b_half_left_blue));
-            economy.setTextColor(getContext().getColor(R.color.dark_blue));
-            economy.setBackground(getContext().getDrawable(R.drawable.b_half_right_blue_stroke));
-            feeDescription.setText(String.format(getString(R.string.FeeSelector_estimatedDeliver), getString(R.string.FeeSelector_regularTime)));
-            warningText.getLayoutParams().height = 0;
-        } else {
-            isEconomyFee = true;
-            BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getEconomyFeePerKb(getContext()), false);
-            regular.setTextColor(getContext().getColor(R.color.dark_blue));
-            regular.setBackground(getContext().getDrawable(R.drawable.b_half_left_blue_stroke));
-            economy.setTextColor(getContext().getColor(R.color.white));
-            economy.setBackground(getContext().getDrawable(R.drawable.b_half_right_blue));
-            feeDescription.setText(String.format(getString(R.string.FeeSelector_estimatedDeliver), getString(R.string.FeeSelector_economyTime)));
-            warningText.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        }
-        warningText.requestLayout();
-        updateText();
     }
 
     private boolean isInputValid(String input) {
