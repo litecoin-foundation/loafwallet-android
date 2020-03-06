@@ -131,7 +131,7 @@ public class BRConstants {
                     Pair.create("Litewallet Hardware Fundraiser", "MVRj1whQ8hqcpffjRxLLCJG1mD27V9YygY"),
                     Pair.create("Litecoin Foundation", "MDPqwDf9eUErGLcZNt1HN9HqnbFCSCSRme")
             };
-    public static final long DONATION_AMOUNT = 180_000;
+    public static final long DONATION_AMOUNT = 1_800_000;
 
     /**
      * Support Center article ids.
