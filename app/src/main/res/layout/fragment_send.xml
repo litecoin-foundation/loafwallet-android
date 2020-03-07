@@ -348,7 +348,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:background="@android:color/transparent"
-                android:minHeight="60dp"
+                android:minHeight="80dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textColor="@color/light_gray"
