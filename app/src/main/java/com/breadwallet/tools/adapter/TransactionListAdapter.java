@@ -2,11 +2,6 @@ package com.breadwallet.tools.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -17,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.customviews.BRText;
@@ -36,6 +35,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import timber.log.Timber;
 
 
 /**
@@ -368,7 +369,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         filter(query, switches);
     }
 
-    public void resetFilter(){
+    public void resetFilter() {
         itemFeed = backUpFeed;
         notifyDataSetChanged();
     }
@@ -422,7 +423,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         itemFeed = filteredList;
         notifyDataSetChanged();
 
-        Log.e(TAG, "filter: " + query + " took: " + (System.currentTimeMillis() - start));
+        Timber.d("filter: %s took: %s", query, System.currentTimeMillis() - start);
     }
 
     private class TxHolder extends RecyclerView.ViewHolder {
