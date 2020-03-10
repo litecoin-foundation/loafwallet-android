@@ -192,6 +192,7 @@ public class BRApiManager {
         }
         try {
             JSONObject obj = new JSONObject(jsonString);
+            // TODO: Refactor when mobile-api v0.4.0 is in prod
             long regularFee = obj.optLong("fee_per_kb");
             long economyFee = obj.optLong("fee_per_kb_economy");
             long luxuryFee = obj.optLong("fee_per_kb_luxury");
