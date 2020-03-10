@@ -69,7 +69,7 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
-        AnalyticsManager.INSTANCE.initWith(getBreadContext());
+        AnalyticsManager.getInstance().initWith(getBreadContext());
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();

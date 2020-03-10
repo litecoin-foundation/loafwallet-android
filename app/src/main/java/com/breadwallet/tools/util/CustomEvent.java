@@ -1,5 +1,5 @@
 package com.breadwallet.tools.util;
- 
+
 public enum CustomEvent {
     _20191105_AL("APP_LAUNCHED")
     , _20191105_VSC("VISIT_SEND_CONTROLLER")
