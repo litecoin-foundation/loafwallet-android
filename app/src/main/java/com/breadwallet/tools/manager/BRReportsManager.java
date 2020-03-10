@@ -1,9 +1,8 @@
 package com.breadwallet.tools.manager;
 
 import android.util.Log;
-
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * BreadWallet

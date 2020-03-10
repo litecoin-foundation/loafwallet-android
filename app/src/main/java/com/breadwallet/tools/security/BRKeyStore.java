@@ -25,6 +25,7 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.manager.FirebaseManager;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BytesUtil;
@@ -54,7 +55,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Handler;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -65,6 +65,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * BreadWallet
@@ -171,7 +173,6 @@ public class BRKeyStore {
 //        Assert.assertEquals(AUTH_DURATION_SEC, 300);
     }
 
-
     private synchronized static boolean _setData(Context context, byte[] data, String alias, String alias_file, String alias_iv,
                                                  int request_code, boolean auth_required) throws UserNotAuthenticatedException {
 //        Log.e(TAG, "_setData: " + alias);
@@ -260,7 +261,7 @@ public class BRKeyStore {
     }
 
     private synchronized static byte[] _getData(final Context context, String alias, String alias_file, String alias_iv, int request_code)
-            throws UserNotAuthenticatedException {
+            throws UserNotAuthenticatedException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
         validateGet(alias, alias_file, alias_iv);//validate entries
         KeyStore keyStore = null;
 
@@ -372,18 +373,17 @@ public class BRKeyStore {
                 BRReportsManager.reportBug(ex);
                 throw new RuntimeException(e.getMessage());
             } else {
-                BRReportsManager.reportBug(e);
-                throw new RuntimeException(e.getMessage());
+                RuntimeException runtimeException = new RuntimeException(e.getMessage());
+                FirebaseManager.
+
+            reportRuntimeException(runtimeException);
             }
 
         } catch (UnrecoverableKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException e) {
             /** if for any other reason the keystore fails, crash! */
             Log.e(TAG, "getData: error: " + e.getClass().getSuperclass().getName());
-            BRReportsManager.reportBug(e);
-            throw new RuntimeException(e.getMessage());
-        } catch (BadPaddingException | IllegalBlockSizeException | NoSuchProviderException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage());
+            RuntimeException runtimeException = new RuntimeException(e.getMessage());
+            FirebaseManager.INSTANCE.reportRuntimeException(runtimeException);
         } finally {
             lock.unlock();
         }
