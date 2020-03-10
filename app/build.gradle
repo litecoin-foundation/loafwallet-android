@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'com.google.gms.google-services'
+
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     signingConfigs {
@@ -207,9 +207,6 @@ dependencies {
 
     // Firebase Crashlytics NDK
     implementation 'com.google.firebase:firebase-crashlytics-ndk:17.0.0-beta01'
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
 
 
 }

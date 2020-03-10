@@ -167,4 +167,5 @@ public class BRConstants {
 
     private BRConstants() {
     }
+
 }

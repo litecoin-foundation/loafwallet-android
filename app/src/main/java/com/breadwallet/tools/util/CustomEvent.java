@@ -1,8 +1,6 @@
-package com.breadwallet.tools.util
-
-enum class CustomEvent(
-val itemName: String)
-{
+package com.breadwallet.tools.util;
+ 
+public enum CustomEvent {
     _20191105_AL("APP_LAUNCHED")
     , _20191105_VSC("VISIT_SEND_CONTROLLER")
     , _20202116_VRC("VISIT_RECEIVE_CONTROLLER")
@@ -24,5 +22,22 @@ val itemName: String)
     , _20200217_DLWB("DID_LOGIN_WITH_BIOMETRICS")
     , _20200223_DD("DID_DONATE")
     , _20200225_DCD("DID_CANCEL_DONATE")
-    , _20200301_DUDFPK("DID_USE_DEFAULT_FEE_PER_KB")
+    , _20200301_DUDFPK("DID_USE_DEFAULT_FEE_PER_KB");
+
+    private final String text;
+
+    /**
+     * @param text
+     */
+    private CustomEvent(final String text) {
+        this.text = text;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Enum#toString()
+     */
+    @Override
+    public String toString() {
+        return text;
+    }
 }
