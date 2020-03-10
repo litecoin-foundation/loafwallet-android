@@ -1,5 +1,4 @@
 package com.breadwallet;
-package com.breadwallet.tools.manager
 
 import android.app.Activity;
 import android.app.Application;
@@ -13,6 +12,7 @@ import android.view.WindowManager;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
 
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.Utils;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
@@ -69,7 +69,7 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
-        FirebaseManager.INSTANCE.initWith(getBreadContext());
+        AnalyticsManager.INSTANCE.initWith(getBreadContext());
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();

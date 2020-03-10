@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import com.breadwallet.tools.threads.BRExecutor
 import com.breadwallet.tools.util.CustomEvent
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 /**
@@ -34,36 +33,29 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 object FirebaseManager {
 
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var firebaseCrashlytics: FirebaseCrashlytics
 
     fun initWith(context: Context) {
-        firebaseAnalytics = FirebaseAnalytics.getInstance(context)
         firebaseCrashlytics = FirebaseCrashlytics.getInstance()
     }
 
-    fun logEvent(itemName: CustomEvent, params: Bundle?) {
-        val params = Bundle()
-        firebaseAnalytics.logEvent(itemName.toString(), params)
-    }
-
     fun reportRuntimeException(er: RuntimeException?) {
-        try {
-            FirebaseCrashlytics.getInstance().recordException(er!!)
-        } catch (e: Exception) {
-            firebaseAnalytics.logEvent(CustomEvent._20200112_ERR.toString(), null)
-        }
+//        try {
+//            FirebaseCrashlytics.getInstance().recordException(er!!)
+//        } catch (e: Exception) {
+//            firebaseAnalytics.logEvent(CustomEvent._20200112_ERR.toString(), null)
+//        }
     }
 
     fun reportException(throwable: Throwable) {
-        firebaseCrashlytics.recordException(throwable)
+       // firebaseCrashlytics.recordException(throwable)
     }
 
     fun reportException(er: Exception?) {
-        try {
-            FirebaseCrashlytics.getInstance().recordException(er!!)
-        } catch (e: Exception) {
-            firebaseAnalytics.logEvent(CustomEvent._20200112_ERR.toString(), null)
-        }
+//        try {
+//            FirebaseCrashlytics.getInstance().recordException(er!!)
+//        } catch (e: Exception) {
+//            firebaseAnalytics.logEvent(CustomEvent._20200112_ERR.toString(), null)
+//        }
     }
 }
