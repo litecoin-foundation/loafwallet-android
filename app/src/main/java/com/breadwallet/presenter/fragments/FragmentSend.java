@@ -23,8 +23,10 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.transition.AutoTransition;
@@ -43,6 +45,7 @@ import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.animation.SpringAnimator;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
+import com.breadwallet.tools.manager.FeeManager;
 import com.breadwallet.tools.manager.FontManager;
 import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
@@ -112,7 +115,6 @@ public class FragmentSend extends Fragment {
     private boolean feeButtonsShown = false;
     private BRText feeDescription;
     private BRText warningText;
-    public static boolean isEconomyFee;
     private boolean amountLabelOn = true;
 
     private static String savedMemo;
@@ -199,31 +201,38 @@ public class FragmentSend extends Fragment {
     }
 
     private void onFeeTypeSelected(int checkedId) {
+        FeeManager feeManager = FeeManager.getInstance();
         switch (checkedId) {
             case R.id.regular_fee_but:
-                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getFeePerKb(getContext()), false);
-                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_regularTime)));
-                warningText.setVisibility(View.GONE);
+                feeManager.setFeeType(FeeManager.REGULAR);
+                BRWalletManager.getInstance().setFeePerKb(feeManager.getFees().regular);
+                setFeeInformation(R.string.FeeSelector_regularTime, 0, 0, View.GONE);
                 break;
             case R.id.economy_fee_but:
-                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getEconomyFeePerKb(getContext()), false);
-                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_economyTime)));
-                warningText.setText(R.string.FeeSelector_economyWarning);
-                warningText.setTextColor(getResources().getColor(R.color.red_text, null));
-                warningText.setVisibility(View.VISIBLE);
+                feeManager.setFeeType(FeeManager.ECONOMY);
+                BRWalletManager.getInstance().setFeePerKb(feeManager.getFees().economy);
+                setFeeInformation(R.string.FeeSelector_economyTime, R.string.FeeSelector_economyWarning, R.color.red_text, View.VISIBLE);
                 break;
             case R.id.luxury_fee_but:
-                BRWalletManager.getInstance().setFeePerKb(BRSharedPrefs.getEconomyFeePerKb(getContext()), false);
-                feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(R.string.FeeSelector_luxuryTime)));
-                warningText.setText(R.string.FeeSelector_luxuryMessage);
-                warningText.setTextColor(getResources().getColor(R.color.light_gray, null));
-                warningText.setVisibility(View.VISIBLE);
-                // TODO: handle is  isEconomyFee and LuxuryFee
+                feeManager.setFeeType(FeeManager.LUXURY);
+                BRWalletManager.getInstance().setFeePerKb(feeManager.getFees().luxury);
+                setFeeInformation(R.string.FeeSelector_luxuryTime, R.string.FeeSelector_luxuryMessage, R.color.light_gray, View.VISIBLE);
                 break;
             default:
                 break;
         }
         updateText();
+    }
+
+    private void setFeeInformation(@StringRes int deliveryTime, @StringRes int warningStringId, @ColorRes int warningColorId, int visibility) {
+        feeDescription.setText(getString(R.string.FeeSelector_estimatedDeliver, getString(deliveryTime)));
+        if (warningStringId != 0) {
+            warningText.setText(warningStringId);
+        }
+        if (warningColorId != 0) {
+            warningText.setTextColor(getResources().getColor(warningColorId, null));
+        }
+        warningText.setVisibility(visibility);
     }
 
     private void setListeners() {
@@ -564,7 +573,7 @@ public class FragmentSend extends Fragment {
                 }
             }
         });
-        isEconomyFee = false;
+        FeeManager.getInstance().resetFeeType();
     }
 
     @Override
