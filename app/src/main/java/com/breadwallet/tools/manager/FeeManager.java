@@ -3,6 +3,7 @@ package com.breadwallet.tools.manager;
 import androidx.annotation.StringDef;
 
 import com.breadwallet.presenter.entities.Fee;
+import com.breadwallet.tools.util.CustomEvent;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -40,6 +41,7 @@ public final class FeeManager {
     private void initWithDefaultValues() {
         currentFees = defaultValues;
         feeType = REGULAR;
+        //AnalyticsManager.getInstance().logEvent(CustomEvent._20200301_DUDFPK, null);
     }
 
     private FeeManager() {

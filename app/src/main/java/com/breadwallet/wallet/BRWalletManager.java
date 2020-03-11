@@ -37,6 +37,7 @@ import com.breadwallet.presenter.interfaces.BROnSignalCompletion;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.animation.SpringAnimator;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRNotificationManager;
 import com.breadwallet.tools.manager.BRReportsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
@@ -51,6 +52,7 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
 import com.breadwallet.tools.util.Bip39Reader;
+import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.TypesConverter;
 import com.breadwallet.tools.util.Utils;
 import com.platform.entities.WalletInfo;
@@ -574,6 +576,7 @@ public class BRWalletManager {
                     }
                 });
         } finally {
+            //AnalyticsManager.getInstance().logEvent(CustomEvent._20200111_WNI, null);
             itInitiatingWallet = false;
         }
     }

@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
 
 import com.breadwallet.tools.manager.AnalyticsManager;
+import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.Utils;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
@@ -69,7 +71,8 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
-        AnalyticsManager.getInstance().initWith(getBreadContext());
+        //AnalyticsManager.getInstance().init();
+       //AnalyticsManager.getInstance().logEvent(CustomEvent._20191105_AL, null);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();

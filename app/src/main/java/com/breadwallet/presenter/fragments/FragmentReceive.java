@@ -24,11 +24,13 @@ import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.qrcode.QRUtils;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
+import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
@@ -126,7 +128,7 @@ public class FragmentReceive extends Fragment {
         signalLayout.setLayoutTransition(BRAnimator.getDefaultTransition());
 
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
-
+        //AnalyticsManager.getInstance().logEvent(CustomEvent._20202116_VRC, null);
         return rootView;
     }
 

@@ -43,6 +43,7 @@ import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.BRDialog;
 import com.breadwallet.tools.animation.SlideDetector;
 import com.breadwallet.tools.animation.SpringAnimator;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
@@ -53,6 +54,7 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
 
@@ -451,8 +453,10 @@ public class FragmentSend extends Fragment {
                     SpringAnimator.failShakeAnimation(getActivity(), feeText);
                 }
 
-                if (allFilled)
+                if (allFilled) {
                     BRSender.getInstance().sendTransaction(getContext(), new PaymentItem(new String[]{address}, null, satoshiAmount.longValue(), null, false, comment));
+                    //AnalyticsManager.getInstance().logEvent(CustomEvent._20191105_DSL, null);
+                }
             }
         });
 

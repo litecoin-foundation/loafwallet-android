@@ -18,12 +18,14 @@ import androidx.annotation.Nullable;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.entities.PaymentItem;
+import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.FeeManager;
 import com.breadwallet.tools.security.BRSender;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.wallet.BRWalletManager;
 
 import java.math.BigDecimal;
@@ -98,6 +100,7 @@ public class DynamicDonationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
+                AnalyticsManager.getInstance().logEvent(CustomEvent._20200225_DCD, null);
             }
         });
 
@@ -107,6 +110,14 @@ public class DynamicDonationFragment extends Fragment {
             public void onClick(View v) {
                 String memo = getString(R.string.Donate_toThe) + chosenAddress.first;
                 PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
+
+                Bundle params = new Bundle();
+                params.putString("ANDROID", "PLATFORM");
+                params.putString("DONATION_ACCOUNT", memo);
+                params.putLong("DONATION_AMOUNT", mDonationAmount);
+
+                //AnalyticsManager.getInstance().logEvent(CustomEvent._20200223_DD, params);
+
                 BRSender.getInstance().sendTransaction(getContext(), request);
             }
         });
