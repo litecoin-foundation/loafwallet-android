@@ -24,7 +24,6 @@ import com.breadwallet.presenter.customviews.BRKeyboard;
 import com.breadwallet.presenter.customviews.BRLinearLayoutWithCaret;
 import com.breadwallet.tools.animation.BRAnimator;
 import com.breadwallet.tools.animation.SlideDetector;
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.manager.BRClipboardManager;
 import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.qrcode.QRUtils;
@@ -33,6 +32,7 @@ import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static com.breadwallet.tools.animation.BRAnimator.animateBackgroundDim;
 import static com.breadwallet.tools.animation.BRAnimator.animateSignalSlide;
@@ -85,6 +85,7 @@ public class FragmentReceive extends Fragment {
     private Handler copyCloseHandler = new Handler();
     private BRKeyboard keyboard;
     private View separator2;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,6 +111,8 @@ public class FragmentReceive extends Fragment {
         close = (ImageButton) rootView.findViewById(R.id.close_button);
         separator2 = rootView.findViewById(R.id.separator2);
         separator2.setVisibility(View.GONE);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
         setListeners();
         BRWalletManager.getInstance().addBalanceChangedListener(new BRWalletManager.OnBalanceChanged() {
             @Override
@@ -128,7 +131,9 @@ public class FragmentReceive extends Fragment {
         signalLayout.setLayoutTransition(BRAnimator.getDefaultTransition());
 
         signalLayout.setOnTouchListener(new SlideDetector(getContext(), signalLayout));
-        //AnalyticsManager.getInstance().logEvent(CustomEvent._20202116_VRC, null);
+
+        mFirebaseAnalytics.logEvent(CustomEvent._20202116_VRC.toString(), null);
+
         return rootView;
     }
 

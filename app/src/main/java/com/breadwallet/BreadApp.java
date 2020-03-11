@@ -12,10 +12,9 @@ import android.view.WindowManager;
 
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
-
-import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.CustomEvent;
 import com.breadwallet.tools.util.Utils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
@@ -58,6 +57,8 @@ public class BreadApp extends Application {
     private static Timer isBackgroundChecker;
     public static AtomicInteger activityCounter = new AtomicInteger();
     public static long backgroundedTime;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
 
     private static Activity currentActivity;
 
@@ -71,8 +72,8 @@ public class BreadApp extends Application {
         }
 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enableCrashlytics);
-        //AnalyticsManager.getInstance().init();
-       //AnalyticsManager.getInstance().logEvent(CustomEvent._20191105_AL, null);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.logEvent(CustomEvent._20191105_AL.toString(), null);
 
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
