@@ -155,7 +155,6 @@ public class PeerDataSource implements BRDataSourceInterface {
             database = dbHelper.getWritableDatabase();
         dbHelper.setWriteAheadLoggingEnabled(BRConstants.WAL);
 //        }
-//        Log.d("Database open counter: ",  String.valueOf(mOpenCounter.get()));
         return database;
     }
 
@@ -166,6 +165,5 @@ public class PeerDataSource implements BRDataSourceInterface {
 //            database.close();
 
 //        }
-//        Log.d("Database open counter: " , String.valueOf(mOpenCounter.get()));
     }
 }

@@ -103,7 +103,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                 }
                 obj.put("metadata", mdObj);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             array.put(obj);
         }
@@ -130,7 +130,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                         PackageInfo pInfo = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
                         verCode = pInfo.versionCode;
                     } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     obj.put("appVersion", verCode);
                     obj.put("events", arr);
@@ -151,7 +151,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                         if (response != null)
                             strResponse = response.body().string();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                         fails++;
                     } finally {
                         if (response != null) response.close();
@@ -161,7 +161,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                         fails++;
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     fails++;
                 }
             }

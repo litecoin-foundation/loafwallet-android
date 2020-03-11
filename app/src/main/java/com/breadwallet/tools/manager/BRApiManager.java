@@ -96,7 +96,7 @@ public class BRApiManager {
                             BRSharedPrefs.putCurrencyListPosition(context, i - 1);
                         }
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     set.add(tmp);
                 }
@@ -177,7 +177,7 @@ public class BRApiManager {
             jsonArray = new JSONArray(jsonString);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return jsonArray;
     }
@@ -196,9 +196,7 @@ public class BRApiManager {
             long luxuryFee = obj.optLong("fee_per_kb_luxury");
             FeeManager.getInstance().setFees(luxuryFee, regularFee, economyFee);
         } catch (JSONException e) {
-            Timber.e(e, "updateFeePerKb: FAILED: %s", jsonString);
-            BRReportsManager.reportBug(e);
-            BRReportsManager.reportBug(new IllegalArgumentException("JSON ERR: " + jsonString));
+            Timber.e(new IllegalArgumentException("updateFeePerKb: FAILED: " + jsonString, e));
         }
     }
 

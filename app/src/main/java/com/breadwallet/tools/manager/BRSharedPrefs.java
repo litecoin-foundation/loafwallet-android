@@ -73,7 +73,7 @@ public class BRSharedPrefs {
         try {
             defIso = Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Timber.e(e);
             defIso = Currency.getInstance(Locale.US).getCurrencyCode();
         }
         return settingsToGet.getString(BRConstants.CURRENT_CURRENCY, defIso);

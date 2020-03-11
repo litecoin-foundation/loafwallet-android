@@ -48,7 +48,6 @@ import timber.log.Timber;
  */
 
 public class BreadApp extends Application {
-    private static final String TAG = BreadApp.class.getName();
     public static int DISPLAY_HEIGHT_PX;
     FingerprintManager mFingerprintManager;
     public static String HOST = "api.loafwallet.org";
@@ -113,7 +112,7 @@ public class BreadApp extends Application {
             public void run() {
                 if (isAppInBackground(app)) {
                     backgroundedTime = System.currentTimeMillis();
-                    Log.e(TAG, "App went in background!");
+                    Timber.d("App went in background!");
                     // APP in background, do something
                     isBackgroundChecker.cancel();
                     fireListeners();

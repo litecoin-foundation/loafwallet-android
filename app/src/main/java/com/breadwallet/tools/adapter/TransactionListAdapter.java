@@ -65,8 +65,6 @@ import timber.log.Timber;
  */
 
 public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final String TAG = TransactionListAdapter.class.getName();
-
     private final Context mContext;
     private final int txResId;
     private final int syncingResId;
@@ -122,15 +120,12 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     item = newItems.get(i);
                     item.metaData = KVStoreManager.getInstance().getTxMetaData(mContext, item.getTxHash());
                     item.txReversed = Utils.reverseHex(Utils.bytesToHex(item.getTxHash()));
-
                 }
                 backUpFeed = newItems;
-                String log = String.format("newItems: %d, took: %d", newItems.size(), (System.currentTimeMillis() - s));
-                Log.e(TAG, "updateData: " + log);
+                Timber.d("updateData: newItems: %d, took: %s", newItems.size(), System.currentTimeMillis() - s);
                 updatingData = false;
             }
         });
-
     }
 
     private void updateTxHashes() {
@@ -153,13 +148,11 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //    private void updateMetadata() {
 //        if (updatingMetadata) return;
 //        updatingMetadata = true;
-//        Log.e(TAG, "updateMetadata: itemFeed: " + itemFeed.size());
 //        BRExecutor.getInstance().forLightWeightBackgroundTasks().execute(new Runnable() {
 //            @Override
 //            public void run() {
 //                long start = System.currentTimeMillis();
 //                mds = KVStoreManager.getInstance().getAllTxMD(mContext);
-//                Log.e(TAG, "updateMetadata, took:" + (System.currentTimeMillis() - start));
 //                updatingMetadata = false;
 //                TxManager.getInstance().updateTxList(mContext);
 //            }
@@ -196,7 +189,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 setSyncing((SyncingHolder) holder);
                 break;
         }
-
     }
 
     @Override
@@ -245,7 +237,6 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         convertView.mainLayout.setBackgroundResource(getResourceByPos(position));
         convertView.sentReceived.setText(received ? mContext.getString(R.string.TransactionDetails_received, "") : mContext.getString(R.string.TransactionDetails_sent, ""));
         convertView.toFrom.setText(received ? String.format(mContext.getString(R.string.TransactionDetails_from), "") : String.format(mContext.getString(R.string.TransactionDetails_to), ""));
-//        final String addr = position == 1? "1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v" : "35SwXe97aPRUsoaUTH1Dr3SB7JptH39pDZ"; //testing
         final String addr = item.getTo()[0];
         convertView.account.setText(addr);
         int blockHeight = item.getBlockHeight();
@@ -333,7 +324,7 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void setPrompt(final PromptHolder prompt) {
-        Log.d(TAG, "setPrompt: " + TxManager.getInstance().promptInfo.title);
+        Timber.d("setPrompt: %s", TxManager.getInstance().promptInfo.title);
         if (TxManager.getInstance().promptInfo == null) {
             throw new RuntimeException("can't happen, showing prompt with null PromptInfo");
         }
@@ -342,11 +333,9 @@ public class TransactionListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         prompt.mainLayout.setBackgroundResource(R.drawable.tx_rounded);
         prompt.title.setText(TxManager.getInstance().promptInfo.title);
         prompt.description.setText(TxManager.getInstance().promptInfo.description);
-
     }
 
     private void setSyncing(final SyncingHolder syncing) {
-//        Log.e(TAG, "setSyncing: " + syncing);
         TxManager.getInstance().syncingHolder = syncing;
         syncing.mainLayout.setBackgroundResource(R.drawable.tx_rounded);
     }
