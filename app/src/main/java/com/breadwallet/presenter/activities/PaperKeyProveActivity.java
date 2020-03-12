@@ -154,7 +154,7 @@ public class PaperKeyProveActivity extends BRActivity {
                             brDialogView.dismissWithAnimation();
                         }
                     }, null, null, 0);
-            Timber.e(new IllegalArgumentException("Paper Key error, please contact support at contact@loafwallet.org"));
+            Timber.e(new IllegalArgumentException("Paper Key error. Problem with OS Keystore"));
         } else {
             randomWordsSetUp(wordArray);
         }

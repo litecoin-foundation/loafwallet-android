@@ -599,7 +599,7 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
                 @Override
                 public void run() {
                     final double progress = BRPeerManager.syncProgress(BRSharedPrefs.getStartHeight(BreadActivity.this));
-                    Timber.d("Syn progress: %s", progress);
+                    Timber.d("Sync Progress: %s", progress);
                     if (progress < 1 && progress > 0) {
                         SyncManager.getInstance().startSyncingProgressThread();
                     }

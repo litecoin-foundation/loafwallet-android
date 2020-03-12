@@ -174,7 +174,7 @@ public class BREventManager implements BreadApp.OnAppBackgrounded {
                         new File(dir, children[i]).delete();
                     }
                 } else {
-                    Timber.i("pushToServer:  HUH?");
+                    Timber.i("pushToServer: missing events directory");
                 }
             } else {
                 Timber.i("pushToServer: FAILED with: %s fails", fails);

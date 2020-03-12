@@ -100,9 +100,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
                     camera.autoFocus(this);
                     focusing = true;
                 } catch (RuntimeException re) {
-                    // Have heard RuntimeException reported in Android 4.0.x+; continue?
-                    Timber.e(re, "Unexpected exception while focusing");
-                    // Try again later to keep cycle going
+                    Timber.e(re, "Unexpected exception while focusing. Maybe the RuntimeException reported in Android 4.0.x+");
                     autoFocusAgainLater();
                 }
             }
@@ -126,8 +124,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
             try {
                 camera.cancelAutoFocus();
             } catch (RuntimeException re) {
-                // Have heard RuntimeException reported in Android 4.0.x+; continue?
-                Timber.e(re, "Unexpected exception while cancelling focusing");
+                Timber.e(re, "Unexpected exception while cancelling focusing. Maybe the RuntimeException reported in Android 4.0.x+");
             }
         }
     }
