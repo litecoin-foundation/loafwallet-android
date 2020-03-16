@@ -98,9 +98,7 @@ android {
                     targets "core-lib"
                 }
             }
-
         }
-
     }
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
