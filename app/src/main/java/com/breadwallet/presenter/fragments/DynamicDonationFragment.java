@@ -114,7 +114,7 @@ public class DynamicDonationFragment extends Fragment {
                 PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
 
                 Bundle params = new Bundle();
-                params.putString("ANDROID", "PLATFORM");
+                params.putString("PLATFORM", "ANDROID");
                 params.putString("DONATION_ACCOUNT", memo);
                 params.putLong("DONATION_AMOUNT", mDonationAmount);
                 params.putString("ADDRESS_SCHEME", "v2");
