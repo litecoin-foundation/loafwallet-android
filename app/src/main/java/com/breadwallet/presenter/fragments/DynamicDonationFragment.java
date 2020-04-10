@@ -117,6 +117,7 @@ public class DynamicDonationFragment extends Fragment {
                 params.putString("ANDROID", "PLATFORM");
                 params.putString("DONATION_ACCOUNT", memo);
                 params.putLong("DONATION_AMOUNT", mDonationAmount);
+                params.putString("ADDRESS_SCHEME", "v2");
 
                 AnalyticsManager.logCustomEventWithParams(BRConstants._20200223_DD, params);
 
