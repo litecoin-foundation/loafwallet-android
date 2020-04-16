@@ -29,8 +29,8 @@ android {
         applicationId = 'com.loafwallet'
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 607
-        versionName "v1.19.0"
+        versionCode 610
+        versionName "v1.19.2"
         multiDexEnabled true
 
         // Similar to other properties in the defaultConfig block,
@@ -98,9 +98,7 @@ android {
                     targets "core-lib"
                 }
             }
-
         }
-
     }
     lintOptions {
         // set to true to turn off analysis progress reporting by lint
