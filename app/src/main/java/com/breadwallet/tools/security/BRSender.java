@@ -97,7 +97,7 @@ public class BRSender {
                         long time = BRSharedPrefs.getFeeTime(app);
                         if (time <= 0 || now - time >= FEE_EXPIRATION_MILLIS) {
                             Timber.d("sendTransaction: fee out of date even after fetching...");
-                            throw new FeeOutOfDate(time, now);
+                            throw new FeeOutOfDate(BRSharedPrefs.getFeeTime(app), now);
                         }
                     }
                     if (!timedOut)
