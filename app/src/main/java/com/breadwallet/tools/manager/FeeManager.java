@@ -3,7 +3,6 @@ package com.breadwallet.tools.manager;
 import androidx.annotation.StringDef;
 
 import com.breadwallet.presenter.entities.Fee;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

@@ -167,7 +167,11 @@ public class BRConstants {
     public static final String WEB_LINK = "https://loafwallet.org";
     public static final String TOS_LINK = "https://loafwallet.org/tos";
 
+<<<<<<< HEAD
     public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.LITECOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
+=======
+    public static final String BLOCK_EXPLORER_BASE_URL = BuildConfig.BITCOIN_TESTNET ? "https://testnet.litecore.io/tx/" : "https://insight.litecore.io/tx/";
+>>>>>>> master
 
     private BRConstants() {
     }

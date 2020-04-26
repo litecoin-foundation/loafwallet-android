@@ -1,7 +1,8 @@
 package com.breadwallet.presenter.fragments;
 
 import android.app.Fragment;
-import android.os.Bundle;
+import android.os.Bundle; 
+import android.util.Log; 
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,7 +113,7 @@ public class DynamicDonationFragment extends Fragment {
                 String memo = getString(R.string.Donate_toThe) + chosenAddress.first;
                 PaymentItem request = new PaymentItem(new String[]{chosenAddress.second}, null, mDonationAmount, null, false, memo);
 
-                Bundle params = new Bundle();
+                Bundle params = new Bundle(); 
                 params.putString("PLATFORM", "ANDROID");
                 params.putString("DONATION_ACCOUNT", memo);
                 params.putLong("DONATION_AMOUNT", mDonationAmount);
