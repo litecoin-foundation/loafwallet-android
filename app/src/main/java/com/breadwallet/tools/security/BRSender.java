@@ -458,8 +458,8 @@ public class BRSender {
         for (String s : item.addresses) {
             allAddresses.append(s + ", ");
         }
-        receiver = allAddresses.toString();
         allAddresses.delete(allAddresses.length() - 2, allAddresses.length());
+        receiver = allAddresses.toString();
         if (certified) {
             receiver = "certified: " + item.cn + "\n";
         }
