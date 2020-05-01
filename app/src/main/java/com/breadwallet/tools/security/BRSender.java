@@ -15,8 +15,8 @@ import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
 import com.breadwallet.tools.util.BRCurrency;
 import com.breadwallet.tools.util.BRExchange;
+import com.breadwallet.tools.util.Utils;
 import com.breadwallet.wallet.BRWalletManager;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.math.BigDecimal;
 import java.util.Locale;
@@ -449,21 +449,8 @@ public class BRSender {
     }
 
     public String getReceiver(PaymentItem item) {
-        String receiver;
-        boolean certified = false;
-        if (item.cn != null && item.cn.length() != 0) {
-            certified = true;
-        }
-        StringBuilder allAddresses = new StringBuilder();
-        for (String s : item.addresses) {
-            allAddresses.append(s + ", ");
-        }
-        allAddresses.delete(allAddresses.length() - 2, allAddresses.length());
-        receiver = allAddresses.toString();
-        if (certified) {
-            receiver = "certified: " + item.cn + "\n";
-        }
-        return receiver;
+        boolean certified = item.cn != null && item.cn.length() != 0;
+        return certified ? "certified: " + item.cn + "\n" : Utils.join(item.addresses, ", ");
     }
 
     public boolean isSmallerThanMin(Context app, PaymentItem paymentRequest) {
