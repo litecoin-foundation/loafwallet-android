@@ -450,7 +450,7 @@ public class BRSender {
 
     public String getReceiver(PaymentItem item) {
         boolean certified = item.cn != null && item.cn.length() != 0;
-        return certified ? "certified: " + item.cn + "\n" : Utils.join(item.addresses, ", ");
+        return certified ? "certified: " + item.cn : Utils.join(item.addresses, ", ");
     }
 
     public boolean isSmallerThanMin(Context app, PaymentItem paymentRequest) {
