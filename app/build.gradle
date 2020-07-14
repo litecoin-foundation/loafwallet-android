@@ -8,7 +8,8 @@ android {
     signingConfigs {
         release
     }
-    def Properties props = new Properties()
+
+    Properties props = new Properties()
     def propFile = file('../release.properties')
     if (propFile.canRead()) {
         props.load(new FileInputStream(propFile))
@@ -41,19 +42,22 @@ android {
             // libraries Gradle should build and package with your APK.
             abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
         }
+
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_TOOLCHAIN=clang"
             }
         }
-
     }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
     packagingOptions {
         pickFirst 'protobuf.meta'
     }
+
     externalNativeBuild {
         cmake {
             // When you specify a version of CMake, as shown below,
