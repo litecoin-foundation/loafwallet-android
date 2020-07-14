@@ -22,6 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#include <stdlib.h>
 #include "wallet.h"
 #include "PeerManager.h"
 #include "BRPeerManager.h"
@@ -534,7 +535,8 @@ JNIEXPORT jlong JNICALL
 Java_com_breadwallet_wallet_BRWalletManager_feeForTransactionAmount(JNIEnv *env, jobject obj,
                                                                     jlong amount) {
     if (!_wallet) return 0;
-    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "current fee: %lu", BRWalletFeePerKb(_wallet));
+    __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "current fee: %llu",
+                        (unsigned long long) BRWalletFeePerKb(_wallet));
     uint64_t fee = BRWalletFeeForTxAmount(_wallet, (uint64_t) amount);
     return (jlong) fee;
 }
@@ -591,7 +593,7 @@ JNIEXPORT jlong JNICALL
 Java_com_breadwallet_wallet_BRWalletManager_bitcoinAmount(JNIEnv *env, jobject thiz,
                                                           jlong localAmount, double price) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
-                        "bitcoinAmount: localAmount: %lli, price: %lf", localAmount, price);
+                        "bitcoinAmount: localAmount: %lli, price: %lf", (long long) localAmount, price);
     return (jlong) BRBitcoinAmount(localAmount, price);
 }
 
@@ -599,7 +601,7 @@ JNIEXPORT jlong
 Java_com_breadwallet_wallet_BRWalletManager_localAmount(JNIEnv *env, jobject thiz, jlong amount,
                                                         double price) {
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ",
-                        "localAmount: amount: %lli, price: %lf", amount, price);
+                        "localAmount: amount: %lli, price: %lf", (long long) amount, price);
     return (jlong) BRLocalAmount(amount, price);
 }
 
@@ -707,7 +709,7 @@ JNIEXPORT void JNICALL Java_com_breadwallet_wallet_BRWalletManager_setFeePerKb(J
                                                                                jboolean ignore) {
     if (!_wallet || ignore) return;
     __android_log_print(ANDROID_LOG_DEBUG, "Message from C: ", "setFeePerKb, ignore:%d, fee: %lli",
-                        ignore, fee);
+                        ignore, (long long) fee);
     BRWalletSetFeePerKb(_wallet, (uint64_t) fee);
 }
 
@@ -902,7 +904,7 @@ Java_com_breadwallet_wallet_BRWalletManager_txHashSha256Hex(JNIEnv *env, jobject
     BRSHA256(&sha256Hash, theHash.u8, sizeof(theHash));
 
 //    UInt256 reversedHash = UInt256Reverse(sha256Hash);
-    char *result = u256hex(sha256Hash);
+    const char *result = u256hex(sha256Hash);
     return (*env)->NewStringUTF(env, result);
 }
 
@@ -1033,6 +1035,7 @@ JNIEXPORT jlong JNICALL Java_com_breadwallet_wallet_BRWalletManager_nativeBalanc
     if (!_wallet) return -1;
     return BRWalletBalance(_wallet);
 }
+
 JNIEXPORT jlong JNICALL Java_com_breadwallet_wallet_BRWalletManager_defaultFee(
         JNIEnv *env,
         jobject thiz) {
@@ -1040,6 +1043,7 @@ JNIEXPORT jlong JNICALL Java_com_breadwallet_wallet_BRWalletManager_defaultFee(
 
     return DEFAULT_FEE_PER_KB;
 }
+
 JNIEXPORT jlong JNICALL Java_com_breadwallet_wallet_BRWalletManager_maxFee(
         JNIEnv *env,
         jobject thiz) {

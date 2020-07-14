@@ -33,6 +33,7 @@
 #include <pthread.h>
 #include <BRBase58.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
 #include <arpa/inet.h>
