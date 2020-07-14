@@ -23,7 +23,7 @@ android {
         }
     }
 
-    compileSdkVersion = 29
+    compileSdkVersion 29
     defaultConfig {
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         applicationId = 'com.loafwallet'
@@ -153,7 +153,7 @@ android {
         }
 
     }
-    compileSdkVersion 29
+
 }
 
 task copyResDirectoryToClasses(type: Copy) {
