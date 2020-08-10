@@ -3,6 +3,7 @@ package com.breadwallet.presenter.activities.settings;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
+import android.view.WindowManager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.ActivityUTILS;
@@ -23,6 +24,7 @@ public class ShareDataActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_data);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
         toggleButton.setChecked(BRSharedPrefs.getShareData(this));

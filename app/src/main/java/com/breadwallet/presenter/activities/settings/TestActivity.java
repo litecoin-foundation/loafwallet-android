@@ -1,6 +1,7 @@
 package com.breadwallet.presenter.activities.settings;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.breadwallet.R;
 import com.breadwallet.presenter.activities.util.BRActivity;
@@ -17,7 +18,8 @@ public class TestActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        
     }
 
     @Override

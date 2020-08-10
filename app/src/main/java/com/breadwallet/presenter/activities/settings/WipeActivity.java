@@ -3,6 +3,7 @@ package com.breadwallet.presenter.activities.settings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -28,6 +29,7 @@ public class WipeActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restore);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         nextButton = (Button) findViewById(R.id.send_button);
         close = (ImageButton) findViewById(R.id.close_button);

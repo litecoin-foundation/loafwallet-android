@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class DisabledActivity extends BRActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disabled);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         untilLabel = (TextView) findViewById(R.id.until_label);
         layout = (ConstraintLayout) findViewById(R.id.layout);
