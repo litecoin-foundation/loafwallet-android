@@ -181,6 +181,14 @@ public class FragmentSend extends Fragment {
         keyboardIndex = signalLayout.indexOfChild(keyboardLayout);
         //TODO: all views are using the layout of this button. Views should be refactored without it
         // Hiding until layouts are built.
+
+        // Hide donation button if balance is below minimum donation amount
+        if (curBalance < BRConstants.DONATION_AMOUNT + 0.0005) {
+            donate.setVisibility(View.GONE);
+        } else {
+            donate.setVisibility(View.VISIBLE);
+        }
+
         ImageButton faq = (ImageButton) rootView.findViewById(R.id.faq_button);
 
         showKeyboard(false);
