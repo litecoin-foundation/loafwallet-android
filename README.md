@@ -14,11 +14,11 @@ The Litewallet Team is a group of global volunteers & part of the Litecoin Found
 
 ## Completely decentralized
 
-Unlike other iOS Litecoin wallets, **Litewallet** is a standalone Litecoin client. It connects directly to the Litecoin network using [SPV](https://en.bitcoin.it/wiki/Thin_Client_Security#Header-Only_Clients) mode, and doesn't rely on servers that can be hacked or disabled. Even if Litewallet is removed from the App Store, the app will continue to function, allowing users to access their valuable Litecoin at any time.
+Unlike other Android Litecoin wallets, **Litewallet** is a standalone Litecoin client. It connects directly to the Litecoin network using [SPV](https://en.bitcoin.it/wiki/Thin_Client_Security#Header-Only_Clients) mode, and doesn't rely on servers that can be hacked or disabled. Even if Litewallet is removed from the App Store, the app will continue to function, allowing users to access their valuable Litecoin at any time.
 
 ## Cutting-edge security
 
-**Litewallet** utilizes AES hardware encryption, app sandboxing, and the latest iOS security features to protect users from malware, browser security holes, and even physical theft. Private keys are stored only in the secure enclave of the user's phone, inaccessible to anyone other than the user.
+**Litewallet** utilizes AES hardware encryption, app sandboxing, and the latest Android security features to protect users from malware, browser security holes, and even physical theft. Private keys are stored only in the secure enclave of the user's phone, inaccessible to anyone other than the user.
 
 ## Designed with new users in mind
 
