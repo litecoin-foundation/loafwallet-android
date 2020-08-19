@@ -163,7 +163,7 @@ public class BRConstants {
     public static final String loopBug = "android-loop-bug";
 
     public static final String TWITTER_LINK = "https://twitter.com/Litewallet_App";
-    public static final String REDDIT_LINK = "https://www.reddit.com/r/litecoin";
+    public static final String REDDIT_LINK = "https://www.reddit.com/r/Litewallet";
     public static final String WEB_LINK = "https://lite-wallet.org";
     public static final String TOS_LINK = "https://lite-wallet.org/policy";
 
