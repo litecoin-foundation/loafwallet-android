@@ -81,3 +81,4 @@ crash.txt
 /fastlane/
 fastlane/
 app/loaf/release/*
+/partnerapi
