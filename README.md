@@ -1,11 +1,11 @@
 [![Litewallet](/images/header-android.png)](https://play.google.com/store/apps/details?id=com.loafwallet&hl=en_US)
 ======================
-[![Release](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android) 
+[![Release](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/v/release/litecoin-foundation/loafwallet-android)
 [![MIT License](https://img.shields.io/github/license/litecoin-foundation/loafwallet-android?style=plastic)](https://img.shields.io/github/license/litecoin-foundation/loafwallet-android?style=plastic)
 
 ## Easy and secure
 Litewallet is the best way to get started with Litecoin. Our simple, streamlined design is easy for beginners, yet powerful enough for experienced users. This is a free app produced by the Litecoin Foundation.
- 
+
 ## Donations
 The Litewallet Team is a group of global volunteers & part of the Litecoin Foundation that work hard to promote the use of Litecoin. Litewallet takes a lot of time and resources to improve and test features but we need your help.  Please consider donating to one of our addresses:
 |                                   Hardware Campaign                                   	|                              General Litecoin Foundation                              	|
@@ -58,7 +58,7 @@ Simplicity and ease-of-use is **Litewallet**'s core design principle. A simple r
 [![GitHub issues](https://img.shields.io/github/issues/litecoin-foundation/loafwallet-android?style=plastic)](https://github.com/litecoin-foundation/loafwallet-android/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/litecoin-foundation/loafwallet-android?color=00ff00&style=plastic)](https://github.com/litecoin-foundation/loafwallet-android/pulls)
 
-### Building & Developing Litewallet for Android: 
+### Building & Developing Litewallet for Android:
 
 1. Download and install Java 7 or up
 2. Download and install the latest Android studio
