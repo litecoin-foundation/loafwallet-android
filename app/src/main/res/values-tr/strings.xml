@@ -1,10 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
   <!-- App name -->
   <string name="About.appName.android">Loaf</string>
   <!-- About screen blog label -->
   <string name="About.blog">İnternet sitesi</string>
   <!-- About screen footer -->
-  <string name="About.footer">Litecoin Vakfı'nın Litewallet Ekibi tarafından yapılmıştır\n%1$s</string>
+  <string name="About.footer">Litecoin Vakfı\'nın Litewallet Ekibi tarafından yapılmıştır\n%1$s</string>
   <!-- About app version -->
   <string name="About.appVersion">%1$s</string>
   <!-- Privay Policy button label -->
@@ -24,7 +25,7 @@
   <!-- Loading Wallet Message -->
   <string name="Account.loadingMessage">Cüzdan yükleniyor</string>
   <!-- Default wallet name -->
-  <string name="AccountHeader.defaultWalletName">Litewallet'ım</string>
+  <string name="AccountHeader.defaultWalletName">Litewallet\'ım</string>
   <!-- Third party keyboard warning -->
   <string name="Alert.customKeyboard.android">Görünüşe göre, yazdıklarınızı kaydedebilen ve Kağıt Anahtarınızı çalabilen üçüncü taraf bir klavye kullanıyorsunuz. Ekstra koruma için lütfen varsayılan Android klavyesine geçin.</string>
   <!-- Error alert title -->
@@ -80,7 +81,7 @@
   <!-- BCH successfully sent alert message -->
   <string name="BCH.successMessage">BCH başarıyla gönderildi.</string>
   <!-- Widthdraw BCH view title -->
-  <string name="BCH.title">BCH'yi geri çekin</string>
+  <string name="BCH.title">BCH\'yi geri çekin</string>
   <!-- Tx Hash button header -->
   <string name="BCH.txHashHeader">BCH İşlem Kimliği</string>
   <!-- Approve button label -->
@@ -188,13 +189,13 @@
   <!-- Caption for graphics -->
   <string name="Import.leftCaption">İçe aktarılacak cüzdan</string>
   <!-- Import wallet intro screen message -->
-  <string name="Import.message">Bir cüzdanı içe aktarmak, diğer cüzdanınızdaki tüm parayı tek bir işlem kullanarak Litewallet'inize aktarır.</string>
+  <string name="Import.message">Bir cüzdanı içe aktarmak, diğer cüzdanınızdaki tüm parayı tek bir işlem kullanarak Litewallet\'inize aktarır.</string>
   <!-- Enter password alert view title -->
   <string name="Import.password">Bu özel anahtar şifre korumalıdır.</string>
   <!-- password textfield placeholder -->
   <string name="Import.passwordPlaceholder">parola</string>
   <!-- Caption for graphics -->
-  <string name="Import.rightCaption">Litewallet'ınız</string>
+  <string name="Import.rightCaption">Litewallet\'ınız</string>
   <!-- Scan Private key button label -->
   <string name="Import.scan">Özel Anahtarı Tara</string>
   <!-- Import wallet success alert title -->
@@ -214,13 +215,13 @@
   <!-- Ignore jailbreak warning button -->
   <string name="JailbreakWarnings.ignore">Göz ardı etmek</string>
   <!-- Jailbreak warning message -->
-  <string name="JailbreakWarnings.messageWithBalance">CİHAZ GÜVENLİĞİNDEN ÖDÜLLENDİRİLMİŞTİR\n Hiç \'jailbreak\' uygulaması anahtarlık verilerine erişebilir ve Litecoin'inizi çalabilir! Bu cüzdanı hemen silin ve güvenli bir cihazda geri yükleyin.</string>
+  <string name="JailbreakWarnings.messageWithBalance">CİHAZ GÜVENLİĞİNDEN ÖDÜLLENDİRİLMİŞTİR\n Hiç \'jailbreak\' uygulaması anahtarlık verilerine erişebilir ve Litecoin\'inizi çalabilir! Bu cüzdanı hemen silin ve güvenli bir cihazda geri yükleyin.</string>
   <!-- Jailbreak warning title -->
   <string name="JailbreakWarnings.title">UYARI</string>
   <!-- Location services disabled error -->
   <string name="LocationPlugin.disabled">Konum hizmetleri devre dışı bırakıldı.</string>
   <!-- No permissions for location services -->
-  <string name="LocationPlugin.notAuthorized">Litewallet'in konum hizmetlerine erişim izni yoktur.</string>
+  <string name="LocationPlugin.notAuthorized">Litewallet\'in konum hizmetlerine erişim izni yoktur.</string>
   <!-- Wallet creation date prefix -->
   <string name="ManageWallet.creationDatePrefix">Cüzdanını üzerinde yarattın %1$s</string>
   <!-- Manage wallet description text -->
@@ -298,15 +299,15 @@
   <!-- Transaction rejected prompt title -->
   <string name="Prompts.RecommendRescan.title">İşlem Reddedildi</string>
   <!-- Share data prompt body -->
-  <string name="Prompts.ShareData.body">Anonim verilerinizi bizimle paylaşarak Litewallet'in geliştirilmesine yardımcı olun</string>
+  <string name="Prompts.ShareData.body">Anonim verilerinizi bizimle paylaşarak Litewallet\'in geliştirilmesine yardımcı olun</string>
   <!-- Share data prompt title -->
   <string name="Prompts.ShareData.title">Anonim Verileri Paylaşın</string>
   <!-- Enable touch ID prompt body -->
-  <string name="Prompts.TouchId.body">Touch ID'yi etkinleştirmek için buraya dokunun</string>
+  <string name="Prompts.TouchId.body">Touch ID\'yi etkinleştirmek için buraya dokunun</string>
   <!-- Enable Fingerprint prompt body -->
   <string name="Prompts.TouchId.body.android">Parmak izi kimlik doğrulamasını etkinleştirmek için buraya dokunun</string>
   <!-- Enable touch ID prompt title -->
-  <string name="Prompts.TouchId.title">Touch ID'yi etkinleştir</string>
+  <string name="Prompts.TouchId.title">Touch ID\'yi etkinleştir</string>
   <!-- Enable Fingerprint prompt title -->
   <string name="Prompts.TouchId.title.android">Parmak İzi Kimlik Doğrulamasını Etkinleştir</string>
   <!-- Button on fingerprint prompt so the user can enter their PIN instead -->
@@ -314,7 +315,7 @@
   <!-- Upgrade PIN prompt body. -->
   <string name="Prompts.UpgradePin.body">Litewallet, 6 basamaklı bir PIN kullanarak yükseltildi. Yükseltmek için buraya dokunun.</string>
   <!-- Upgrade PIN prompt title. -->
-  <string name="Prompts.UpgradePin.title">PIN'i yükselt</string>
+  <string name="Prompts.UpgradePin.title">PIN\'i yükselt</string>
   <!-- Notifications will be added later but users can set their preferences now, which is why we specify "in the future". -->
   <string name="PushNotifications.body">Turn on notifications to receive special messages from Litewallet in the future.</string>
   <!-- Push notifications toggle switch label -->
@@ -342,11 +343,11 @@
   <!-- Recover wallet header -->
   <string name="RecoverWallet.header">Cüzdanı Kurtar</string>
   <!-- Reset PIN with paper key: header -->
-  <string name="RecoverWallet.header_reset_pin">PIN'i sıfırla</string>
+  <string name="RecoverWallet.header_reset_pin">PIN\'i sıfırla</string>
   <!-- Enter paper key instruction -->
   <string name="RecoverWallet.instruction">Kağıt Anahtarını Girin</string>
   <!-- Recover wallet intro -->
-  <string name="RecoverWallet.intro">Litewallet'inizi kağıt anahtarınızla kurtarın.</string>
+  <string name="RecoverWallet.intro">Litewallet\'inizi kağıt anahtarınızla kurtarın.</string>
   <!-- Invalid paper key message -->
   <string name="RecoverWallet.invalid">Girdiğiniz kağıt anahtarı geçersiz. Lütfen her kelimeyi iki kez kontrol edin ve tekrar deneyin.</string>
   <!-- Previous button accessibility label -->
@@ -374,7 +375,7 @@
   <!-- extimated time -->
   <string name="ReScan.body1">20-45 dakika</string>
   <!-- Syncing explanation -->
-  <string name="ReScan.body2">Bir işlem Litecoin ağında tamamlandı olarak gösteriliyor, ancak Litewallet'ınızda gösterilmiyorsa.</string>
+  <string name="ReScan.body2">Bir işlem Litecoin ağında tamamlandı olarak gösteriliyor, ancak Litewallet\'ınızda gösterilmiyorsa.</string>
   <!-- Syncing explanation -->
   <string name="ReScan.body3">Sürekli olarak işleminizin reddedildiğini belirten bir hata alıyorsunuz.</string>
   <!-- Start Sync button label -->
@@ -400,17 +401,17 @@
   <!-- Security Center Info -->
   <string name="SecurityCenter.info">Maksimum koruma için tüm güvenlik özelliklerini etkinleştirin.</string>
   <!-- Paper Key button description -->
-  <string name="SecurityCenter.paperKeyDescription">Telefonunuzu kaybederseniz veya yükseltirseniz Litecoin'e erişmenin tek yolu.</string>
+  <string name="SecurityCenter.paperKeyDescription">Telefonunuzu kaybederseniz veya yükseltirseniz Litecoin\'e erişmenin tek yolu.</string>
   <!-- Paper Key button title -->
   <string name="SecurityCenter.paperKeyTitle">Kağıt Anahtarı</string>
   <!-- PIN button description -->
-  <string name="SecurityCenter.pinDescription">Litewallet'inizi yetkisiz kullanıcılardan korur.</string>
+  <string name="SecurityCenter.pinDescription">Litewallet\'inizi yetkisiz kullanıcılardan korur.</string>
   <!-- PIN button title -->
   <string name="SecurityCenter.pinTitle">6 Haneli PIN</string>
   <!-- Security Center Title -->
   <string name="SecurityCenter.title">Güvenlik Merkezi</string>
   <!-- Touch ID button description -->
-  <string name="SecurityCenter.touchIdDescription">Litewallet'ınızın kilidini rahatça açın ve belirli bir limite kadar para gönderin.</string>
+  <string name="SecurityCenter.touchIdDescription">Litewallet\'ınızın kilidini rahatça açın ve belirli bir limite kadar para gönderin.</string>
   <!-- Touch ID button title -->
   <string name="SecurityCenter.touchIdTitle">Touch ID</string>
   <!-- Security center fingerprint authentication button -->
@@ -422,11 +423,11 @@
   <!-- Instructions how to allow the camera access for the app -->
   <string name="Send.cameraUnavailabeMessage.android">İçinde kamera erişimine izin ver \"Ayarlar\" &gt; \"Uygulamalar\" &gt; \"Litewallet\" &gt; \"İzinler\"</string>
   <!-- Permission required to access camera -->
-  <string name="Send.cameraUnavailabeTitle.android">Litewallet'in kameraya erişmesine izin verilmiyor</string>
+  <string name="Send.cameraUnavailabeTitle.android">Litewallet\'in kameraya erişmesine izin verilmiyor</string>
   <!-- Camera not allowed message -->
-  <string name="Send.cameraunavailableMessage">Kamera erişimine izin vermek için Ayarlar'a gidin.</string>
+  <string name="Send.cameraunavailableMessage">Kamera erişimine izin vermek için Ayarlar\'a gidin.</string>
   <!-- Camera not allowed alert title -->
-  <string name="Send.cameraUnavailableTitle">Litewallet'in kameraya erişmesine izin verilmiyor</string>
+  <string name="Send.cameraUnavailableTitle">Litewallet\'in kameraya erişmesine izin verilmiyor</string>
   <!-- Warning when sending to self. -->
   <string name="Send.containsAddress">Hedef, kendi adresinizdir. Kendinize gönderemezsiniz.</string>
   <!-- Could not create transaction alert title -->
@@ -516,7 +517,7 @@
   <!-- Start or recover another wallet menu label. -->
   <string name="Settings.wipe">Başka Cüzdanı Başlat/Kurtar</string>
   <!-- Share data view body -->
-  <string name="ShareData.body">Anonim verilerinizi bizimle paylaşarak Litewallet'in geliştirilmesine yardımcı olun. Bu herhangi bir finansal bilgi içermez. Finansal gizliliğinize saygı duyuyoruz.</string>
+  <string name="ShareData.body">Anonim verilerinizi bizimle paylaşarak Litewallet\'in geliştirilmesine yardımcı olun. Bu herhangi bir finansal bilgi içermez. Finansal gizliliğinize saygı duyuyoruz.</string>
   <!-- Share data header -->
   <string name="ShareData.header">Veriler Paylaşılsın mı?</string>
   <!-- Share data switch label. -->
@@ -524,13 +525,13 @@
   <!-- button label -->
   <string name="StartPaperPhrase.againButtonTitle">Kağıt Anahtarını Yeniden Yazın</string>
   <!-- Paper key explanation text. -->
-  <string name="StartPaperPhrase.body">Telefonunuzun kaybolması, çalınması, kırılması veya yükseltilmesi durumunda Litewallet'inizi geri yüklemenin tek yolu kağıt anahtarınızdır. \n\ nBir kağıda yazıp güvende tutmanız için size bir kelime listesi göstereceğiz.</string>
+  <string name="StartPaperPhrase.body">Telefonunuzun kaybolması, çalınması, kırılması veya yükseltilmesi durumunda Litewallet\'inizi geri yüklemenin tek yolu kağıt anahtarınızdır. \n\ nBir kağıda yazıp güvende tutmanız için size bir kelime listesi göstereceğiz.</string>
   <!-- button label -->
   <string name="StartPaperPhrase.buttonTitle">Kağıt Anahtarını Yazın</string>
   <!-- Argument is date -->
   <string name="StartPaperPhrase.date">En son kağıt anahtarını yazdın %1$s</string>
   <!-- Start view message -->
-  <string name="StartViewController.message">Litecoin'i kullanmanın en güvenli ve en güvenli yolu.</string>
+  <string name="StartViewController.message">Litecoin\'i kullanmanın en güvenli ve en güvenli yolu.</string>
   <!-- Syncing view connectiong state header text -->
   <string name="SyncingView.connecting">Bağlanıyor</string>
   <!-- Syncing view header text -->
@@ -552,11 +553,11 @@
   <!-- Fingerprint enabling description body -->
   <string name="TouchIdSettings.customizeText.android">Parmak İzi Kimlik Doğrulama Harcama Limitinizi Parmak İzi Yetkilendirme Harcama Limiti ekranından özelleştirebilirsiniz.</string>
   <!-- Instruction for the fingerprint setup -->
-  <string name="TouchIdSettings.disabledWarning.body.android">Bu cihazda parmak izi kimlik doğrulamasını etkinleştirmediniz. Ayarlar'a gidin -&gt; Parmak izi kimlik doğrulamasını kurmak için güvenlik.</string>
+  <string name="TouchIdSettings.disabledWarning.body.android">Bu cihazda parmak izi kimlik doğrulamasını etkinleştirmediniz. Ayarlar\'a gidin -&gt; Parmak izi kimlik doğrulamasını kurmak için güvenlik.</string>
   <!-- Fingerprint Is Not Setup -->
   <string name="TouchIdSettings.disabledWarning.title.android">Parmak İzi Kimlik Doğrulaması Etkin Değil</string>
   <!-- Touch Id screen label -->
-  <string name="TouchIdSettings.label">Litewallet'ınızın kilidini açmak ve belirli bir limite kadar para göndermek için parmak izinizi kullanın.</string>
+  <string name="TouchIdSettings.label">Litewallet\'ınızın kilidini açmak ve belirli bir limite kadar para göndermek için parmak izinizi kullanın.</string>
   <!-- Link Text (see TouchIdSettings.customizeText) -->
   <string name="TouchIdSettings.linkText">Touch ID Harcama Sınırı Ekranı</string>
   <!-- Spending Limit: b100,000 ($100) -->
@@ -650,7 +651,7 @@
   <!-- My Address button title -->
   <string name="UnlockScreen.myAddress">Benim adresim</string>
   <!-- Reset PIN with Paper Key button label. -->
-  <string name="UnlockScreen.resetPin">PIN'i sıfırla</string>
+  <string name="UnlockScreen.resetPin">PIN\'i sıfırla</string>
   <!-- Scan button title -->
   <string name="UnlockScreen.scan">Tarama</string>
   <!-- Unlock Screen sub-header -->
@@ -658,25 +659,25 @@
   <!-- Instruction to touch the sensor for fingerprint authentication -->
   <string name="UnlockScreen.touchIdInstructions.android">Dokunma Sensörü</string>
   <!-- TouchID prompt text -->
-  <string name="UnlockScreen.touchIdPrompt">Litewallet'ınızın kilidini açın.</string>
+  <string name="UnlockScreen.touchIdPrompt">Litewallet\'ınızın kilidini açın.</string>
   <!-- Device authentication body -->
   <string name="UnlockScreen.touchIdPrompt.android">Devam etmek için lütfen Android cihazınızın kilidini açın.</string>
   <!-- Unlock with TouchID accessibility label -->
   <string name="UnlockScreen.touchIdText">İle kilidini aç TouchID</string>
   <!-- View a transaction on the blockchain explorer -->
-  <string name="ViewOnBlockchain">Blockchain'de görüntüle</string>
+  <string name="ViewOnBlockchain">Blockchain\'de görüntüle</string>
   <!-- Device authentication title -->
   <string name="UnlockScreen.touchIdTitle.android">Kimlik doğrulama gerekli</string>
   <!-- Wallet unlocked message -->
   <string name="UnlockScreen.unlocked">Cüzdan Kilidi Açıldı</string>
   <!-- Update PIN caption text -->
-  <string name="UpdatePin.caption">Bu PIN kodunu unutmayın. Unutursanız, Litecoin'inize erişemezsiniz.</string>
+  <string name="UpdatePin.caption">Bu PIN kodunu unutmayın. Unutursanız, Litecoin\'inize erişemezsiniz.</string>
   <!-- PIN creation info. -->
-  <string name="UpdatePin.createInstruction">PIN kodunuz Litewallet'inizin kilidini açmak ve para göndermek için kullanılacaktır.</string>
+  <string name="UpdatePin.createInstruction">PIN kodunuz Litewallet\'inizin kilidini açmak ve para göndermek için kullanılacaktır.</string>
   <!-- Update PIN title -->
   <string name="UpdatePin.createTitle">PIN ayarla</string>
   <!-- Update PIN title -->
-  <string name="UpdatePin.createTitleConfirm">PIN'i Yeniden Girin</string>
+  <string name="UpdatePin.createTitleConfirm">PIN\'i Yeniden Girin</string>
   <!-- Enter current PIN instruction -->
   <string name="UpdatePin.enterCurrent">Mevcut PIN kodunuzu girin.</string>
   <!-- Enter new PIN instruction -->
@@ -688,7 +689,7 @@
   <!-- Update PIN failure alert view title -->
   <string name="UpdatePin.setPinErrorTitle">Update PIN Error</string>
   <!-- Update PIN title -->
-  <string name="UpdatePin.updateTitle">PIN'i güncelle</string>
+  <string name="UpdatePin.updateTitle">PIN\'i güncelle</string>
   <!-- Authorize to copy wallet addresses alert message -->
   <string name="URLHandling.addressaddressListAlertMessage">Cüzdan adresleri panoya kopyalansın mı?</string>
   <!-- Authorize to copy wallet address PIN view prompt. -->
@@ -716,7 +717,7 @@
   <!-- Welcome screen text. (?) will be replaced with the help icon users should look for. -->
   <string name="Welcome.body">Litewallet az önce güncellendi! \nYardıma ihtiyacınız varsa, çoğu ekranın sağ üst köşesindeki (?) simgesini arayın.</string>
   <!-- Top title of welcome screen -->
-  <string name="Welcome.title">Litewallet'e hoş geldiniz!</string>
+  <string name="Welcome.title">Litewallet\'e hoş geldiniz!</string>
   <!-- Wipe wallet alert message -->
   <string name="WipeWallet.alertMessage">Bu cüzdanı silmek istediğinizden emin misiniz?</string>
   <!-- Wipe wallet alert title -->
@@ -728,7 +729,7 @@
   <!-- Enter phrase to wipe wallet instruction. -->
   <string name="WipeWallet.instruction">Yeni bir cüzdan başlatmak veya mevcut bir cüzdanı geri yüklemek için önce şu anda kurulu olan cüzdanı silmelisiniz. Devam etmek için mevcut cüzdanın Kağıt Anahtarını girin.</string>
   <!-- Start wipe wallet view message -->
-  <string name="WipeWallet.startMessage">Başka bir cüzdanı başlatmak veya kurtarmak, bu cihazda farklı bir Litewallet'a erişmenize ve onu yönetmenize olanak sağlar.</string>
+  <string name="WipeWallet.startMessage">Başka bir cüzdanı başlatmak veya kurtarmak, bu cihazda farklı bir Litewallet\'a erişmenize ve onu yönetmenize olanak sağlar.</string>
   <!-- Start wipe wallet view warning -->
   <string name="WipeWallet.startWarning">Mevcut cüzdanınız bu cihazdan kaldırılacaktır. Gelecekte geri yüklemek isterseniz, Kağıt Anahtarınızı girmeniz gerekecektir.</string>
   <!-- Wipe wallet navigation item title. -->
@@ -746,7 +747,7 @@
   <!-- 1 of 3 -->
   <string name="WritePaperPhrase.step">%1$d nın-nin %2$d</string>
 
-  <string name="Donate.title">Litecoin Vakfı'na bağış yapın (%1$s)</string>
+  <string name="Donate.title">Litecoin Vakfı\'na bağış yapın (%1$s)</string>
 
   <string name="Confirmation.processingAndDonationTime">İşlem süresi: Bu işlemlerin işlenmesi %1$s dakika sürecektir.</string>
   <string name="Donate.title.confirmation">Bağışı Onaylayın</string>
@@ -758,25 +759,6 @@
   <string name="FeeSelector.luxuryTime">2,5 - 5+ dakika</string>
   <string name="FeeSelector.luxuryMessage">Bu seçenek, bir prim ödüyor olsanız bile işleminizin kabul edilmesini neredeyse garanti eder.</string>
 
-  <!--Buy center - partners-->
-  <string name="BuyCenter.simplex.Title" tools:ignore="MissingTranslation">Simplex</string>
-  <string name="BuyCenter.simplex.FinancialDetails">"• 5 dakikada Litecoin edinin!\n• Kredi kartıyla Litecoin satın alın\n• Pasaport veya Eyalet Kimliği"</string>
-
-  <string name="BuyCenter.moonpay.Title" tools:ignore="MissingTranslation">Moonpay</string>
-  <string name="BuyCenter.moonpay.FinancialDetails">"• Çok sayıda fiat çiftiyle LTC satın alın\n• Birden çok yöntemle ödeme yapın\n• Küresel ödeme sağlayıcısı"</string>
-
-  <string name="aud_currency_code" translatable="false">AUD</string>
-  <string name="gbp_currency_code" translatable="false">GBP</string>
-  <string name="hkd_currency_code" translatable="false">HKD</string>
-  <string name="idr_currency_code" translatable="false">IDR</string>
-  <string name="rub_currency_code" translatable="false">RUB</string>
-  <string name="sgd_currency_code" translatable="false">SGD</string>
-
-  <string name="cad_currency_code" translatable="false">CAD</string>
-  <string name="eur_currency_code" translatable="false">EUR</string>
-  <string name="jpy_currency_code" translatable="false">JPY</string>
-  <string name="usd_currency_code" translatable="false">USD</string>
-
   <string name="BottomNavItem.History.title">Tarih</string>
   <string name="BottomNavItem.Card.title">Kart</string>
 
@@ -787,14 +769,13 @@
   <string name="mismatch_password">Eşleşmeyen şifre</string>
 
   <!-- Login view texts -->
-  <string name="Login.Hint.email" translatable="false">@string/Receive.emailButton</string>
   <string name="Login.Hint.password">Parola</string>
   <string name="Login.forgotPassword">Parolanızı mı unuttunuz?</string>
   <string name="Login.login">Oturum aç</string>
   <string name="Login.register">Kayıt ol</string>
   <string name="Login.Dialog.forgotPassword.reset">Şifreyi yenile</string>
   <string name="Login.Dialog.forgotPassword.visit">Ziyaret etmek</string>
-  <string name="Login.Dialog.forgotPasswordMessage">Ziyaret etmek https://litecoin.dashboard.getblockcard.com/password/forgot to reset your password</string>
+  <string name="Login.Dialog.forgotPasswordMessage">Ziyaret etmek https://litecoin.dashboard.getblockcard.com/password/forgot Şifrenizi sıfırlamak için</string>
 
   <!-- Register view texts -->
   <string name="Register.registerCardPhrase">Litecoin Kartına Kaydolun</string>
