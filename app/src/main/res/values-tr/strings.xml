@@ -759,6 +759,10 @@
   <string name="FeeSelector.luxuryTime">2,5 - 5+ dakika</string>
   <string name="FeeSelector.luxuryMessage">Bu seçenek, bir prim ödüyor olsanız bile işleminizin kabul edilmesini neredeyse garanti eder.</string>
 
+  <!--Buy center - partners-->
+  <string name="BuyCenter.simplex.FinancialDetails">"• 5 dakikada Litecoin alın!\n• Kredi kartı ile Litecoin satın alın\n• Pasaport veya Eyalet Kimliği"</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Birçok fiat çiftiyle LTC satın alın\n• Birden fazla yöntemle ödeme yapın\n• Küresel ödeme sağlayıcısı"</string>
+
   <string name="BottomNavItem.History.title">Tarih</string>
   <string name="BottomNavItem.Card.title">Kart</string>
 
