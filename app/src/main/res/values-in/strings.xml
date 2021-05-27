@@ -67,8 +67,7 @@
   <!-- API Token error message -->
   <string name="ApiClient.tokenError">Tidak dapat mengambil token API</string>
   <!-- Send BCH view body. -->
-  <string name="BCH.body">
-Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat percabangan (%1$s) akan dikirim.</string>
+  <string name="BCH.body">Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat percabangan (%1$s) akan dikirim.</string>
   <!-- Confirm sending <$5.00> to <address>? -->
   <string name="BCH.confirmationMessage">Konfirmasikan pengiriman %1$s untuk %2$s</string>
   <!-- Confirmation alert title -->
@@ -318,7 +317,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <!-- Button on fingerprint prompt so the user can enter their PIN instead -->
   <string name="Prompts.TouchId.usePin.android">PIN</string>
   <!-- Upgrade PIN prompt body. -->
-  <string name="Prompts.UpgradePin.body">Litewallet has upgraded to using a 6-digit PIN. Tap here to upgrade. Litewallet telah ditingkatkan untuk menggunakan PIN 6 digit. Ketuk di sini untuk meningkatkan.</string>
+  <string name="Prompts.UpgradePin.body">Litewallet has upgraded to using a pin 6 angka. Tap here to upgrade. Litewallet telah ditingkatkan untuk menggunakan pin 6 angka. Ketuk di sini untuk meningkatkan.</string>
   <!-- Upgrade PIN prompt title. -->
   <string name="Prompts.UpgradePin.title">Tingkatkan PIN</string>
   <!-- Notifications will be added later but users can set their preferences now, which is why we specify "in the future". -->
@@ -412,7 +411,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <!-- PIN button description -->
   <string name="SecurityCenter.pinDescription">Melindungi Litewallet Anda dari pengguna yang tidak sah.</string>
   <!-- PIN button title -->
-  <string name="SecurityCenter.pinTitle">PIN 6-Digit</string>
+  <string name="SecurityCenter.pinTitle">pin 6 angka</string>
   <!-- Security Center Title -->
   <string name="SecurityCenter.title">Pusat Keamanan</string>
   <!-- Touch ID button description -->
@@ -438,7 +437,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <!-- Could not create transaction alert title -->
   <string name="Send.creatTransactionError">Tidak dapat membuat transaksi.</string>
   <!-- Description for sending money label -->
-  <string name="Send.descriptionLabel">Memo</string>
+  <string name="Send.descriptionLabel">Catatan</string>
   <!-- Emtpy pasteboard error message -->
   <string name="Send.emptyPasteboard">Papan tempel kosong</string>
   <!-- Network Fee: $0.01 -->
@@ -479,7 +478,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <!-- Or -->
   <string name="Send.or">Atau</string>
   <!-- Lookup -->
-  <string name="Send.UnstoppableDomains.lookup">Lookup</string>
+  <string name="Send.UnstoppableDomains.lookup">Mencari</string>
   <!-- Your address was resolved! -->
   <string name="Send.UnstoppableDomains.domainResolved">Alamat Anda telah diselesaikan!</string>
 
@@ -582,7 +581,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <!-- Always require passcode option -->
   <string name="TouchIdSpendingLimit">Selalu minta kode sandi</string>
   <!-- Touch ID spending limit screen body -->
-  <string name="TouchIdSpendingLimit.body">Anda akan diminta untuk memasukkan PIN 6 digit Anda untuk mengirim transaksi apa pun yang melebihi batas pengeluaran Anda, dan setiap 48 jam sejak terakhir kali Anda memasukkan PIN 6 digit Anda.</string>
+  <string name="TouchIdSpendingLimit.body">Anda akan diminta untuk memasukkan pin 6 angka Anda untuk mengirim transaksi apa pun yang melebihi batas pengeluaran Anda, dan setiap 48 jam sejak terakhir kali Anda memasukkan PIN 6 angka Anda.</string>
   <!-- Touch Id spending limit screen title -->
   <string name="TouchIdSpendingLimit.title">Touch ID Batas Pengeluaran</string>
   <!-- name of spending limit when using fingerprint authorization -->
@@ -788,7 +787,7 @@ Masukkan alamat BCH tujuan di bawah ini. Semua BCH di dompet Anda pada saat perc
   <string name="mismatch_password">Kata sandi tidak cocok</string>
   <string name="Error.emailNotVerified">Anda perlu memverifikasi alamat email Anda sebelum Anda dapat masuk.</string>
   <string name="Error.wrong2faTokenProvided">2FA yang diberikan salah</string>
-  <string name="BuyCenter.simplex.FinancialDetails">• Dapatkan Litecoin dalam 5 menit!\n• Beli Litecoin melalui kartu kredit\n• Paspor atau KTP</string>
+  <string name="BuyCenter.simplex.FinancialDetails">• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID</string>
   <string name="ManageWallet.balance">Saldo Kartu</string>
   <string name="LitecoinCard.Disclaimer.bullets">- Pendaftaran Baru\n- Masuk (akun yang ada)\n- Tidak ada saldo yang ditampilkan\n- Tidak ada transfer\n- Khusus AS</string>
   <string name="LitecoinCard.Disclaimer.description">Kartu Litecoin saat ini memiliki fungsi terbatas di Litewallet.</string>
