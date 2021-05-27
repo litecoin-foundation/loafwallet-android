@@ -757,6 +757,10 @@
   <string name="Confirmation.staticAddressLabel">Alamat:</string>
   <string name="FeeSelector.luxury">Kemewahan</string>
   <string name="FeeSelector.luxuryMessage">Opsi ini secara virtual menjamin penerimaan transaksi Anda meskipun Anda membayar premi.</string>
+
+  <string name="BuyCenter.simplex.FinancialDetails">"• Dapatkan Litecoin dalam 5 menit!\n• Beli Litecoin melalui kartu kredit\n• Paspor atau ID Negara"</string>
+  <string name="BuyCenter.moonpay.FinancialDetails">"• Beli LTC dengan banyak pasangan fiat\n• Bayar dengan beberapa metode\n• Penyedia pembayaran global"</string>
+
   <string name="FeeSelector.luxuryTime">2.5 - 5+ menit</string>
   <string name="BottomNavItem.History.title">Sejarah</string>
   <string name="BottomNavItem.Card.title">Kartu</string>
@@ -787,7 +791,6 @@
   <string name="mismatch_password">Kata sandi tidak cocok</string>
   <string name="Error.emailNotVerified">Anda perlu memverifikasi alamat email Anda sebelum Anda dapat masuk.</string>
   <string name="Error.wrong2faTokenProvided">2FA yang diberikan salah</string>
-  <string name="BuyCenter.simplex.FinancialDetails">• Get Litecoin in 5 mins!\n• Buy Litecoin via credit card\n• Passport or State ID</string>
   <string name="ManageWallet.balance">Saldo Kartu</string>
   <string name="LitecoinCard.Disclaimer.bullets">- Pendaftaran Baru\n- Masuk (akun yang ada)\n- Tidak ada saldo yang ditampilkan\n- Tidak ada transfer\n- Khusus AS</string>
   <string name="LitecoinCard.Disclaimer.description">Kartu Litecoin saat ini memiliki fungsi terbatas di Litewallet.</string>
