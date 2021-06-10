@@ -23,7 +23,7 @@ Steps to reproduce the behavior:
 <!--If applicable, add screenshots to help explain your problem.-->
 
 **Observed Environment**
- - OS version [e.g. _Android 21_]:
+ - OS version [e.g. _Android 5_]:
  - Litewallet Version [e.g. _v2.3.1_]:
  - Device model:[e.g. _Samsung 21_]:
 
