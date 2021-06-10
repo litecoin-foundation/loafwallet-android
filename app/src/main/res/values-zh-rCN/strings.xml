@@ -794,4 +794,5 @@
   <string name="LitecoinCard.Disclaimer.referral">访问litecoin.getblockcard.com以获取完全访问权限</string>
   <string name="LitecoinCard.Disclaimer.title">Litecoin卡测试版</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•购买具有许多法定货币对的LTC\n•以多种方式支付\n•全球支付提供商"</string>
+  <string name="Login.currentLtcPrice">当前的LTC值 %1$s</string>
 </resources>

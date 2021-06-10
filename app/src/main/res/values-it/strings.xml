@@ -794,4 +794,5 @@
   <string name="LitecoinCard.Disclaimer.referral">Visita litecoin.getblockcard.com per l\'accesso completo</string>
   <string name="LitecoinCard.Disclaimer.title">Litecoin Card Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Acquista LTC con molte coppie fiat\n• Paga con più metodi\n• Fornitore globale di pagamenti"</string>
+  <string name="Login.currentLtcPrice">Valore LTC corrente in %1$s</string>
 </resources>

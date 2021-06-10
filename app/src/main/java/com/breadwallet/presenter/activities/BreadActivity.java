@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
@@ -29,7 +30,6 @@ import com.breadwallet.R;
 import com.breadwallet.presenter.activities.intro.IntroActivity;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.customviews.BRNotificationBar;
-import com.breadwallet.presenter.entities.CurrencyEntity;
 import com.breadwallet.presenter.fragments.BuyTabFragment;
 import com.breadwallet.presenter.history.HistoryFragment;
 import com.breadwallet.presenter.spend.AuthBottomSheetDialogFragment;
@@ -40,7 +40,6 @@ import com.breadwallet.tools.manager.BRSharedPrefs;
 import com.breadwallet.tools.manager.InternetManager;
 import com.breadwallet.tools.manager.SyncManager;
 import com.breadwallet.tools.security.BitcoinUrlHandler;
-import com.breadwallet.tools.sqlite.CurrencyDataSource;
 import com.breadwallet.tools.sqlite.TransactionDataSource;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
@@ -59,9 +58,6 @@ import com.google.android.play.core.tasks.Task;
 import com.platform.APIClient;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import timber.log.Timber;
 
@@ -103,8 +99,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private Button secondaryPrice;
     private TextView equals;
     private ImageButton menuBut;
-    private TextView ltcPriceLbl;
-    private TextView ltcPriceDateLbl;
     private TextView balanceTxtV;
 
     public static boolean appVisible = false;
@@ -391,8 +385,8 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
     private void initializeViews() {
         menuBut = findViewById(R.id.menuBut);
         bottomNav = findViewById(R.id.bottomNav);
-        ltcPriceLbl = findViewById(R.id.price_change_text);
-        ltcPriceDateLbl = findViewById(R.id.priceDateLbl);
+        bottomNav.getMenu().clear();
+        bottomNav.inflateMenu(isInUsa() ? R.menu.bottom_nav_menu_us : R.menu.bottom_nav_menu);
         balanceTxtV = findViewById(R.id.balanceTxtV);
 
         primaryPrice = findViewById(R.id.primary_price);
@@ -415,8 +409,12 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             }
         });
 
-        ltcPriceLbl.setTextSize(PRIMARY_TEXT_SIZE);
         balanceTxtV.append(":");
+    }
+
+    private boolean isInUsa() {
+        TelephonyManager telManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        return "us".equals(telManager.getSimCountryIso());
     }
 
     @Override
@@ -429,18 +427,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             Thread.currentThread().setName(Thread.currentThread().getName() + ":updateUI");
             //sleep a little in order to make sure all the commits are finished (like SharePreferences commits)
             String iso = BRSharedPrefs.getIso(BreadActivity.this);
-
-            String formattedCurrency = null;
-            CurrencyEntity currency = CurrencyDataSource.getInstance(BreadActivity.this).getCurrencyByIso(iso);
-            if (currency != null) {
-                final BigDecimal roundedPriceAmount = new BigDecimal(currency.rate).multiply(new BigDecimal(100))
-                        .divide(new BigDecimal(100), 2, BRConstants.ROUNDING_MODE);
-                formattedCurrency = BRCurrency.getFormattedCurrencyString(BreadActivity.this, iso, roundedPriceAmount);
-            } else {
-                Timber.w("The currency related to %s is NULL", iso);
-            }
-
-            final String ltcPrice = formattedCurrency;
 
             //current amount in litoshis
             final BigDecimal amount = new BigDecimal(BRSharedPrefs.getCatchedBalance(BreadActivity.this));
@@ -455,12 +441,6 @@ public class BreadActivity extends BRActivity implements BRWalletManager.OnBalan
             runOnUiThread(() -> {
                 primaryPrice.setText(formattedBTCAmount);
                 secondaryPrice.setText(String.format("%s", formattedCurAmount));
-                if (ltcPrice != null) {
-                    ltcPriceLbl.setText(ltcPrice);
-                    SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
-                    String pattern = df.toPattern().replaceAll("\\W?[Yy]+\\W?", " ");
-                    ltcPriceDateLbl.setText("as of " + android.text.format.DateFormat.format(pattern, new Date()));
-                }
             });
         });
     }

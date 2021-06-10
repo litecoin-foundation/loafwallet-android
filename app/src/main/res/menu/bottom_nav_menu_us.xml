@@ -14,6 +14,12 @@
         android:title="@string/Button.send" />
 
     <item
+        android:id="@+id/nav_card"
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_spend"
+        android:title="@string/BottomNavItem.Card.title" />
+
+    <item
         android:id="@+id/nav_receive"
         android:enabled="true"
         android:icon="@drawable/ic_nav_receive"

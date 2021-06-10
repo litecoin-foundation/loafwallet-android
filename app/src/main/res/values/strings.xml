@@ -833,5 +833,8 @@
   <!-- Beta Testing Litecoin Card -->
   <string name="LitecoinCard.Disclaimer.title">"Litecoin Card Beta"</string>
 
+  <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
+  <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
+
 
 </resources>
