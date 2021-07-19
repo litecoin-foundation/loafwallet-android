@@ -835,6 +835,7 @@
 
   <string name="Login.ltcPrice" translatable="false">1 LTC = %1$s</string>
   <string name="Login.currentLtcPrice">Current LTC value in %1$s</string>
+  <string name="Settings.languages">Languages</string>
 
 
 </resources>

@@ -796,4 +796,5 @@
   <string name="LitecoinCard.Disclaimer.title">라이트 코인 카드 베타</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• 많은 법정 화폐 쌍으로 LTC 구매\n• 여러 방법으로 지불\n• 글로벌 지불 공급자"</string>
   <string name="Login.currentLtcPrice">현재 LTC 값 %1$s</string>
+  <string name="Settings.languages">언어</string>
 </resources>

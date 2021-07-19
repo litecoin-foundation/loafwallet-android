@@ -795,4 +795,5 @@
   <string name="LitecoinCard.Disclaimer.title">Litecoin-kort Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Køb LTC med mange fiat-par\n• Betal med flere metoder\n• Global betalingsudbyder"</string>
   <string name="Login.currentLtcPrice">Aktuel LTC-værdi i %1$s</string>
+  <string name="Settings.languages">Sprog</string>
 </resources>

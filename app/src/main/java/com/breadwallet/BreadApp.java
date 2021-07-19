@@ -14,6 +14,7 @@ import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.tools.listeners.SyncReceiver;
 import com.breadwallet.tools.manager.AnalyticsManager;
 import com.breadwallet.tools.util.BRConstants;
+import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.tools.util.Utils;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
@@ -131,6 +132,12 @@ public class BreadApp extends Application {
         };
 
         isBackgroundChecker.schedule(backgroundCheck, 500, 500);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        LocaleHelper.Companion.init(base);
+        super.attachBaseContext(LocaleHelper.Companion.getInstance().setLocale(base));
     }
 
     public interface OnAppBackgrounded {

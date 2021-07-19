@@ -814,6 +814,7 @@
   <string name="LitecoinCard.Disclaimer.referral">"Tam erişim için litecoin.getblockcard.com adresini ziyaret edin"</string>
   <!-- Beta Testing Litecoin Card -->
   <string name="LitecoinCard.Disclaimer.title">"Litecoin Kartı Beta"</string>
+  <string name="Settings.languages">Diller</string>
 
 
 </resources>

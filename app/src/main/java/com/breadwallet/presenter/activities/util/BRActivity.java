@@ -1,11 +1,12 @@
 package com.breadwallet.presenter.activities.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.fragment.app.FragmentActivity;
-
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.breadwallet.BreadApp;
@@ -22,6 +23,7 @@ import com.breadwallet.tools.security.BitcoinUrlHandler;
 import com.breadwallet.tools.security.PostAuth;
 import com.breadwallet.tools.threads.BRExecutor;
 import com.breadwallet.tools.util.BRConstants;
+import com.breadwallet.tools.util.LocaleHelper;
 import com.breadwallet.wallet.BRWalletManager;
 import com.platform.HTTPServer;
 import com.platform.tools.BRBitId;
@@ -56,6 +58,17 @@ public class BRActivity extends FragmentActivity {
 
     static {
         System.loadLibrary(BRConstants.NATIVE_LIB_NAME);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        LocaleHelper.Companion.getInstance().setLocale(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.Companion.getInstance().setLocale(newBase));
     }
 
     @Override
