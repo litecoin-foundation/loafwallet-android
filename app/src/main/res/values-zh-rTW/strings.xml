@@ -795,4 +795,5 @@
   <string name="LitecoinCard.Disclaimer.title">Litecoin卡測試版</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"•購買具有許多法定貨幣對的LTC\n•以多種方式支付\n•全球支付提供商"</string>
   <string name="Login.currentLtcPrice">當前的LTC值 %1$s</string>
+  <string name="Settings.languages">語言能力</string>
 </resources>

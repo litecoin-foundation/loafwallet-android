@@ -796,4 +796,5 @@
   <string name="LitecoinCard.Disclaimer.description">Kartu Litecoin saat ini memiliki fungsi terbatas di Litewallet.</string>
   <string name="LitecoinCard.Disclaimer.referral">Kunjungi litecoin.getblockcard.com untuk akses penuh</string>
   <string name="LitecoinCard.Disclaimer.title">Kartu Litecoin Beta</string>
+  <string name="Settings.languages">Bahasa</string>
 </resources>

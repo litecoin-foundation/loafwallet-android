@@ -795,4 +795,5 @@
   <string name="LitecoinCard.Disclaimer.title">Litecoin Card Beta</string>
   <string name="BuyCenter.moonpay.FinancialDetails">"• Compre LTC com muitos pares fiat\n• Pague com vários métodos\n• Provedor de pagamento global"</string>
   <string name="Login.currentLtcPrice">Valor LTC atual em %1$s</string>
+  <string name="Settings.languages">Línguas</string>
 </resources>

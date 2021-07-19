@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.breadwallet.R;
+import com.breadwallet.presenter.language.ChangeLanguageBottomSheet;
 import com.breadwallet.presenter.activities.util.BRActivity;
 import com.breadwallet.presenter.entities.BRSettingsItem;
 import com.breadwallet.presenter.interfaces.BRAuthCompletion;
@@ -30,7 +32,6 @@ import static com.breadwallet.R.layout.settings_list_item;
 import static com.breadwallet.R.layout.settings_list_section;
 
 public class SettingsActivity extends BRActivity {
-    private static final String TAG = SettingsActivity.class.getName();
     private ListView listView;
     public List<BRSettingsItem> items;
     public static boolean appVisible = false;
@@ -45,8 +46,7 @@ public class SettingsActivity extends BRActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        listView = (ListView) findViewById(R.id.settings_list);
-
+        listView = findViewById(R.id.settings_list);
     }
 
 
@@ -116,113 +116,90 @@ public class SettingsActivity extends BRActivity {
     }
 
     private void populateItems() {
-
         items.add(new BRSettingsItem(getString(R.string.Settings_wallet), "", null, true));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_importTitle), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, ImportActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
+        items.add(new BRSettingsItem(getString(R.string.Settings_importTitle), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, ImportActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
 
-            }
         }, false));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_wipe), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, WipeActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-            }
+        items.add(new BRSettingsItem(getString(R.string.Settings_wipe), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, WipeActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
         }, false));
 
         items.add(new BRSettingsItem(getString(R.string.Settings_manage), "", null, true));
 
         if (AuthManager.isFingerPrintAvailableAndSetup(this)) {
-            items.add(new BRSettingsItem(getString(R.string.Settings_touchIdLimit_android), "", new View.OnClickListener() {
+            items.add(new BRSettingsItem(getString(R.string.Settings_touchIdLimit_android), "", v -> AuthManager.getInstance().authPrompt(SettingsActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
                 @Override
-                public void onClick(View v) {
-                    AuthManager.getInstance().authPrompt(SettingsActivity.this, null, getString(R.string.VerifyPin_continueBody), true, false, new BRAuthCompletion() {
-                        @Override
-                        public void onComplete() {
-                            Intent intent = new Intent(SettingsActivity.this, SpendLimitActivity.class);
-                            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-                            startActivity(intent);
-                        }
+                public void onComplete() {
+                    Intent intent = new Intent(SettingsActivity.this, SpendLimitActivity.class);
+                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+                    startActivity(intent);
+                }
 
-                        @Override
-                        public void onCancel() {
-
-                        }
-                    });
+                @Override
+                public void onCancel() {
 
                 }
-            }, false));
+            }), false));
         }
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_currency), BRSharedPrefs.getIso(this), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, DisplayCurrencyActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
+        items.add(new BRSettingsItem(getString(R.string.Settings_languages), null, v -> {
+            ChangeLanguageBottomSheet fragment = new ChangeLanguageBottomSheet();
+            fragment.show(getSupportFragmentManager(), fragment.getTag());
         }, false));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_sync), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, SyncBlockchainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
+        items.add(new BRSettingsItem(getString(R.string.Settings_currency), BRSharedPrefs.getIso(this), v -> {
+            Intent intent = new Intent(SettingsActivity.this, DisplayCurrencyActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+        }, false));
+
+        items.add(new BRSettingsItem(getString(R.string.Settings_sync), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, SyncBlockchainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
         items.add(new BRSettingsItem("", "", null, true));
 
-        items.add(new BRSettingsItem(getString(R.string.Settings_shareData), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, ShareDataActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
+        items.add(new BRSettingsItem(getString(R.string.Settings_shareData), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, ShareDataActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
+
         boolean eaEnabled = APIClient.getInstance(this).isFeatureEnabled(APIClient.FeatureFlags.EARLY_ACCESS.toString());
         eaEnabled = false;
         if (eaEnabled)
-            items.add(new BRSettingsItem(getString(R.string.Settings_earlyAccess), "", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(SettingsActivity.this, WebViewActivity.class);
-                    intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_EA);
-                    Activity app = SettingsActivity.this;
-                    app.startActivity(intent);
-                    app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
-                }
+            items.add(new BRSettingsItem(getString(R.string.Settings_earlyAccess), "", v -> {
+                Intent intent = new Intent(SettingsActivity.this, WebViewActivity.class);
+                intent.putExtra(WebViewActivity.URL_EXTRA, HTTPServer.URL_EA);
+                Activity app = SettingsActivity.this;
+                app.startActivity(intent);
+                app.overridePendingTransition(R.anim.enter_from_bottom, R.anim.empty_300);
             }, false));
-        items.add(new BRSettingsItem(getString(R.string.Settings_about), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, AboutActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
+
+        items.add(new BRSettingsItem(getString(R.string.Settings_about), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, AboutActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
+
         items.add(new BRSettingsItem("", "", null, true));
-        items.add(new BRSettingsItem(getString(R.string.Settings_advancedTitle), "", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, AdvancedActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
-            }
+
+        items.add(new BRSettingsItem(getString(R.string.Settings_advancedTitle), "", v -> {
+            Intent intent = new Intent(SettingsActivity.this, AdvancedActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
         }, false));
 
         items.add(new BRSettingsItem("", "", null, true)); //just for a blank space
-
     }
 
     @Override
